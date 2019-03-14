@@ -1,0 +1,12 @@
+﻿"Problèmes Techniques"
+Référence;Bloquant;"Date de correction";"Date de signalement";Intervenant;Module(s);Equipement;Description;Solution;"Fichier(s) joint(s)"
+10;X;;24/04/2017;"0_MÉCANICIENS (Groupe mécaniciens)";129;POMPE;"DEMONTAGE CR5-29 POUR DEPANNER M120 CHEZ ARKEMA
+POMPE EN COMMANDE LE 24/04/2017";"REMONTAGE DE LA POMPE DES RECEPTION";
+4;X;15/05/2017;24/03/2017;"DECLERCQLU (Ludovic Declercq)";121;LBC;"ENTRE N°9 DE L'AUTOMATE HS
+IL N'Y A PLUS DE LECTURE DE CONDUCTIVITÉ";"CONTRÔLE DE L'ANCIEN AUTOMATE DU MODULE 112 +
+-> ok fait par Kevin Houssin le 27/03/2017
+
+LUDO : L'INSTALLER SUR LE M121
+RETOUR PRÉVU LE 15/04/2017
+
+Entrée automate ok contrôle câblage Anthony Simon sur site.";

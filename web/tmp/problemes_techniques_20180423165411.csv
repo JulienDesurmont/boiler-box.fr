@@ -1,0 +1,8 @@
+﻿"Problèmes Techniques"
+Référence;Bloquant;"Date de correction";"Date de signalement";Opérateur;Module(s);Equipement;Description;Solution;"Fichier(s) joint(s)"
+287;X;;01/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";108;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 108 (VAP 16T 16b GN/FOD)";;
+288;X;;01/02/2018;"0_TECHNICIENS (Groupe Techniciens)";108;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 108 (VAP 16T 16b GN/FOD)";;
+289;X;06/02/2018;01/02/2018;"BAZELISAL (Alexandre Bazelis)";108;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 108 (VAP 16T 16b GN/FOD)";"pas de ibc";
+192;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";108;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X

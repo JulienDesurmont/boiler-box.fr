@@ -1,0 +1,6 @@
+Options +FollowSymLinks
+
+<ifModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^BingSiteAuth.xml$  web/BingSiteAuth.xml
+</ifModule>

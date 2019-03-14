@@ -1,0 +1,271 @@
+﻿"Problèmes Techniques"
+Référence;Bloquant;"Date de correction";"Date de signalement";Opérateur;Module(s);Equipement;Description;Solution;"Fichier(s) joint(s)"
+14;X;;31/08/2017;"0_MÉCANICIENS (Groupe mécaniciens)";101;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 101 (EC 3700 KW GN/FOD)";;
+15;X;;31/08/2017;"0_TECHNICIENS (Groupe Techniciens)";101;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 101 (EC 3700 KW GN/FOD)";;
+51;X;;31/08/2017;"0_MÉCANICIENS (Groupe mécaniciens)";141;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 141 (VAP 3T2 16b GN/FOD)";;
+52;X;;31/08/2017;"0_TECHNICIENS (Groupe Techniciens)";141;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 141 (VAP 3T2 16b GN/FOD)";;
+53;X;;31/08/2017;"BAZELISAL (Alexandre Bazelis)";141;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 141 (VAP 3T2 16b GN/FOD)";;
+69;X;;20/09/2017;"0_TECHNICIENS (Groupe Techniciens)";115;BRULEUR;"Pompe fuel fuyarde par l'arbre. Pompe HS.
+pompe commandée
+pompe receptionnée";"Remplacement de la pompe (pompe pas encore commandée).";
+66;X;;20/09/2017;"0_MÉCANICIENS (Groupe mécaniciens)";600;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 600 (BALLON DETENTE PURGES SPE ES)";;
+67;X;20/09/2017;20/09/2017;"DESURMONTJU (Julien Desurmont)";600;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 600 (BALLON DETENTE PURGES SPE ES)";test;
+68;X;;20/09/2017;"BAZELISAL (Alexandre Bazelis)";600;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 600 (BALLON DETENTE PURGES SPE ES)";;
+76;X;;25/09/2017;"0_MÉCANICIENS (Groupe mécaniciens)";518;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 518 (MODULE ADOUCISSEUR 4M3/H)";;
+77;X;;25/09/2017;"0_TECHNICIENS (Groupe Techniciens)";518;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 518 (MODULE ADOUCISSEUR 4M3/H)";;
+78;X;;25/09/2017;"BAZELISAL (Alexandre Bazelis)";518;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 518 (MODULE ADOUCISSEUR 4M3/H)";;
+79;X;;25/09/2017;"0_MÉCANICIENS (Groupe mécaniciens)";519;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 519 (MODULE ADOUCISSEUR 8,4M3/H)";;
+80;X;;25/09/2017;"0_TECHNICIENS (Groupe Techniciens)";519;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 519 (MODULE ADOUCISSEUR 8,4M3/H)";;
+81;X;;25/09/2017;"BAZELISAL (Alexandre Bazelis)";519;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 519 (MODULE ADOUCISSEUR 8,4M3/H)";;
+88;X;;25/09/2017;"0_MÉCANICIENS (Groupe mécaniciens)";552;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 552 (DETENDEUR VAPEUR DN80)";;
+89;X;;25/09/2017;"0_TECHNICIENS (Groupe Techniciens)";552;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 552 (DETENDEUR VAPEUR DN80)";;
+90;X;;25/09/2017;"BAZELISAL (Alexandre Bazelis)";552;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 552 (DETENDEUR VAPEUR DN80)";;
+103;X;;22/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";527;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 527 (BALLON DETENTE PURGES 450l)";;
+104;X;;22/01/2018;"0_TECHNICIENS (Groupe Techniciens)";527;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 527 (BALLON DETENTE PURGES 450l)";;
+105;X;;22/01/2018;"BAZELISAL (Alexandre Bazelis)";527;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 527 (BALLON DETENTE PURGES 450l)";;
+121;;;23/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";153;MÉCANIQUE;"corriger les reserves sur m153
+la remettre en mode vapeur
+consulter le rapport de réception";;X
+122;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";107;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 107 (VAP 3T2 16b GN/FOD)";;
+123;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";107;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 107 (VAP 3T2 16b GN/FOD)";;
+125;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";107;"CORPS DE CHAUFFE";"ip a realiser";;
+126;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";129;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 129 (VAP 3T2 16b GN/FOD)";;
+127;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";129;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 129 (VAP 3T2 16b GN/FOD)";;
+128;X;;29/01/2018;"BAZELISAL (Alexandre Bazelis)";129;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 129 (VAP 3T2 16b GN/FOD)";;
+129;;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";129;"CORPS DE CHAUFFE";requalif;;
+131;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";141;"CORPS DE CHAUFFE";ip;;
+135;;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";142;"CORPS DE CHAUFFE";"calorifuge a réparer";"réparation avec tole inox en attente du bon calo";
+136;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";154;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 154 (VAP 16T 24,5b GN/FOD version SH + nouveau design)";;
+137;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";154;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 154 (VAP 16T 24,5b GN/FOD version SH + nouveau design)";;
+138;X;;29/01/2018;"BAZELISAL (Alexandre Bazelis)";154;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 154 (VAP 16T 24,5b GN/FOD version SH + nouveau design)";;
+139;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";155;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 155 (VAP 16T 24,5b GN/FOD version SH + nouveau design)";;
+140;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";155;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 155 (VAP 16T 24,5b GN/FOD version SH + nouveau design)";;
+141;X;;29/01/2018;"BAZELISAL (Alexandre Bazelis)";155;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 155 (VAP 16T 24,5b GN/FOD version SH + nouveau design)";;
+148;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";501;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 501 (BACHE 17M3 6B)";;
+149;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";501;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 501 (BACHE 17M3 6B)";;
+150;X;;29/01/2018;"BAZELISAL (Alexandre Bazelis)";501;"BÂCHE 17m3";"réaliser les modifications de la campagne technique";;
+155;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";505;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 505 (EXP. EC 1000 L + POMPE)";;
+158;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";506;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 506 (EXP. EC 500 L)";;
+159;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";506;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 506 (EXP. EC 500 L)";;
+167;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";511;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 511 (BALLON EXTRACTION 450l)";;
+168;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";511;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 511 (BALLON EXTRACTION 450l)";;
+170;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";513;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 513 (SILENCIEUX VAPEUR 30T 20B)";;
+171;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";513;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 513 (SILENCIEUX VAPEUR 30T 20B)";;
+173;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";520;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 520 (MODULE ADOUCISSEUR 8,4M3/H)";;
+174;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";520;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 520 (MODULE ADOUCISSEUR 8,4M3/H)";;
+175;X;;29/01/2018;"BAZELISAL (Alexandre Bazelis)";520;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 520 (MODULE ADOUCISSEUR 8,4M3/H)";;
+176;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";521;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 521 (MODULE ADOUCISSEUR 8,4M3/H)";;
+177;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";521;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 521 (MODULE ADOUCISSEUR 8,4M3/H)";;
+178;X;;29/01/2018;"BAZELISAL (Alexandre Bazelis)";521;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 521 (MODULE ADOUCISSEUR 8,4M3/H)";;
+179;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";523;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 523 (BALLON DE DETENTE DES PURGES & EXTRACTIONS)";;
+180;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";523;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 523 (BALLON DE DETENTE DES PURGES & EXTRACTIONS)";;
+182;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";524;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 524 (Cuve FOD 15m3)";;
+183;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";524;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 524 (Cuve FOD 15m3)";;
+184;X;;29/01/2018;"BAZELISAL (Alexandre Bazelis)";524;TUYAUTERIE;"effectuer la mise en conformité de la tuayuterie";;
+185;X;;29/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";526;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 526 (BACHE 17,5M3 0,5B INOX)";;
+186;X;;29/01/2018;"0_TECHNICIENS (Groupe Techniciens)";526;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 526 (BACHE 17,5M3 0,5B INOX)";;
+187;X;;29/01/2018;"BAZELISAL (Alexandre Bazelis)";526;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 526 (BACHE 17,5M3 0,5B INOX)";;
+188;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";101;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+202;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";121;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+189;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";105;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+190;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";106;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+191;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";107;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+192;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";108;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+193;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";109;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+195;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";111;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+196;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";115;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+197;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";116;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+198;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";117;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+199;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";118;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+200;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";119;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+201;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";120;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+204;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";123;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+206;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";125;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+207;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";126;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+208;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";129;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+209;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";130;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+210;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";132;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+211;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";133;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+212;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";137;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+213;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";139;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+214;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";140;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+215;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";141;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+216;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";142;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+217;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";143;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+218;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";144;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+219;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";145;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+220;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";146;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+221;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";147;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+222;;;30/01/2018;"BAZELISAL (Alexandre Bazelis)";151;"Revamping 001 : Renforcement de piquage mano ou pressostat sur eau alimentaire LTS";"Revamping 001";;X
+239;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";530;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 530 (BACHE 17,5m3 0,5B)";;
+240;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";530;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 530 (BACHE 17,5m3 0,5B)";;
+241;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";530;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 530 (BACHE 17,5m3 0,5B)";;
+242;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";537;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 537 (Cuve FOD 15m3)";;
+243;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";537;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 537 (Cuve FOD 15m3)";;
+244;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";537;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 537 (Cuve FOD 15m3)";;
+251;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";543;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 543 (ECHANGEUR A PLAQUES)";;
+252;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";543;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 543 (ECHANGEUR A PLAQUES)";;
+253;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";543;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 543 (ECHANGEUR A PLAQUES)";;
+254;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";545;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 545 (Cuves FOD 3x1m3 dans 10')";;
+255;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";545;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 545 (Cuves FOD 3x1m3 dans 10')";;
+256;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";545;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 545 (Cuves FOD 3x1m3 dans 10')";;
+257;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";546;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 546 (DETENDEUR VAPEUR DN80)";;
+258;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";546;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 546 (DETENDEUR VAPEUR DN80)";;
+259;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";546;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 546 (DETENDEUR VAPEUR DN80)";;
+260;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";557;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 557 (MODULE ADOUCISSEUR 3,2M3/H)";;
+265;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";570;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 570 (SKID POMPE ECC KSB)";;
+266;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";570;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 570 (SKID POMPE ECC KSB)";;
+267;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";570;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 570 (SKID POMPE ECC KSB)";;
+268;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";570;POMPE;"pompe neuve, n'a jamais démarré sur l776
+mise en service par ksb a faire";;
+278;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";579;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 579 (BALLON DETENTE PURGES BEM)";;
+279;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";579;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 579 (BALLON DETENTE PURGES BEM)";;
+280;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";579;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 579 (BALLON DETENTE PURGES BEM)";;
+272;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";585;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 585 (SILENCIEUX VAPEUR 30T 20B)";;
+273;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";585;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 585 (SILENCIEUX VAPEUR 30T 20B)";;
+274;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";585;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 585 (SILENCIEUX VAPEUR 30T 20B)";;
+236;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";586;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 586 (ECONOMISEUR 12 T/H)";;
+237;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";586;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 586 (ECONOMISEUR 12 T/H)";;
+238;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";586;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 586 (ECONOMISEUR 12 T/H)";;
+275;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";589;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 589 (SKID POMPE FIOUL)";;
+276;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";589;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 589 (SKID POMPE FIOUL)";;
+277;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";589;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 589 (SKID POMPE FIOUL)";;
+230;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";600;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 600 (BALLON DETENTE PURGES SPE ES)";;
+231;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";600;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 600 (BALLON DETENTE PURGES SPE ES)";;
+232;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";600;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 600 (BALLON DETENTE PURGES SPE ES)";;
+233;X;;31/01/2018;"0_MÉCANICIENS (Groupe mécaniciens)";605;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 605 ()";;
+234;X;;31/01/2018;"0_TECHNICIENS (Groupe Techniciens)";605;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 605 ()";;
+235;X;;31/01/2018;"BAZELISAL (Alexandre Bazelis)";605;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 605 ()";;
+287;X;;01/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";108;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 108 (VAP 16T 16b GN/FOD)";;
+288;X;;01/02/2018;"0_TECHNICIENS (Groupe Techniciens)";108;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 108 (VAP 16T 16b GN/FOD)";;
+302;X;;02/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";103;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 103 (EC 3700 KW GN/FOD)";;
+303;X;;02/02/2018;"0_TECHNICIENS (Groupe Techniciens)";103;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 103 (EC 3700 KW GN/FOD)";;
+312;X;;08/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";117;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 117 (VAP 3T2 16b GN/FOD)";;
+313;X;;08/02/2018;"0_TECHNICIENS (Groupe Techniciens)";117;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 117 (VAP 3T2 16b GN/FOD)";;
+314;X;;08/02/2018;"BAZELISAL (Alexandre Bazelis)";117;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 117 (VAP 3T2 16b GN/FOD)";;
+316;;;14/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";146;BRULEUR;"manque torche bruleur, démontage fait sur site pour dépanner m151 de Cadarache";;
+315;;;14/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";151;VANNE;"REMPLACEMENT KIT GARNITURE SUR VANNE PNEUMATIQUE 6571 AVEC KIT 6572
+FRAPPER LE NUMÉRO DE VANNE 6571-2";;
+329;X;;22/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";115;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 115 (VAP 3T2 16b GN/FOD)";;
+330;X;;22/02/2018;"0_TECHNICIENS (Groupe Techniciens)";115;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 115 (VAP 3T2 16b GN/FOD)";;
+331;X;;22/02/2018;"BAZELISAL (Alexandre Bazelis)";115;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 115 (VAP 3T2 16b GN/FOD)";;
+323;X;;22/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";547;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 547 (BALLON DETENTE PURGES SPE ES)";;
+324;X;;22/02/2018;"0_TECHNICIENS (Groupe Techniciens)";547;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 547 (BALLON DETENTE PURGES SPE ES)";;
+325;X;;22/02/2018;"BAZELISAL (Alexandre Bazelis)";547;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 547 (BALLON DETENTE PURGES SPE ES)";;
+332;X;;26/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";145;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 145 (VAP 12T 28b GN/FOD)";;
+333;X;;26/02/2018;"0_TECHNICIENS (Groupe Techniciens)";145;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 145 (VAP 12T 28b GN/FOD)";;
+334;X;;26/02/2018;"BAZELISAL (Alexandre Bazelis)";145;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 145 (VAP 12T 28b GN/FOD)";;
+335;X;;26/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";146;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 146 (VAP 12T 28b GN/FOD)";;
+336;X;;26/02/2018;"0_TECHNICIENS (Groupe Techniciens)";146;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 146 (VAP 12T 28b GN/FOD)";;
+337;X;;26/02/2018;"BAZELISAL (Alexandre Bazelis)";146;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 146 (VAP 12T 28b GN/FOD)";;
+338;X;;27/02/2018;"0_MÉCANICIENS (Groupe mécaniciens)";126;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 126 (VAP 16T 24,5b GN/FOD)";;
+339;X;;27/02/2018;"0_TECHNICIENS (Groupe Techniciens)";126;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 126 (VAP 16T 24,5b GN/FOD)";;
+340;X;;27/02/2018;"BAZELISAL (Alexandre Bazelis)";126;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 126 (VAP 16T 24,5b GN/FOD)";;
+348;X;;15/03/2018;"0_MÉCANICIENS (Groupe mécaniciens)";113;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 113 (VAP 1,25T 16B GN/FOD)";;
+349;X;;15/03/2018;"0_TECHNICIENS (Groupe Techniciens)";113;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 113 (VAP 1,25T 16B GN/FOD)";;
+350;X;;15/03/2018;"BAZELISAL (Alexandre Bazelis)";113;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 113 (VAP 1,25T 16B GN/FOD)";;
+351;X;;15/03/2018;"0_MÉCANICIENS (Groupe mécaniciens)";535;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 535 (Cuve FOD 15m3)";;
+352;X;;15/03/2018;"0_TECHNICIENS (Groupe Techniciens)";535;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 535 (Cuve FOD 15m3)";;
+353;X;;15/03/2018;"BAZELISAL (Alexandre Bazelis)";535;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 535 (Cuve FOD 15m3)";;
+354;X;;23/03/2018;"0_MÉCANICIENS (Groupe mécaniciens)";114;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 114 (VAP 1,25T 16B GN/FOD)";;
+355;X;;23/03/2018;"0_TECHNICIENS (Groupe Techniciens)";114;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 114 (VAP 1,25T 16B GN/FOD)";;
+356;X;;23/03/2018;"BAZELISAL (Alexandre Bazelis)";114;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 114 (VAP 1,25T 16B GN/FOD)";;
+357;X;;26/03/2018;"0_MÉCANICIENS (Groupe mécaniciens)";109;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 109 (VAP 6T 20b GN/FOD)";;
+358;X;;26/03/2018;"0_TECHNICIENS (Groupe Techniciens)";109;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 109 (VAP 6T 20b GN/FOD)";;
+359;X;;26/03/2018;"BAZELISAL (Alexandre Bazelis)";109;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 109 (VAP 6T 20b GN/FOD)";;
+363;;;26/03/2018;"BAZELISAL (Alexandre Bazelis)";142;"ARMOIRE ÉLECTRIQUE";"PROBLEME ETIquette CE à conrtroler";;
+360;X;;26/03/2018;"0_MÉCANICIENS (Groupe mécaniciens)";510;"CHECK MÉCANICIEN";"Effectuer le check mécanicien
+Vérifier les problèmes déclarés sur le module 510 (BARILLET DN200 INOX x20b)";;
+361;X;;26/03/2018;"0_TECHNICIENS (Groupe Techniciens)";510;"CHECK TECHNICIEN";"Effectuer le check technicien
+Vérifier les problèmes déclarés sur le module 510 (BARILLET DN200 INOX x20b)";;
+362;X;;26/03/2018;"BAZELISAL (Alexandre Bazelis)";510;"MISE A JOUR AUTOMATE ET COMMUNICATION";"Effectuer la mise à jour de l'automate et de la communication pour le module 510 (BARILLET DN200 INOX x20b)";;

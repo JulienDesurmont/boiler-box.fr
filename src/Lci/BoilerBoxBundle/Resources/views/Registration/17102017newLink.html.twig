@@ -1,0 +1,215 @@
+{# /src/Lci/BoilerBoxBundle/Resources/views/Registration/newLink.html.twig #}
+{% extends "LciBoilerBoxBundle::secondBoilerLayout.html.twig" %}
+
+{% block fos_user_content %}
+<div class='ajout_objet'>
+	<h1>Gestion des liens</h1>
+	<div class='formulaire'>
+		<div id='linkUsers'>
+        	<form name='MyForm' method='post' action="{{ path('lci_registration_link') }}">
+            	<div id='zoneUser'>
+					<h1>Choix de l'utilisateur</h1>
+					<div class='display_flex_row'>
+						<div>
+							<select name='listeUsers' id='listeUsers'>
+								{% for user in liste_users %}
+									<option value="{{ user.id }}">{{ user.label }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div>
+							<img class='btn_associer' src="{{ asset('bundles/lciboilerbox/images/administration/boutons/btn_associer_sites.png') }}" onmouseover=this.src=src="{{ asset('bundles/lciboilerbox/images/administration/boutons/btn_associer_sites_hover.png') }}" onmouseout=this.src=src="{{ asset('bundles/lciboilerbox/images/administration/boutons/btn_associer_sites.png') }}" onClick="attente(); getListeSites();" alt="Associer des sites">
+						</div>
+					</div>
+            	</div>
+            	<div id='zoneSites' class='cacher'>
+					<div class='listing'>
+						<div class='listing2'>
+							<h1></h1>
+							<div class='formulaire_liste'>
+								<table class='tab_liste'>
+									<thead class='tab_liste_modules'>
+										<tr><th>Autorisation</th><th>Nom du site</th></tr>
+									</thead>
+									<tbody class='tab_liste_modules'>
+										<div id='check_sites'>
+											<tr><td><input type='checkbox' name='checkAllSites' onclick="checkAll('sites')"/></td>
+												<td>Tous les sites</td>
+											</tr>
+											{% for site in liste_sites %}
+												<tr><td><input type='checkbox' name="{{ site.id }}" id="check_{{ site.id }}" /></td>
+													<td>{{ site.affaire }} - {{ site.intitule }}</td>
+												</tr>
+											{% endfor %}
+										</div>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+    	        	<div class='validationFormulaire'>
+        	    		<div class='right'>
+	    	        		<a href='#' style="height:30px;" onClick="reinitFormulaire();return false;" ><div class='bouton green'><div class='bgbouton'>Retour</div></div></a><br />
+	    	        		<a href='#' style="height:30px;" onClick="validFormulaire('MyForm');return false;" ><div class='bouton blue'><div class='bgbouton'>Enregister</div></div></a>
+		    			</div>
+    	        	</div>
+            	</div>
+        	</form>
+		</div>
+		<div id='separateur'>ou</div>
+		<div id='linkSites' >
+        	<form name='MyForm2' method='post' action="{{ path('lci_registration_userslink') }}">
+        	    <div id='zoneSite'>
+        	        <h1>Choix du site</h1>
+					<div class='display_flex_row'>
+						<div>
+							<select name='listeSites' id='listeSites'>
+								{% for site in liste_sites %}
+									<option value="{{ site.id }}">{{ site.affaire }} - {{ site.intitule }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div>
+							<img class='btn_associer' src="{{ asset('bundles/lciboilerbox/images/administration/boutons/btn_associer_utilisateurs.png') }}" onmouseover=this.src=src="{{ asset('bundles/lciboilerbox/images/administration/boutons/btn_associer_utilisateurs_hover.png') }}" onmouseout=this.src=src="{{ asset('bundles/lciboilerbox/images/administration/boutons/btn_associer_utilisateurs.png') }}" onClick="attente(); getListeUsers();" alt="Associer des utilisateurs">
+						</div>
+        	        </div>
+        	    </div>
+        	    <div id='zoneUsers' class='cacher'>
+        	        <h1></h1>
+        	        <div id='check_users'>
+						<table>
+			    		<tr><td><input type='checkbox' name='checkAllUsers' onclick="checkAll('users')"/></td><td>Tous les utilisateurs</td></tr>
+        	            {% for user in liste_users %}
+							{% set role_utilisateur = 'noRole' %}
+							<tr style={% if 'ROLE_ADMIN' in user.getRoles() %}'color:lime;'
+                                    {% set role_utilisateur = 'administrateur' %}
+                                {% elseif 'ROLE_RESPONSABLE_PARC' in user.getRoles() %}
+                                    {% set role_utilisateur = 'responsable de parc' %}'color:aqua;'
+                                {% elseif 'ROLE_TECHNICIEN' in user.getRoles() %}
+                                    {% set role_utilisateur = 'technicien' %}'color:white;'
+                                {% elseif 'ROLE_USER' in user.getRoles() %}
+                                    {% set role_utilisateur = 'client' %}'color:red;'
+                                {% endif %}
+								>
+								<td><input type='checkbox' name="{{ user.id }}" id="checkUser_{{ user.id }}" /></td><td>{{ user.label }}</td><td>({{ role_utilisateur }})</td>
+							</tr>
+        	            {% endfor %}
+						</table>
+        	        </div>
+        	        <div class='validationFormulaire'>
+        	            <div class='right'>
+        	                <a href='#' style="height:30px;" onClick="reinit2Formulaire();return false;" ><div class='bouton green'><div class='bgbouton'>Retour</div></div></a><br />
+        	                <a href='#' style="height:30px;" onClick="validFormulaire('MyForm2');return false;" ><div class='bouton blue'><div class='bgbouton'>Enregister</div></div></a>
+        	            </div>
+        	        </div>
+        	    </div>
+        	</form>
+		</div>
+		<div class='validation_formulaire_solo'>
+			<img src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_annuler.png') }}" onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_annuler_hover.png') }}" onmouseout=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_annuler.png') }}" onClick="attente(); redirection('retourMenu');" class="btn_menu" alt="Annuler">
+		</div>
+	</div>
+</div>
+
+<script type='text/javascript'>
+    //	Affichage de la liste des sites pour les affecter à l'utilisateur sélectionné
+    function getListeSites() {
+		//	Récupération de l'identifiant de l'utilisateur
+ 		var idUser = $('#listeUsers').val();
+		//	Appel AJAX pour récupération de la liste des sites affectés à l'utilisateur sélectionné
+		var xhr = getXHR();
+		xhr.open("POST","{{ path('lci_ajax_get_userSites') }}",false);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		var datas = "idUser="+idUser;
+		xhr.send(datas);
+		//	Récupération du retour AJAX : liste des sites affectés à l'utilisateur sélectionné
+		var listeUserSites = $.parseJSON(xhr.responseText);
+		// 	Pour chacun des sites affecté à l'utilisateur : Coche du checkbox correspondant	
+		$.each(listeUserSites, function( key, value ) {
+		    $('#check_'+key).prop('checked', true);
+		});
+		$('#zoneSites h1').html("Liste des sites autorisés à<br />'"+$('#listeUsers :checked').text()+"'");
+		$('#linkSites').addClass('cacher');
+		$('#separateur').addClass('cacher');
+		$('#linkCancel').addClass('cacher');
+		$('#zoneSites').removeClass('cacher');
+		$('#zoneUser').addClass('cacher');
+    }
+
+
+    function getListeUsers() {
+		// Récupération de l'identifiant du site
+		var idSite	= $('#listeSites').val();
+		// Appel AJAX pour récupération de la liste des utilisateurs affectés au site sélectionné
+		var xhr = getXHR();
+		xhr.open("POST","{{ path('lci_ajax_get_siteUsers') }}",false);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		var datas = "idSite="+idSite;
+		xhr.send(datas);
+		// Récupération du retour AJAX : liste des utilisateurs affectés au site sélectionné
+		var listeSiteUsers = $.parseJSON(xhr.responseText);
+		// Pour chacun des utilisateurs affecté au site : Coche du checkbox correspondant
+		$.each(listeSiteUsers, function( key, value ) {
+			$('#checkUser_'+key).prop('checked', true);
+		});
+		$('#zoneUsers h1').html("Liste des utilisateurs autorisés à <br />'"+$('#listeSites :checked').text()+"'");
+		$('#linkUsers').addClass('cacher');
+		$('#separateur').addClass('cacher');
+		$('#linkCancel').addClass('cacher');
+		$('#zoneUsers').removeClass('cacher');
+		$('#zoneSite').addClass('cacher');
+    }
+
+    //		Réinitialisation du formulaire après clic sur Associer des Sites
+    function reinitFormulaire() {
+		var checkboxes = $('#check_sites').find(':checkbox');
+		checkboxes.prop('checked', false);
+		$('#zoneUser').removeClass('cacher');
+		$('#zoneSites').addClass('cacher');
+		$('#linkSites').removeClass('cacher');
+		$('#linkCancel').removeClass('cacher');
+		$('#separateur').removeClass('cacher');
+    }
+
+    //      Réinitialisation du formulaire après clic sur Associer des utilisateurs
+    function reinit2Formulaire() {
+        var userscheckboxes = $('#check_users').find(':checkbox');
+        userscheckboxes.prop('checked', false);
+        $('#zoneSite').removeClass('cacher');
+        $('#zoneUsers').addClass('cacher');
+        $('#linkUsers').removeClass('cacher');
+        $('#linkCancel').removeClass('cacher');
+        $('#separateur').removeClass('cacher');
+    }
+
+
+    function validFormulaire(formName) {
+		document.forms[formName].submit();
+    }
+
+
+    function checkAll(listeName) {
+		if(listeName == 'users') {
+			// Récupération de l'ensemble des valeurs de la checkbox
+			var checkboxes = $('#check_users').find(':checkbox');
+			// Si la case 'Tous les sites est coché'
+			if($('input[name=checkAllUsers]').prop('checked') == true) {
+				// Coche de toutes les valeurs de la checkbox
+				checkboxes.prop('checked', true);
+			} else { 
+				checkboxes.prop('checked', false);
+			}
+		}
+
+		if(listeName == 'sites') {
+			var checkboxes = $('#check_sites').find(':checkbox');
+			if($('input[name=checkAllSites]').prop('checked') == true) {
+				checkboxes.prop('checked', true);
+			} else {
+				checkboxes.prop('checked', false);
+			}
+		}
+    }
+
+</script>
+{% endblock fos_user_content %}

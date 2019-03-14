@@ -1,0 +1,159 @@
+{# src/Lci/BoilerBoxBundle/Resources/views/Bons/form_saisie_bons.html.twig #}
+
+{% extends "LciBoilerBoxBundle::secondBonsLayout.html.twig" %}
+
+{% block title %}{{ parent() }} Saisie de bon{% endblock title %}
+
+{% form_theme form 'templates/form/fields.html.twig' %}
+
+{% block fos_user_content %}
+<div id='entete_de_page'><h1>Bons d'attachements</h1></div>
+
+<div class='listing notToBePrinted'>
+
+	<div class='listing_raw'>
+		<div class='listing2' style='border:none;'>
+			<div class='ajout_objet'>
+				<h1>Nouvelle saisie</h1>
+				<div class='formulaire taille_texte_moyen' >
+    		    	{{ form_start(form, {'action':path('lci_bons_saisie'), 'method':'POST', 'name':'myForm'}) }}
+        			{{ form_errors(form) }}
+        		        <div class='ligne_error'>{{ form_errors(form.userInitiateur) }}</div>
+            		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.userInitiateur) }}</div><div>{{ form_widget(form.userInitiateur) }}</div></div>
+
+            		    <div class='ligne_error'>{{ form_errors(form.dateInitialisation) }}</div>
+            		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateInitialisation) }}</div><div>{{ form_widget(form.dateInitialisation) }}</div></div>
+
+						<div class='ligne_error'>{{ form_errors(form.user) }}</div>
+            		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.user) }}</div><div>{{ form_widget(form.user) }}</div></div>
+
+						<div class='ligne_error'>{{ form_errors(form.numeroBA) }}</div>
+            			<div class='nouveau_probleme_ligne'><div>{{ form_label(form.numeroBA) }}</div><div>{{ form_widget(form.numeroBA) }}</div></div>
+
+            		    <div class='ligne_error'>{{ form_errors(form.site) }}</div>
+            		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.site) }}</div><div>{{ form_widget(form.site) }}</div></div>
+
+						<div class='ligne_error'>{{ form_errors(form.numeroAffaire) }}</div>
+            		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.numeroAffaire) }}</div><div>{{ form_widget(form.numeroAffaire) }}</div></div>
+
+            		    <div class='ligne_error'>{{ form_errors(form.nomDuContact) }}</div>
+            		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.nomDuContact) }}</div><div>{{ form_widget(form.nomDuContact) }}</div></div>
+
+						<div class='ligne_error'>{{ form_errors(form.emailContactClient) }}</div>
+            		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.emailContactClient) }}</div><div>{{ form_widget(form.emailContactClient) }}</div></div>
+
+            		    <div class='ligne_error'>{{ form_errors(form.dateSignature) }}</div>
+            		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateSignature) }}</div><div>{{ form_widget(form.dateSignature) }}</div></div>
+
+						<div class='ligne_error'>{{ form_errors(form.fichiersPdf) }}</div>
+						<div class='nouveau_probleme_ligne'><div>{{ form_label(form.fichiersPdf) }} <span style='font-size:12px'>({{ max_upload_size }} max)</span><br /><span id='lien_ajout_fichier'></span></div></div>
+						<div class='nouveau_probleme_ligne'><div id='champ_ajout_fichiers_bon'>{{ form_widget(form.fichiersPdf) }}</div></div>
+					{{ form_rest(form) }}
+					{{ form_end(form) }}
+				</div>
+    			<div class='validation_formulaire_centre notToBePrinted'>
+    	    		<img 	onClick="attente(); document.forms['myForm'].submit(); return false;"
+							class="btn_menu" 
+							alt="Valider"
+							src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer.png') }}"
+    	        			onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer_hover.png') }}"
+    	        			onmouseout=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer.png') }}"
+					/>
+    			</div>
+			</div>
+		</div>
+
+		<div class='listing3 notToBePrinted'>
+			<div class='ajout_objet'>
+				<h1>Nouveau site</h1>
+				<div class='formulaire taille_texte_moyen'>
+					{{ form_start(form_site, {'action':path('lci_bons_saisie'), 'method':'POST', 'name':'mySiteForm'}) }}
+							<div class='ligne_error'>{{ form_errors(form_site.intitule) }}</div>
+        	                <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.intitule) }}</div><div>{{ form_widget(form_site.intitule) }}</div></div>
+					{{ form_end(form_site) }}
+    		    	<div class='validation_formulaire_centre notToBePrinted'>
+        	    		<img    onClick="attente(); document.forms['mySiteForm'].submit(); return false;"
+        	    		        class="btn_menu"
+        	    		        alt="Valider"
+        	    		        src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer.png') }}"
+        	    		        onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer_hover.png') }}"
+        	    		        onmouseout=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer.png') }}"
+        	    		/>
+        			</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class='validation_formulaire_end notToBePrinted'>
+   		<img 	onClick="attente(); redirection('accueilBons'); return false;"
+				class="btn_menu"
+				alt="Retour au menu"
+				src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour_menu.png') }}" 
+   				onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour_menu_hover.png') }}"
+   				onmouseout=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour_menu.png') }}"
+   		/>
+	</div>
+</div>
+
+{% endblock fos_user_content %}
+
+
+{% block javascript %}
+<script type='text/javascript'>
+	var $indexFichier = 1;
+	var $container;
+
+	$(document).ready(function(){
+		/* Mise en place de l'objet datepicker avec 2 mois affichés */
+        $.datepicker.setDefaults({
+            numberOfMonths: 2
+        });
+		$("#lci_boilerboxbundle_bonsAttachement_dateInitialisation" ).datepicker();
+		$("#lci_boilerboxbundle_bonsAttachement_dateSignature" ).datepicker();
+
+		/* Récupération du container contenant l'attribut data-prototype */
+		$container = $('#lci_boilerboxbundle_bonsAttachement_fichiersPdf');
+	
+		/* Lien permettant l'ajout d'un nouveau fichier */
+		var $addLink = $('<a href="#" id="add_fichier" class="small_link">Ajouter un fichier</a>');
+
+		/* Ajout du lien dans la div du container */
+		$('#lien_ajout_fichier').html($addLink);
+
+		/* Ajout d'un listener pour créer un nouveau champs lors du clic sur le lien */
+		$addLink.click(function(e){
+			ajoutChampFichier();
+			e.preventDefault();
+			$('#lci_boilerboxbundle_bonsAttachement_fichiersPdf_' + ( $indexFichier - 1 ) + '_file').trigger("click");
+			return false;
+		});
+	});
+
+	// Fonction qui ajout un champs 'Nouveau fichier' en remplacant le label et le nom par l'index du fichier
+	function ajoutChampFichier() {
+		var $nouveauPrototype = $($('#lci_boilerboxbundle_bonsAttachement_fichiersPdf').data('prototype').replace(/__name__label__/g, '').replace(/__name__/g, $indexFichier));
+
+	 	// Création et ajout d'un lien de suppression en fin de container
+        $deleteLink = $('<a href="#" class="mini_link">Supprimer</a>');
+        $nouveauPrototype.append($deleteLink);
+
+		// Ajout du listener permettant la suppression du champ fichier lors du clic sur le lien
+		$deleteLink.click(function(e){
+			$nouveauPrototype.remove();
+			e.preventDefault();
+			return false;
+		});
+
+		// Ajout du prototype a la fin du container
+		console.log($nouveauPrototype.html());
+		$container.prepend($nouveauPrototype);
+
+		console.log($container.html());
+
+		// Incrémentation de l'index des fichiers
+		$indexFichier ++;
+	}
+
+</script>
+{% endblock javascript %}

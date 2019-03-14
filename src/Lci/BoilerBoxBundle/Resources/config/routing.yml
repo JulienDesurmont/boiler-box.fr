@@ -1,0 +1,3 @@
+lci_rapport_disponibilite:
+    pattern: /rapport/disponibilite
+    defaults: { _controller: LciBoilerBoxBundle:Rapport:rapportDisponibilite }

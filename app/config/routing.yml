@@ -1,0 +1,215 @@
+lci_files:
+    resource: "@LciFilesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+lci_boiler_box:
+    resource: "@LciBoilerBoxBundle/Resources/config/routing.yml"
+    prefix:   /lci
+lci_boilerbox_index:
+    pattern: /
+    defaults: { _controller: LciBoilerBoxBundle:BoilerBox:accesSite }
+lci_boilerbox_accesSite:
+    pattern: /lci/accesSite
+    defaults: { _controller: LciBoilerBoxBundle:BoilerBox:accesSite }
+lci_boilerbox_defineUserLog:
+    pattern: /ajaxLogin
+    defaults: { _controller: LciBoilerBoxBundle:BoilerBox:defineUserLog }
+lci_boilerbox_getUserLog:
+    pattern: /lci/ajaxGetLogin
+    defaults: { _controller: LciBoilerBoxBundle:Ajax:getUserLog }
+
+
+# *****************************  Routes du Gestionnaire de parc ************************************** #
+
+lci_register_module:
+    pattern: /lci/gestionnaire_parc/admin/register/module/{provenance}
+    defaults: { _controller: LciBoilerBoxBundle:Register:moduleRegistration }
+lci_register_equipement:
+    pattern: /lci/gestionnaire_parc/admin/register/equipement/{provenance}
+    defaults: { _controller: LciBoilerBoxBundle:Register:equipementRegistration }
+lci_gestion_modules:
+    pattern: /lci/gestionnaire_parc/gestion/modules
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:gestionModules }
+lci_gestion_equipements:
+    pattern: /lci/gestionnaire_parc/gestion/equipements
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:gestionEquipements }
+lci_tri_parc_equipements:
+    pattern: /lci/gestionnaire_parc/gestion/modules/tri_parc_equipements
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:triParcEquipements }
+lci_change_parc_equipements:
+    pattern: /lci/gestionnaire_parc/admin/gestion/change/equipements
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:changeEquipements }
+lci_tri_parc_modules:
+    pattern: /lci/gestionnaire_parc/gestion/modules/tri_parc_modules
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:triParcModules }
+lci_change_parc_modules:
+    pattern: /lci/gestionnaire_parc/admin/gestion/change/modules
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:changeModules }
+lci_download_probleme_file:
+    pattern: /lci/gestionnaire_parc/register/downloadFile
+    defaults: { _controller: LciBoilerBoxBundle:Register:downloadFile }
+lci_register_problemeTechnique:
+    pattern: /lci/gestionnaire_parc/register/problemeTechnique
+    defaults: { _controller: LciBoilerBoxBundle:Register:problemeTechniqueRegistration }
+lci_affiche_problemeTechnique:
+    pattern: /lci/gestionnaire_parc/affiche/problemeTechnique
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:problemeTechniqueAffichage }
+lci_gestion_parc:
+    pattern: /lci/gestionnaire_parc/index
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:accueil }
+lci_ajax_change_fromVar:
+    pattern: /lci/gestionnaire_parc/admin/ajax/changeFromVar
+    defaults: { _controller: LciBoilerBoxBundle:Ajax:changeFromVar }
+lci_ajax_change_var_provenance:
+    pattern: /lci/gestionnaire_parc/admin/ajax/changeVarProvenance
+    defaults: { _controller: LciBoilerBoxBundle:Ajax:changeVarProvenance }
+lci_ajax_get_variableDeSession:
+    pattern: /lci/gestionnaire_parc/admin/ajax/getVariableDeSession
+    defaults: { _controller: LciBoilerBoxBundle:Ajax:getVariableDeSession }
+lci_problemes_affectes:
+    pattern: /lci/gestionnaire_parc/ticket/affiche/affectation
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:affectation }
+lci_recherche_problemes:
+    pattern: /lci/gestionnaire_parc/ticket/affiche/recherche
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:rechercheProbleme }
+lci_affiche_problemes:
+    pattern: /lci/gestionnaire_parc/admin/affiche/liste
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:afficheListeProblemes }
+    requirements:
+        _method: GET
+lci_export_liste_problemes:
+    pattern: /lci/gestionnaire_parc/export/liste
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:exportListeProblemes }
+lci_tri_recherche_problemes:
+    pattern: /lci/gestionnaire_parc/ticket/affiche/tri_recherche
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:triRechercheProbleme }
+lci_affiche_module_problemes:
+    pattern: /lci/gestionnaire_parc/ticket/affiche/problemes
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:afficheModuleProblemes }
+lci_affiche_equipement_problemes:
+    pattern: /lci/gestionnaire_parc/ticket/affiche/equipement_problemes
+    defaults: { _controller: LciBoilerBoxBundle:GestionParc:afficheEquipementProblemes }
+lci_mail_probleme_rappel:
+    pattern: /lci/gestionnaire_parc/admin/mailRappelProblemeTechnique
+    defaults: { _controller: LciBoilerBoxBundle:Register:sendEmailRappelProblemeTechnique }
+lci_ajax_mail_probleme_rappel:
+    pattern: /lci/gestionnaire_parc/admin/ajax/mailRappelProblemeTechnique
+    defaults: { _controller: LciBoilerBoxBundle:Ajax:sendEmailRappelProblemeTechnique }
+
+
+# *****************************  Routes Administrateur ************************************** #
+
+lci_register_site:
+    pattern: /lci/admin/register/site
+    defaults: { _controller: LciBoilerBoxBundle:Admin:siteRegistration }
+lci_site_update:
+    pattern: /lci/admin/site/update/{idSite}
+    defaults: { _controller: LciBoilerBoxBundle:Admin:modificationSite, idSite:0 }
+lci_accueil_register_site:
+    pattern: /lci/admin/register/accueil/site
+    defaults: { _controller: LciBoilerBoxBundle:Admin:accueilSiteRegistration }
+lci_change_password:
+    pattern: /lci/changePassword
+    defaults: { _controller: LciBoilerBoxBundle:User:changePassword }
+lci_register_user:
+    pattern: /lci/admin/register/user
+    defaults: { _controller: LciBoilerBoxBundle:Admin:userRegistration }
+lci_update_user:
+    pattern: /lci/admin/register/update/user/{idUtilisateur}
+    defaults: { _controller: LciBoilerBoxBundle:Admin:userUpdate }
+lci_register_role:
+    pattern: /lci/admin/register/accueil/role
+    defaults: { _controller: LciBoilerBoxBundle:Admin:registerRole }
+lci_accueil_register_user:
+    pattern: /lci/admin/register/accueil/user
+    defaults: { _controller: LciBoilerBoxBundle:Admin:accueilUserRegistration }
+lci_registration_link:
+    pattern : /lci/admin/register/link
+    defaults: { _controller: LciBoilerBoxBundle:Admin:LinkUserSites }
+lci_registration_userslink:
+    pattern : /lci/admin/register/userslink
+    defaults: { _controller: LciBoilerBoxBundle:Admin:LinkSiteUsers }
+lci_gestion_admin:
+    pattern: /lci/admin/accueil
+    defaults: { _controller: LciBoilerBoxBundle:Admin:accueil }
+lci_affiche_logs_connexion:
+    pattern: /lci/admin/logs/affiche
+    defaults: { _controller: LciBoilerBoxBundle:Admin:afficheLogs }
+lci_supprime_logs_connexion:
+    pattern: /lci/admin/logs/supprime
+    defaults: { _controller: LciBoilerBoxBundle:Admin:supprimeLogs }
+lci_ajax_get_userSites:
+    pattern: /lci/admin/ajax/getUserSites
+    defaults: { _controller: LciBoilerBoxBundle:Ajax:getUserSites }
+lci_ajax_get_siteUsers:
+    pattern: /lci/admin/ajax/getSiteUsers
+    defaults: { _controller: LciBoilerBoxBundle:Ajax:getSiteUsers }
+lci_ajax_refreshASiteStatut:
+    pattern: /lci/admin/ajax/refreshASiteStatut
+    defaults: { _controller: LciBoilerBoxBundle:Ajax:refreshASiteStatut }
+lci_utils_homepage:
+    path:     /lci/admin/utilitaire/index
+    defaults: { _controller: LciBoilerBoxBundle:Utils:index }
+lci_utils_validChoice:
+    path:    /lci/admin/utilitaire/choix
+    defaults: { _controller: LciBoilerBoxBundle:Utils:validChoice }
+
+
+# *****************************  Routes des Bons d'attachement ************************************** #
+
+lci_bons_attachements:
+    pattern: /lci/bons/accueil
+    defaults: { _controller: LciBoilerBoxBundle:Bons:index }
+lci_bons_saisie:
+    pattern: /lci/bons/saisie
+    defaults: { _controller: LciBoilerBoxBundle:Bons:saisie }
+lci_bons_visualiser:
+    pattern: /lci/bons/visualiser/{refresh}
+    defaults: { _controller: LciBoilerBoxBundle:Bons:visualiser, refresh:null }
+lci_bons_rechercher:
+    pattern: /lci/bons/rechercher
+    defaults: { _controller: LciBoilerBoxBundle:Bons:rechercher }
+lci_ajax_bons_setEnquete:
+    pattern: /lci/bons/ajax/setEnquete
+    defaults: { _controller: LciBoilerBoxBundle:AjaxBons:setEnquete }
+lci_ajax_bons_setValidation:
+    pattern: /lci/bons/ajax/setValidation
+    defaults: { _controller: LciBoilerBoxBundle:AjaxBons:setValidation }
+lci_ajax_bons_suppression_fichier: 
+    pattern: /lci/bons/ajax/supprimeUnFichierDeBon
+    defaults: { _controller: LciBoilerBoxBundle:AjaxBons:supprimeUnFichierDeBon }
+lci_bons_afficher_unbon:
+    pattern: /lci/bons/afficher/unbon
+    defaults: { _controller: LciBoilerBoxBundle:Bons:afficherUnBon }
+lci_bons_modifier_unbon:
+    pattern: /lci/bons/modification/unbon/{idBon}
+    defaults: { _controller: LciBoilerBoxBundle:Bons:modifierUnBon }
+lci_bons_externe_enquete:
+    pattern: /lci/bons/externe/enquetes
+    defaults: { _controller: LciBoilerBoxBundle:Externes:getNewEnquetes }
+
+
+lci_bons_admin_site_index:
+    pattern: /lci/bons/admin/site/index
+    defaults: { _controller: LciBoilerBoxBundle:Bons:indexSite }
+lci_bons_admin_site_creer:
+    pattern: /lci/bons/admin/site/creer
+    defaults: { _controller: LciBoilerBoxBundle:Bons:creerSite }
+lci_bons_commentaires:
+    pattern: /lci/bons/modification/unbon/commentaires/{idBon}
+    defaults: { _controller: LciBoilerBoxBundle:Bons:ajoutCommentaires }
+

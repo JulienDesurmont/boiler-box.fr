@@ -1,0 +1,246 @@
+<?php
+// Lci/BoilerBoxBundle/Entity/User.php
+namespace Lci\BoilerBoxBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * User
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="Lci\BoilerBoxBundle\Entity\UserRepository")
+ * @ORM\HasLifecycleCallbacks
+*/
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+    */
+    protected $label;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Lci\BoilerBoxBundle\Entity\Site", cascade={"persist"})
+     * @ORM\OrderBy({"affaire" = "ASC"})
+    */
+    protected $site;
+
+    /**
+     * One User can have many problems to solve
+     * @ORM\OneToMany(targetEntity="ProblemeTechnique", mappedBy="user")
+    */
+    protected $problemeTechnique;
+
+
+    /**
+     * Un utilisateur peut être la cible de plusieurs bons d'attachements
+     *
+     * @ORM\OneToMany(targetEntity="BonsAttachement", mappedBy="user")
+    */
+    protected $bonsAttachement;
+
+
+	/**
+	 * Un utilisateur peut valider plusieurs bons
+	 *
+	 * @ORM\OneToMany(targetEntity="Validation", mappedBy="user")
+	*/
+	protected $validations;
+
+
+
+    public function __construct()
+    {
+       parent::__construct();
+       if (empty($this->roles)) {
+         $this->roles[] = 'ROLE_USER';
+       }
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * Add site
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Site $site
+     * @return User
+     */
+    public function addSite(\Lci\BoilerBoxBundle\Entity\Site $site)
+    {
+        $this->site[] = $site;
+
+        return $this;
+    }
+
+    /**
+     * Remove site
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Site $site
+     */
+    public function removeSite(\Lci\BoilerBoxBundle\Entity\Site $site)
+    {
+        $this->site->removeElement($site);
+    }
+
+    /**
+     * Get site
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * Set label
+     *
+     * @param string $label
+     * @return User
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * Get label
+     *
+     * @return string 
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Add problemeTechnique
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\ProblemeTechnique $problemeTechnique
+     * @return User
+     */
+    public function addProblemeTechnique(\Lci\BoilerBoxBundle\Entity\ProblemeTechnique $problemeTechnique)
+    {
+        $this->problemeTechnique[] = $problemeTechnique;
+
+        return $this;
+    }
+
+    /**
+     * Remove problemeTechnique
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\ProblemeTechnique $problemeTechnique
+     */
+    public function removeProblemeTechnique(\Lci\BoilerBoxBundle\Entity\ProblemeTechnique $problemeTechnique)
+    {
+        $this->problemeTechnique->removeElement($problemeTechnique);
+    }
+
+    /**
+     * Get problemeTechnique
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProblemeTechnique()
+    {
+        return $this->problemeTechnique;
+    }
+
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+		$this->label = $username;
+        return $this;
+    }
+
+
+    /**
+     * Add bonsAttachement
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\BonsAttachement $bonsAttachement
+     * @return User
+     */
+    public function addBonsAttachement(\Lci\BoilerBoxBundle\Entity\BonsAttachement $bonsAttachement)
+    {
+        $this->bonsAttachement[] = $bonsAttachement;
+
+        return $this;
+    }
+
+    /**
+     * Remove bonsAttachement
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\BonsAttachement $bonsAttachement
+     */
+    public function removeBonsAttachement(\Lci\BoilerBoxBundle\Entity\BonsAttachement $bonsAttachement)
+    {
+        $this->bonsAttachement->removeElement($bonsAttachement);
+    }
+
+    /**
+     * Get bonsAttachement
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBonsAttachement()
+    {
+        return $this->bonsAttachement;
+    }
+
+    /**
+     * Add validations
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Validation $validations
+     * @return User
+     */
+    public function addValidation(\Lci\BoilerBoxBundle\Entity\Validation $validations)
+    {
+        $this->validations[] = $validations;
+
+        return $this;
+    }
+
+    /**
+     * Remove validations
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Validation $validations
+     */
+    public function removeValidation(\Lci\BoilerBoxBundle\Entity\Validation $validations)
+    {
+        $this->validations->removeElement($validations);
+    }
+
+    /**
+     * Get validations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getValidations()
+    {
+        return $this->validations;
+    }
+}

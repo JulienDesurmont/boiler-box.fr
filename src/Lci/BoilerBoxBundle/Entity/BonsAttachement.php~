@@ -1,0 +1,567 @@
+<?php 
+// src/Lci/BoilerBoxBundle/Entity/BonsAttachement.php
+namespace Lci\BoilerBoxBundle\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * BonsAttachement
+ *
+ * @ORM\Entity
+ * @UniqueEntity("numeroBA")
+ * @ORM\Table(name="bon_attachement")
+ * @ORM\Entity(repositoryClass="Lci\BoilerBoxBundle\Entity\BonsAttachementRepository")
+ * @ORM\HasLifecycleCallbacks()
+*/
+
+class BonsAttachement {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer", options={"unsigned":true})
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     *
+	 * @Assert\Type("string")
+	 * @Assert\NotBlank(message="Veuillez indiquer le numéro du bon d'attachement")
+     * @Assert\Length(min=6, max=6, exactMessage="Le numéro du bon doit contenir 6 chiffres")
+	 * @Assert\Regex("/^\d{6}$/", message="Format incorrect. 6 chiffres attendus")
+	 *
+     * @ORM\Column()
+	*/
+	protected $numeroBA;
+
+	/**
+	 * @var string
+	 *
+     * @Assert\Type("string")
+	 * @Assert\NotBlank(message="Veuillez indiquer le numéro de l'affaire")
+     * @Assert\Length(min=4, max=7, minMessage="Format incorrect. Nombre de caractères minimum = 4", maxMessage="Format incorrect. Nombre de caractères maximum = 7")
+     * 
+     * @ORM\Column()
+    */
+    protected $numeroAffaire;
+
+
+    /**
+     * @var string
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(message="Veuillez indiquer le nom du site")
+     *
+     * @ORM\Column()
+    */
+    protected $nomDuSite;
+
+
+    /**
+     * @var string
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(message="Veuillez indiquer le nom du client") 
+     * @ORM\Column()
+    */
+    protected $nomDuClient;
+
+
+
+	/**
+     * @var date
+	 *
+	 * @Assert\Date(message="Format incorrect. Format jj/mm/AAAA attendu.")
+	 * @Assert\NotBlank(message="Veuillez indiquer la date de signature du bon")
+	 *
+	 * @ORM\Column(type="date", name="date_de_signature")
+	*/
+	protected $dateSignature;
+
+
+	/**
+ 	 * @var string
+	 *
+	 * @Assert\Email(checkMX="true") 
+     * @Assert\NotBlank(message="Veuillez indiquer un email de contact client")
+	 * 
+	 * @ORM\Column()
+	*/
+	protected $emailContactClient;
+
+
+    /**
+     * @var boolean
+     *
+     * @Assert\Type("bool")
+     *
+     * @ORM\Column(type="boolean", options={"default"=0})
+    */
+    protected $enqueteNecessaire;
+
+
+    /**
+     * @var boolean
+     *
+     * @Assert\Type("bool")
+     *
+     * @ORM\Column(type="boolean", options={"default"=0})
+    */
+    protected $enqueteFaite;
+
+
+	/**
+	 *
+     * @ORM\OneToOne(targetEntity="Validation", cascade={"persist", "remove"})
+	*/
+	protected $validationTechnique;
+
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Validation", cascade={"persist", "remove"})
+    */
+    protected $validationHoraire;
+
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Validation", cascade={"persist", "remove"})
+    */
+    protected $validationSAV;
+
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Validation", cascade={"persist", "remove"})
+    */
+    protected $validationFacturation;
+
+
+
+
+
+	/**
+	 * Plusieurs bons d'attachements peuvent cibler un site
+	 *
+	 * 
+	 * @ORM\ManyToOne(targetEntity="Site", cascade={"persist"}, inversedBy="bonsAttachement")
+	*/
+	protected $site;
+
+
+    /**
+     * Plusieurs bons d'attachements peuvent cibler un utilisateur
+     *
+     *
+     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"}, inversedBy="bonsAttachement")
+     * @ORM\OrderBy({"label" = "ASC"})
+    */
+    protected $user;
+
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Lci\BoilerBoxBundle\Entity\Fichier", mappedBy="bonAttachement", cascade={"persist", "remove"})
+     *
+    */
+	protected $fichiersPdf;
+
+
+
+
+	public function __construct() {
+		$this->dateSignature = new \Datetime();
+		$this->enqueteNecessaire = false;
+		$this->enqueteFaite = false;
+		$this->fichiersPdf = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set numeroBA
+     *
+     * @param string $numeroBA
+     * @return BonsAttachement
+     */
+    public function setNumeroBA($numeroBA)
+    {
+        $this->numeroBA = $numeroBA;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroBA
+     *
+     * @return string 
+     */
+    public function getNumeroBA()
+    {
+        return $this->numeroBA;
+    }
+
+    /**
+     * Set numeroAffaire
+     *
+     * @param string $numeroAffaire
+     * @return BonsAttachement
+     */
+    public function setNumeroAffaire($numeroAffaire)
+    {
+        $this->numeroAffaire = strtoupper($numeroAffaire);
+
+        return $this;
+    }
+
+    /**
+     * Get numeroAffaire
+     *
+     * @return string 
+     */
+    public function getNumeroAffaire()
+    {
+        return $this->numeroAffaire;
+    }
+
+
+    /**
+     * Set nomDuSite
+     *
+     * @param string $nomDuSite
+     * @return BonsAttachement
+     */
+    public function setNomDuSite($nomDuSite)
+    {
+        $this->nomDuSite = ucfirst(strtolower($nomDuSite));
+
+        return $this;
+    }
+
+    /**
+     * Get nomDuSite
+     *
+     * @return string
+     */
+    public function getNomDuSite()
+    {
+        return $this->nomDuSite;
+    }
+
+
+    /**
+     * Set dateSignature
+     *
+     * @param \DateTime $dateSignature
+     * @return BonsAttachement
+     */
+    public function setDateSignature($dateSignature)
+    {
+        $this->dateSignature = $dateSignature;
+
+        return $this;
+    }
+
+    /**
+     * Get dateSignature
+     *
+     * @return \DateTime 
+     */
+    public function getDateSignature()
+    {
+        return $this->dateSignature;
+    }
+
+    /**
+     * Set emailContactClient
+     *
+     * @param string $emailContactClient
+     * @return BonsAttachement
+     */
+    public function setEmailContactClient($emailContactClient)
+    {
+        $this->emailContactClient = $emailContactClient;
+
+        return $this;
+    }
+
+    /**
+     * Get emailContactClient
+     *
+     * @return string 
+     */
+    public function getEmailContactClient()
+    {
+        return $this->emailContactClient;
+    }
+
+    /**
+     * Set site
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Site $site
+     * @return BonsAttachement
+     */
+    public function setSite(\Lci\BoilerBoxBundle\Entity\Site $site = null)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \Lci\BoilerBoxBundle\Entity\Site 
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+
+    /**
+     * Set user
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\User $user
+     * @return BonsAttachement
+     */
+    public function setUser(\Lci\BoilerBoxBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Lci\BoilerBoxBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+
+
+
+    /**
+     * Set enqueteNecessaire
+     *
+     * @param boolean $enqueteNecessaire
+     * @return BonsAttachement
+     */
+    public function setEnqueteNecessaire($enqueteNecessaire)
+    {
+        $this->enqueteNecessaire = $enqueteNecessaire;
+
+        return $this;
+    }
+
+    /**
+     * Get enqueteNecessaire
+     *
+     * @return boolean 
+     */
+    public function getEnqueteNecessaire()
+    {
+        return $this->enqueteNecessaire;
+    }
+
+    /**
+     * Set enqueteFaite
+     *
+     * @param boolean $enqueteFaite
+     * @return BonsAttachement
+     */
+    public function setEnqueteFaite($enqueteFaite)
+    {
+        $this->enqueteFaite = $enqueteFaite;
+
+        return $this;
+    }
+
+    /**
+     * Get enqueteFaite
+     *
+     * @return boolean 
+     */
+    public function getEnqueteFaite()
+    {
+        return $this->enqueteFaite;
+    }
+
+
+    /**
+     * Add fichiersPdf
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Fichier $fichiersPdf
+     * @return BonsAttachement
+     */
+    public function addFichiersPdf(\Lci\BoilerBoxBundle\Entity\Fichier $fichiersPdf)
+    {
+        $this->fichiersPdf[] = $fichiersPdf;
+
+		// On lie le fichier 
+		$fichiersPdf->setBonAttachement($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove fichiersPdf
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Fichier $fichiersPdf
+     */
+    public function removeFichiersPdf(\Lci\BoilerBoxBundle\Entity\Fichier $fichiersPdf)
+    {
+        $this->fichiersPdf->removeElement($fichiersPdf);
+		$fichiersPdf->setBonAttachement(null);
+    }
+
+    /**
+     * Get fichiersPdf
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFichiersPdf()
+    {
+        return $this->fichiersPdf;
+    }
+
+
+	/**
+	 *
+	 * @ORM\PrePersist
+     * @ORM\PreUpdate
+	*/
+    public function setBonToFichiers(){
+		foreach ($this->fichiersPdf as $fichier) {
+			$fichier->setBonAttachement($this);
+		}
+	}
+
+    /**
+     * Set validationTechnique
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Validation $validationTechnique
+     * @return BonsAttachement
+     */
+    public function setValidationTechnique(\Lci\BoilerBoxBundle\Entity\Validation $validationTechnique = null)
+    {
+        $this->validationTechnique = $validationTechnique;
+
+        return $this;
+    }
+
+    /**
+     * Get validationTechnique
+     *
+     * @return \Lci\BoilerBoxBundle\Entity\Validation 
+     */
+    public function getValidationTechnique()
+    {
+        return $this->validationTechnique;
+    }
+
+    /**
+     * Set validationHoraire
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Validation $validationHoraire
+     * @return BonsAttachement
+     */
+    public function setValidationHoraire(\Lci\BoilerBoxBundle\Entity\Validation $validationHoraire = null)
+    {
+        $this->validationHoraire = $validationHoraire;
+
+        return $this;
+    }
+
+    /**
+     * Get validationHoraire
+     *
+     * @return \Lci\BoilerBoxBundle\Entity\Validation 
+     */
+    public function getValidationHoraire()
+    {
+        return $this->validationHoraire;
+    }
+
+    /**
+     * Set validationSAV
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Validation $validationSAV
+     * @return BonsAttachement
+     */
+    public function setValidationSAV(\Lci\BoilerBoxBundle\Entity\Validation $validationSAV = null)
+    {
+        $this->validationSAV = $validationSAV;
+
+        return $this;
+    }
+
+    /**
+     * Get validationSAV
+     *
+     * @return \Lci\BoilerBoxBundle\Entity\Validation 
+     */
+    public function getValidationSAV()
+    {
+        return $this->validationSAV;
+    }
+
+    /**
+     * Set validationFacturation
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Validation $validationFacturation
+     * @return BonsAttachement
+     */
+    public function setValidationFacturation(\Lci\BoilerBoxBundle\Entity\Validation $validationFacturation = null)
+    {
+        $this->validationFacturation = $validationFacturation;
+
+        return $this;
+    }
+
+    /**
+     * Get validationFacturation
+     *
+     * @return \Lci\BoilerBoxBundle\Entity\Validation 
+     */
+    public function getValidationFacturation()
+    {
+        return $this->validationFacturation;
+    }
+
+    /**
+     * Set nomDuClient
+     *
+     * @param string $nomDuClient
+     * @return BonsAttachement
+     */
+    public function setNomDuClient($nomDuClient)
+    {
+        $this->nomDuClient = $nomDuClient;
+
+        return $this;
+    }
+
+    /**
+     * Get nomDuClient
+     *
+     * @return string 
+     */
+    public function getNomDuClient()
+    {
+        return $this->nomDuClient;
+    }
+}
