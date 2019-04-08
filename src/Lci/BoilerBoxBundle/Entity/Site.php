@@ -1,6 +1,5 @@
 <?php
 //src/Lci/BoilerBoxBundle/Entity/Site.php
-
 namespace Lci\BoilerBoxBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -27,7 +26,7 @@ class Site
     /**
      * @var string
      *
-     * @ORM\Column(type="string",length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
      */ 
     protected $url;
 
