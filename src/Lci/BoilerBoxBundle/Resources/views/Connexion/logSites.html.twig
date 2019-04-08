@@ -32,6 +32,7 @@
                 </div>
 				<div class='checkLive'><input id='chk_live' type='checkbox' name='chkLive' onClick='switchLive();'>Live</div>
 				<form action="{{ path('lci_boilerbox_accesSite') }}" method="post" name='myForm' id='myForm' autocomplete="off" data-url={{ path('lci_ajax_refreshASiteStatut') }}>
+					<input type="hidden" id="_database" name="_database" value="" />
 				    <input type="hidden" id="remember_me" name="_remember_me" value="on" />
 					<input type="hidden" id="_username" name="_username" value="" />
 					<input type="hidden" id="_password" name="_password" value="" />
@@ -359,16 +360,19 @@ function actionForm() {
     valeurRadioSite = $('input[name=radLive]:checked').val();
 	var $objSelect; 
 	var $nombreOptions;
+	var $database = "boilerbox_";
     switch(valeurRadioSite) {
         case 'affaire':
             switch(valeurCheckSite) {
                 case 'live':
 					$objSelect = $('#select_sitesLive');
 					$nombreOptions = $('#select_sitesLive option').size();
+                    $database += $('#select_sitesLive option:selected').text().trim().split(" ")[0].toLowerCase();
                     break;
                 case 'site':
                     $objSelect = $('#select_sites');
 					$nombreOptions = $('#select_sites option').size();
+                    $database += $('#select_sites option:selected').text().trim().split(" ")[0].toLowerCase();
                     break;
             }
             break;
@@ -377,17 +381,25 @@ function actionForm() {
                 case 'live':
                     $objSelect = $('#select_sitesModuleLive');
 					$nombreOptions = $('#select_sitesModuleLive option').size();
+                    $database += $('#select_sitesModuleLive option:selected').text().trim().split(" ")[0].toLowerCase();
                     break;
                 case 'site':
                     $objSelect = $('#select_sitesModule');
 					$nombreOptions = $('#select_sitesModule option').size();
+                    $database += $('#select_sitesModule option:selected').text().trim().split(" ")[0].toLowerCase();
                     break;
             }
             break;
     }
+
+	// Indication de la base à afficher dans le VPS
+	$('#_database').val($database);
+	//$('#_database').val('baseded');
+	
 	if ($nombreOptions == 0){
 		return 1;
 	}
+
 
     // Si l'url comprend le message supervision : envoi tel quel sinon envoi vers la page login du site distant
     var urlForm = '';
@@ -401,6 +413,7 @@ function actionForm() {
             urlForm = $objSelect.val() + 'web/app.php/login_check';
         }
 	}
+
     $('#myForm').attr('action', urlForm);
     var xhr = getXHR();
     xhr.open("POST", "{{ path('lci_boilerbox_getUserLog') }}", false);

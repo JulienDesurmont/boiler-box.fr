@@ -1,5 +1,6 @@
 <?php
 //src/Lci/BoilerBoxBundle/Entity/Site.php
+
 namespace Lci\BoilerBoxBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +9,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Site
  * @ORM\Entity
- * @UniqueEntity("url")
  * @UniqueEntity("affaire")
  * @ORM\Table(name="site")
  * @ORM\Entity(repositoryClass="Lci\BoilerBoxBundle\Entity\SiteRepository")
@@ -26,7 +26,7 @@ class Site
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string",length=255)
      */ 
     protected $url;
 

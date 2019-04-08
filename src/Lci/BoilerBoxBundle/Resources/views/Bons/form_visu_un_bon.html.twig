@@ -55,7 +55,7 @@
 							<thead>
 								<tr>
 									{% if (entity_bon.userInitiateur.id == app.user.id) or (entity_bon.user.id == app.user.id) %}
-										<th class='zone_texte_mini'>Supp</th>
+										{#<th class='zone_texte_mini'>Supp</th>#}
 									{% endif %}
 									<th class='zone_texte_geant'>Nom</th>
 									<th class='zone_texte_petit'>Visualiser</th>
@@ -65,7 +65,7 @@
 								{% for fichier in entity_bon.fichiersPdf %}
 									<tr id="fichier_{{ fichier.id }}">
 										{% if (entity_bon.userInitiateur.id == app.user.id) or (entity_bon.user.id == app.user.id) %}
-											<td class='zone_texte_mini'><img src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}" onClick="supprimeUnFichierDuBon('{{ fichier.bonAttachement.id }}', '{{ fichier.id }}');"></td>
+											{#<td class='zone_texte_mini'><img src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}" onClick="supprimeUnFichierDuBon('{{ fichier.bonAttachement.id }}', '{{ fichier.id }}');"></td>#}
 										{% endif %}
 										<td class='zone_texte_geant gauche selectionnable' onclick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
 											<a id="{{ fichier.bonAttachement.id }}_{{ fichier.id }}" class='btn-disable' 

@@ -76,6 +76,10 @@ class BonsAttachementType extends AbstractType {
             'label'         => 'Nom du site',
 			'class'			=> 'LciBoilerBoxBundle:SiteBA',
 			'property'		=> 'intitule',
+			'query_builder'	=> function (EntityRepository $er) {
+				return $er->createQueryBuilder('ba')
+					->orderBy('ba.intitule', 'ASC');
+			},
 			'required'		=> true,
             'label_attr'    => array ('class' => 'label_smalltext'),
             'attr'          => array('class' => 'smallselect'),
