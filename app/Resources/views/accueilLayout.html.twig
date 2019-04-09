@@ -118,13 +118,16 @@
 		$("#menu_boiler_deroulant1").mouseover(function(){
 			if ($afficheMenu == 1) {
 				afficheMenu(this);
+				$('div.boxlogin').addClass('cacher');
 			}
 		});    
 		$("#sousmenu_boiler_deroulant1").mouseout(function(){
 		 	cacheMenu($menuOutil);
+			$('div.boxlogin').removeClass('cacher');
         });
 		$("#map_google").mouseenter(function(){
 			cacheMenu($menuOutil);
+			$('div.boxlogin').removeClass('cacher');
 		});
 		setTimeout(function() {
 			$afficheMenu = 1;

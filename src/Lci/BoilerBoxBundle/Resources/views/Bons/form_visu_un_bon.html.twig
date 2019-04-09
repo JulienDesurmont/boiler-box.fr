@@ -2,6 +2,10 @@
 
 {% extends "LciBoilerBoxBundle::secondBonsLayout.html.twig" %}
 
+{% block meta_viewport %}
+    <meta name="viewport" content="width=device-width, initial-scale=0.3, shrink-to-fit=no">
+{% endblock meta_viewport %}
+
 {% block title %}{{ parent() }} : Fichiers du bon{% endblock title %}
 
 {% block fos_user_content %}

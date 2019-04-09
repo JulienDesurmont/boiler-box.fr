@@ -5,7 +5,7 @@
 
 {% block fos_user_content %}
 <div id='entete_de_page'><h1>{% if is_granted('ROLE_SECRETERIAT') %}Bons {% else %}Mes bons {% endif %}d'attachements</h1></div>
-<div class='menu_parc'>
+<div class='menu_bons'>
     <div class='menu_ligne1'>
 		{% if is_granted('ROLE_SAISIE_BA') %}
 		<img 	onClick="attente(); redirection('bonsSaisie'); return false;"

@@ -2,6 +2,10 @@
 
 {% extends "LciBoilerBoxBundle::secondBonsLayout.html.twig" %}
 
+{% block meta_viewport %}
+    <meta name="viewport" content="width=device-width, initial-scale=0.39, shrink-to-fit=no">
+{% endblock meta_viewport %}
+
 {% block title %}{{ parent() }} Visualisation des bons{% endblock title %}
 
 {% block fos_user_content %}
@@ -15,13 +19,14 @@
 	<h1>{% if is_granted('ROLE_GESTION_BA') %}Liste des {% else %}Mes {% endif %} bons d'attachements</h1>
 </div>
 <div class='listing notToBePrinted'>
-	{% if filtre %}<div class='texte_refresh_liste_ba' onClick='refeshResearch();'>
-						<div>Réinitialiser les filtres</div>
-						<div class='refresh_liste_ba'>
-							<span class='horizontal'></span>
-							<span class='vertical'></span>
-						</div>
-					</div>
+	{% if filtre %}
+		<div class='texte_refresh_liste_ba' onClick='refeshResearch();'>
+			<div>Réinitialiser les filtres</div>
+			<div class='refresh_liste_ba'>
+				<span class='horizontal'></span>
+				<span class='vertical'></span>
+			</div>
+		</div>
 	{% endif %}
     <div class='listing2'>
         <div class='formulaire_liste'>
