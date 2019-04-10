@@ -51,10 +51,11 @@
 
             		    <div class='ligne_error'>{{ form_errors(form.dateSignature) }}</div>
             		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateSignature) }}</div><div>{{ form_widget(form.dateSignature) }}</div></div>
-
-						<div class='ligne_error'>{{ form_errors(form.fichiersPdf) }}</div>
-						<div class='nouveau_probleme_ligne'><div>{{ form_label(form.fichiersPdf) }} <span style='font-size:12px'>({{ max_upload_size }} max)</span><br /><span id='lien_ajout_fichier'></span></div></div>
-						<div class='nouveau_probleme_ligne'><div id='champ_ajout_fichiers_bon'>{{ form_widget(form.fichiersPdf) }}</div></div>
+						<div id="ajout_fichier_mobile_portrait">
+							<div class='ligne_error'>{{ form_errors(form.fichiersPdf) }}</div>
+							<div class='nouveau_probleme_ligne'><div>{{ form_label(form.fichiersPdf) }} <span style='font-size:12px'>({{ max_upload_size }} max)</span><br /><span id='lien_ajout_fichier'></span></div></div>
+							<div class='nouveau_probleme_ligne'><div id='champ_ajout_fichiers_bon'>{{ form_widget(form.fichiersPdf) }}</div></div>
+						</div>
 					{{ form_rest(form) }}
 					{{ form_end(form) }}
 				</div>

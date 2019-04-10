@@ -1445,6 +1445,12 @@ a:active {
 		height: 50px;
 	}
 
+	#ajout_fichier_mobile_portrait {
+		height: 60px;
+		overflow: scroll;
+	}
+
+
 }
 
 
