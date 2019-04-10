@@ -8,6 +8,9 @@
 
 {% block title %}{{ parent() }} : Fichiers du bon{% endblock title %}
 
+{% block class_menu_boiler %} elargir {% endblock class_menu_boiler %}
+
+
 {% block fos_user_content %}
 <div id='entete_de_page'><h1>Bons d'attachement</h1></div>
 <div id='erreur_formulaire_bon'>{{ form_errors(form_ajout_fichier) }}</div>
@@ -303,10 +306,11 @@
 		</div>
 	</div>
 
+	<div id='validation_formulaire_end_portrait'>
 	<div class='validation_formulaire_end notToBePrinted'>
 		<img    id='img_validation'
 				onClick="attente(); document.forms['myFormCommentaires'].submit(); return false;"
-	    		class="btn_menu"
+	    		class="btn_menu mobile"
 	            alt="Valider"
 	            src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer.png') }}"
 	            onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer_hover.png') }}"
@@ -316,19 +320,19 @@
 
 	<div class='validation_formulaire_end notToBePrinted'>
 	    <img 	onClick="attente(); redirection('bonsVisualiser'); return false;"
-				class="btn_menu"
+				class="btn_menu mobile"
 				alt="Retour au menu"
 				src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour.png') }}" 
 	        	onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour_hover.png') }}"
 	        	onmouseout=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour.png') }}"
 	    />
 	</div>
+	</div>
 
 	<form method='post' name='form_modification_bon' id='form_modification_bon' action="{{ path('lci_bons_modifier_unbon', { 'idBon':entity_bon.id }) }}">
 		<input type='hidden' name='id_bon' id='id_bon' />
 	</form>
 </div>
-
 {% endblock fos_user_content %}
 
 

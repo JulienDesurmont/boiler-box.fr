@@ -8,6 +8,9 @@
 
 {% block title %}{{ parent() }} Visualisation des bons{% endblock title %}
 
+{% block class_menu_boiler %} elargir {% endblock class_menu_boiler %}
+
+
 {% block fos_user_content %}
 	{#
 	# Pour un utlisateur lambda, seul ses bons sont visualisables.
@@ -28,7 +31,7 @@
 			</div>
 		</div>
 	{% endif %}
-    <div class='listing2'>
+    <div class='listing_all_bons'>
         <div class='formulaire_liste'>
             <table class='tab_liste tableau_listing'>
                 <thead id='contenu_head_tableau_bons'>
@@ -138,12 +141,14 @@
 </div>
 
 {% if is_granted('ROLE_SAISIE_BA') %}
+<div id="validation_formulaire_end_portrait">
 	<div class='validation_formulaire_end notToBePrinted'>
-	    <img src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour_menu.png') }}" class="btn_menu" alt="Retour au menu"
+	    <img src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour_menu.png') }}" class="btn_menu mobile" alt="Retour au menu"
 	         onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour_menu_hover.png') }}"
 	         onmouseout=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour_menu.png') }}"
 	         onClick="redirection('accueilBons'); return false;">
 	</div>
+</div>
 {% endif %}
 
 
