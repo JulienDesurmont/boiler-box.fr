@@ -3,6 +3,8 @@
 {% extends "LciBoilerBoxBundle::secondBonsLayout.html.twig" %}
 {% block title %} {{ parent() }}Bons d'attachements{% endblock title %}
 
+{% block class_menu_boiler %} elargir {% endblock class_menu_boiler %}
+
 {% block fos_user_content %}
 <div id='entete_de_page'><h1>{% if is_granted('ROLE_SECRETERIAT') %}Bons {% else %}Mes bons {% endif %}d'attachements</h1></div>
 <div class='menu_bons'>

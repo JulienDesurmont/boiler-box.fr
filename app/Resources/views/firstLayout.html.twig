@@ -50,7 +50,7 @@
 			</div>
         </div>
 
-        <div id='menu_boiler' class='notToBePrinted'>
+        <div id='menu_boiler' class='notToBePrinted {% block class_menu_boiler %} {% endblock class_menu_boiler %}'>
            	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
            		{% if is_granted("ROLE_ADMIN") %}
                    	<div class='menu_boiler'>
