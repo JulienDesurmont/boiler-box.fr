@@ -49,13 +49,18 @@ class ObjRechercheBonsAttachementType extends AbstractType {
 				'maxlength'   => 7
             ),
         ))
-		->add('site', 'entity', array(
-			'label'			=> 'Site',
-			'label_attr'	=> array('class' => 'label_smalltext'),
-			'attr'			=> array('class' => 'smallselect'),
-			'property'		=> 'intitule',
-			'class'			=> 'LciBoilerBoxBundle:SiteBA',
-			'placeholder'	=> 'Tout site'
+       ->add('site', 'entity', array(
+			'label' => 'Nom du site',
+			'class' => 'LciBoilerBoxBundle:SiteBA',
+			'property'	=> 'intitule',
+			'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('ba')
+                    ->orderBy('ba.intitule', 'ASC');
+            },
+			'required'      => true,
+            'label_attr'    => array ('class' => 'label_smalltext'),
+            'attr'          => array('class' => 'smallselect'),
+			'placeholder'   => 'Tout site'
 		))
         ->add('nomDuContact', 'text', array(
             'label'         => 'Nom du contact',
@@ -63,7 +68,7 @@ class ObjRechercheBonsAttachementType extends AbstractType {
             'required'      => true,
             'trim'          => true,
             'attr'          => array(
-                'class'         => 'biginput lower centrer'
+                'class'         => 'biginput centrer'
             )
         ))
 	 	->add('saisie', 'choice', array(

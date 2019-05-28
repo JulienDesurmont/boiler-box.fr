@@ -103,7 +103,7 @@ class BonsAttachementType extends AbstractType {
             'required'      => true,
             'trim'          => true,
             'attr'          => array(
-                'class'         => 'biginput lower centrer'
+                'class'         => 'biginput centrer'
             )
 		))
 		->add('emailContactClient', 'text', array(

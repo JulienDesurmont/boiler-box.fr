@@ -88,7 +88,9 @@
 							{{ ent_bons.numeroBA }}
 						</td>
                         <td class='zone_texte_mini' data-intitule='dateSignature'>
-                            {{ ent_bons.dateSignature | date('d/m/Y')  }}
+							{% if ent_bons.dateSignature is not null  %}
+                            	{{ ent_bons.dateSignature | date('d/m/Y')  }}
+							{% endif %}
                         </td>
                         <td class='zone_texte_moyen' data-intitule='initiateur'>
                             {{ ent_bons.userInitiateur.label }}

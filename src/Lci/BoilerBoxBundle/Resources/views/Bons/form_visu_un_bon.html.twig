@@ -34,7 +34,7 @@
 					<div><h2>Demande {{ entity_bon.id }} (initialisée par {{ entity_bon.userInitiateur.label }})</h2></div>
 					<br />
 					<div><h1>Bon {{ entity_bon.numeroBA }}</h1></div>
-					<div class='afterH1'><span class='titre'>Signé le : </span>{{ entity_bon.dateSignature | date('d/m/Y')  }}</div>
+					<div class='afterH1'><span class='titre'>Signé le : </span>{% if entity_bon.dateSignature is not null  %}{{ entity_bon.dateSignature | date('d/m/Y')  }}{% endif %}</div>
 					<div><span class='titre'>Intervenant : </span>{{ entity_bon.user.label }}</div>
 					<div><span class='titre'>Site d'intervention : </span>{{ entity_bon.site.intitule }}   ( {{ entity_bon.numeroAffaire | upper }} ) </div>
 					{% if entity_bon.enqueteFaite %}

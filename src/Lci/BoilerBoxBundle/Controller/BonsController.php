@@ -293,7 +293,7 @@ public function afficherUnBonAction() {
             	    if ($fichier->getBonAttachement() == null) {
             	        $fichier->setBonAttachement($entity_bon);
             	        $em->persist($fichier);
-						$fichier->setAlt($fichier->getAlt()." ( ".$this->get('security.context')->getToken()->getUser()->getLabel()." le ".date('d/m/Y')." )");
+						$fichier->setAlt($fichier->getAlt()." ( ".$this->get('security.context')->getToken()->getUser()->getLabel()." le ".date('d/m/Y à H:i')." )");
 						if ($fichier->getUrl() == null) {
 							$entity_bon->removeFichiersPdf($fichier);
 							$em->detach($fichier);
