@@ -23,7 +23,7 @@
 					<div class='entete'>
 						<div>{{ entity_bon.dateInitialisation | date('d/m/Y')  }}</div>
 						{% if (entity_bon.userInitiateur.id == app.user.id) or (entity_bon.user.id == app.user.id) %}
-						<div onclick="updateBon({{ entity_bon.id }});">
+						<div onClick="updateBon({{ entity_bon.id }});">
 	                    	<img alt='mise à jour' src="{{ asset('bundles/lciboilerbox/images/boutons/btn_bon_maj.png') }}"
 	                    	    onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/boutons/btn_bon_maj_hover.png') }}"
 	                    	    onmouseout=this.src="{{ asset('bundles/lciboilerbox/images/boutons/btn_bon_maj.png') }}"
@@ -50,6 +50,11 @@
 	    	        <div class='liste_fichiers_du_bon'>
 						<h2>
 							Fichiers attachés 
+                            <div id='info_bulle_archive' class='fichier cacher'>Montrer / Cacher les fichiers archivés</div>
+                            <div id='label_archive'>
+                                Archives : <input type='checkbox' id='chk_archive' name='chk_archive' value='chk_archive' onClick="afficheArchives();" />
+                            </div>
+
 							<div id='info_bulle_fichier' class='fichier cacher'></div>
 							<div id='label_fichier' class='droite_div' style='top:15px;'>
 								<label class="switch">
@@ -61,25 +66,32 @@
 						<table class='table_boiler tab_fichiers'>
 							<thead>
 								<tr>
-									{% if (entity_bon.userInitiateur.id == app.user.id) or (entity_bon.user.id == app.user.id) %}
-										{#<th class='zone_texte_mini'>Supp</th>#}
-									{% endif %}
+									{# {% if (entity_bon.userInitiateur.id == app.user.id) or (entity_bon.user.id == app.user.id) %} #}
+										<th class='zone_texte_mini'>Archiver</th>
+									{# {% endif %} #}
 									<th class='zone_texte_geant'>Nom</th>
 									<th class='zone_texte_petit'>Visualiser</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id='table_des_fichiers'>
 								{% for fichier in entity_bon.fichiersPdf %}
-									<tr id="fichier_{{ fichier.id }}">
-										{% if (entity_bon.userInitiateur.id == app.user.id) or (entity_bon.user.id == app.user.id) %}
-											{#<td class='zone_texte_mini'><img src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}" onClick="supprimeUnFichierDuBon('{{ fichier.bonAttachement.id }}', '{{ fichier.id }}');"></td>#}
-										{% endif %}
-										<td class='zone_texte_geant gauche selectionnable' onclick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
+									<tr id="fichier_{{ fichier.id }}" {% if fichier.archive == true %}class="cacher archive"{% endif %}>
+										<td class='zone_texte_mini'>
+											<img 	id="image_{{ fichier.id }}" 
+													{% if fichier.archive == false %}
+														src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}" 
+													{% else %}
+														src="{{ asset('bundles/lciboilerbox/images/parc/boutons/btnPicto_visualiser.png') }}" 
+													{% endif %} 
+													onClick="archiveUnFichierDuBon('{{ fichier.id }}', '{{ fichier.archive }}');"
+											/>
+										</td>
+										<td class='zone_texte_geant gauche selectionnable' onClick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
 											<a id="{{ fichier.bonAttachement.id }}_{{ fichier.id }}" class='btn-disable' 
 												href="{{ asset(prefix_image ~ '/web/uploads/bonsAttachement/fichiersDesBons/' ~ fichier.bonAttachement.id ~ '_' ~  fichier.url) }}" download={{ fichier.alt }}>
 											{{ fichier.alt }}
 										</a></td>
-										<td class='zone_texte_petit selectionnable' onclick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
+										<td class='zone_texte_petit selectionnable' onClick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
 											<img src="{{ asset('bundles/lciboilerbox/images/parc/boutons/btnPicto_visualiser.png') }}">
 										</td>
 									</tr>
@@ -345,6 +357,8 @@
     var $container;
 
 	$(document).ready(function() {
+		/* Désactivation de la checkbox Archive */
+		$('#chk_archive').attr('checked', false);
 		$('#lci_boilerboxbundle_bonsAttachement_validationTechnique_valide').click(function(e){
 			e.preventDefault;
 			$sens = $('#lci_boilerboxbundle_bonsAttachement_validationTechnique_valide').is(":checked");
@@ -411,6 +425,16 @@
             $('#info_bulle_fichier').addClass('cacher');
 
         });
+
+		$('#label_archive').mouseover(function(e) {
+            $('#info_bulle_archive').removeClass('cacher');
+
+        });
+        $('#label_archive').mouseout(function(e) {
+            $('#info_bulle_archive').addClass('cacher');
+
+        });
+
 	});	
 
 	function changeValidation($type, $sens) {
@@ -510,21 +534,26 @@
 	}
 
 
-    function supprimeUnFichierDuBon($idBon, $idFichier) {
-		if (confirm('Êtes vous certain de vouloir supprimer le fichier ?')) 
-		{
-    	    $.ajax({
-        	    url: "{{ path('lci_ajax_bons_suppression_fichier') }}",
-           	 	method: "post",
-            	data: {'identifiant_bon':$idBon, 'identifiant_fichier':$idFichier},
-            	success: function($msg) {
-					$('#fichier_' +  $idFichier).hide();
-            	},
-            	error: function($requete, $error, $msg) {
-            	    alert('Erreur : Suppression non effectuée');
-            	}
-        	});
-		}
+    function archiveUnFichierDuBon($idFichier, $archive) {
+        $.ajax({
+       	    url: "{{ path('lci_ajax_bons_archive_fichier') }}",
+      	 	method: "post",
+           	data: {'identifiant_fichier':$idFichier},
+           	success: function($msg) {
+				if ($archive == false) {
+					$('#fichier_' +  $idFichier).addClass('archive');
+					$('#image_' + $idFichier).attr('src', "{{ asset('bundles/lciboilerbox/images/parc/boutons/btnPicto_visualiser.png') }}");
+					$('#image_' + $idFichier).attr('onClick',"archiveUnFichierDuBon('" + $idFichier + "', '1')");
+				} else {
+					$('#fichier_' +  $idFichier).removeClass('archive');
+					$('#image_' + $idFichier).attr('src', "{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}");
+					$('#image_' + $idFichier).attr('onClick',"archiveUnFichierDuBon('" + $idFichier + "', '0')");
+				}
+           	},
+           	error: function($requete, $error, $msg) {
+           	    alert('Erreur : Archivage non effectué');
+           	}
+       	});
     }
 
 
@@ -570,6 +599,21 @@
 		} else {
 			$('#img_validation').attr('onClick', "attente(); document.forms['myFormCommentaires'].submit(); return false;");
 		}	
+	}
+
+
+	function afficheArchives() {
+		if ($('#chk_archive').is(":checked")) {
+            $('#table_des_fichiers tr').each(function() {
+               	$(this).removeClass('cacher');
+            });
+		}else{
+			$('#table_des_fichiers tr').each(function() {
+				if ($(this).attr('class') == "archive") {
+					$(this).addClass('cacher');
+				}
+			});
+		} 
 	}
 </script>
 {% endblock javascript %}

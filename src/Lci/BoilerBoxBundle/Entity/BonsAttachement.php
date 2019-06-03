@@ -402,16 +402,17 @@ class BonsAttachement {
         return $this;
     }
 
-    /**
+    /*
      * Remove fichiersPdf
      *
      * @param \Lci\BoilerBoxBundle\Entity\Fichier $fichiersPdf
-     */
     public function removeFichiersPdf(\Lci\BoilerBoxBundle\Entity\Fichier $fichiersPdf)
     {
         $this->fichiersPdf->removeElement($fichiersPdf);
 		//$fichiersPdf->setBonAttachement(null);
     }
+	*/
+
 
     /**
      * Get fichiersPdf
@@ -618,4 +619,6 @@ class BonsAttachement {
     {
         return $this->commentaires;
     }
+
+
 }

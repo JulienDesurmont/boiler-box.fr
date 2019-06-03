@@ -88,15 +88,15 @@ private function devalidation($entity_validation, $entity_user) {
 }
 
 
-public function supprimeUnFichierDeBonAction() {
-    $id_bon = $_POST['identifiant_bon'];
+public function archiveUnFichierDeBonAction() {
     $id_fichier_bon = $_POST['identifiant_fichier'];
     $em = $this->getDoctrine()->getManager();
     $entity_fichier = $em->getRepository('LciBoilerBoxBundle:Fichier')->find($id_fichier_bon);
-    $entity_bon = $em->getRepository('LciBoilerBoxBundle:BonsAttachement')->find($id_bon);
-    $entity_bon->removeFichiersPdf($entity_fichier);
-	// Suppression du fichier de la base (et du serveur avec l'evenement POSTREMOVE)
-	$em->remove($entity_fichier);
+	if ($entity_fichier->getArchive() == false) {
+		$entity_fichier->setArchive(true);
+	} else {
+		$entity_fichier->setArchive(false);
+	}
 	$em->flush();
 	return new Response();
 }

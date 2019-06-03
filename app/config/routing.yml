@@ -189,9 +189,9 @@ lci_ajax_bons_setEnquete:
 lci_ajax_bons_setValidation:
     pattern: /lci/bons/ajax/setValidation
     defaults: { _controller: LciBoilerBoxBundle:AjaxBons:setValidation }
-lci_ajax_bons_suppression_fichier: 
-    pattern: /lci/bons/ajax/supprimeUnFichierDeBon
-    defaults: { _controller: LciBoilerBoxBundle:AjaxBons:supprimeUnFichierDeBon }
+lci_ajax_bons_archive_fichier: 
+    pattern: /lci/bons/ajax/archiveUnFichierDeBon
+    defaults: { _controller: LciBoilerBoxBundle:AjaxBons:archiveUnFichierDeBon }
 lci_bons_afficher_unbon:
     pattern: /lci/bons/afficher/unbon
     defaults: { _controller: LciBoilerBoxBundle:Bons:afficherUnBon }

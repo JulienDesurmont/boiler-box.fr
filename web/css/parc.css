@@ -1334,9 +1334,8 @@ a:active {
 }
 
 /* Affichage Huawei */
-@media screen and (max-height:1000px) {
+@media screen and (max-height:900px) {
 	#bloc_body {
-      transform: scale(0.80);
 	  position: fixed;
 	  display: flex;
 	  top: 110px;
@@ -2237,6 +2236,29 @@ input:checked + .slider::before {
 #info_bulle_fichier::before {
     content: 'Afficher les commentaires';
 }
+
+
+#info_bulle_archive {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 10px;
+    height: 10px;
+    text-transform: none;
+    background-color: #ccc;
+    border-radius: 30px;
+    padding: 3px;
+    color: black;
+}
+
+#label_archive {
+	font-size: 10px;
+	margin-left: 10px;
+	padding-top: 10px;
+}
+
+
+
 
 #erreur_formulaire_bon {
     position: fixed;
