@@ -1336,6 +1336,7 @@ a:active {
 /* Affichage Huawei */
 @media screen and (max-height:1000px) {
 	#bloc_body {
+      transform: scale(0.80);
 	  position: fixed;
 	  display: flex;
 	  top: 110px;
