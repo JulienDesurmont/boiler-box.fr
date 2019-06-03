@@ -28,7 +28,6 @@ class Fichier {
     */
     protected $url;
 
-
     /**
      * @ORM\Column(type="string", length=4, name="extension")
      *
@@ -40,12 +39,16 @@ class Fichier {
    	*/
   	protected $alt;
 
+	/**
+     * @ORM\column(name="archive", type="boolean")
+    */
+	protected $archive;
+
     /**
      * @Assert\NotBlank(message="Veuillez uploader le(s) fichier(s) pdf.")
      * @Assert\File(maxSize="20M", uploadErrorMessage="Erreur d'importation du fichier", maxSizeMessage="Fichier trop volumineux (max:20Mo)")
     */
 	protected $file;
-
 
 	/**
 	 *
@@ -209,7 +212,7 @@ class Fichier {
 	 * @ORM\PostRemove
 	*/
 	public function removeUpload(){
-		if ($file_exists($this->tempFilename)){
+		if (file_exists($this->tempFilename)){
 			unlink($this->tempFilename);
 		}	
 	}
