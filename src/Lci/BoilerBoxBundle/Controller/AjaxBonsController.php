@@ -93,9 +93,13 @@ public function archiveUnFichierDeBonAction() {
     $em = $this->getDoctrine()->getManager();
     $entity_fichier = $em->getRepository('LciBoilerBoxBundle:Fichier')->find($id_fichier_bon);
 	if ($entity_fichier->getArchive() == false) {
+		$message_archivage = "Archivé par ".$this->get('security.context')->getToken()->getUser()->getLabel()." le ".date('d/m/Y à H:i');
 		$entity_fichier->setArchive(true);
+		$entity_fichier->setInformations($message_archivage);
 	} else {
+		$message_archivage = "Désarchivé par ".$this->get('security.context')->getToken()->getUser()->getLabel()." le ".date('d/m/Y à H:i');
 		$entity_fichier->setArchive(false);
+		$entity_fichier->setInformations($message_archivage);
 	}
 	$em->flush();
 	return new Response();

@@ -326,7 +326,7 @@ public function ajoutCommentairesAction($idBon) {
 	if ($form->isSubmitted()) {
 		if ($form->isValid()) {
 			$nouveaux_commentaires = ucfirst($e_bon->getCommentaires());
-			$e_bon->setCommentaires($commentaires."<div class='bons_commentaires_titre'>Par ".$ent_user_courant->getLabel()." le ".date('d/m/Y h:i:s')."</div><div class='bons_commentaires_text'>".$nouveaux_commentaires."</div>");
+			$e_bon->setCommentaires($commentaires."<div class='bons_commentaires_titre'>Par ".$ent_user_courant->getLabel()." le ".date('d/m/Y H:i:s')."</div><div class='bons_commentaires_text'>".$nouveaux_commentaires."</div>");
 			$em->flush();		
 		} else {
 			echo $form->getErrors();

@@ -2237,6 +2237,12 @@ input:checked + .slider::before {
     content: 'Afficher les commentaires';
 }
 
+span.informations_archivage {
+	color: green;
+	font-size: 0.9em;
+	font-style: italic;
+}
+
 
 #info_bulle_archive {
     position: absolute;

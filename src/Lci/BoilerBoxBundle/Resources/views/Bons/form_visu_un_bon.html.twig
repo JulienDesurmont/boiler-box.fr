@@ -66,9 +66,7 @@
 						<table class='table_boiler tab_fichiers'>
 							<thead>
 								<tr>
-									{# {% if (entity_bon.userInitiateur.id == app.user.id) or (entity_bon.user.id == app.user.id) %} #}
-										<th class='zone_texte_mini'>Archiver</th>
-									{# {% endif %} #}
+									<th class='zone_texte_mini'>Archiver</th>
 									<th class='zone_texte_geant'>Nom</th>
 									<th class='zone_texte_petit'>Visualiser</th>
 								</tr>
@@ -79,9 +77,9 @@
 										<td class='zone_texte_mini'>
 											<img 	id="image_{{ fichier.id }}" 
 													{% if fichier.archive == false %}
-														src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}" 
+														src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-ajout.png') }}" 
 													{% else %}
-														src="{{ asset('bundles/lciboilerbox/images/parc/boutons/btnPicto_visualiser.png') }}" 
+														src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}" 
 													{% endif %} 
 													onClick="archiveUnFichierDuBon('{{ fichier.id }}', '{{ fichier.archive }}');"
 											/>
@@ -89,7 +87,7 @@
 										<td class='zone_texte_geant gauche selectionnable' onClick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
 											<a id="{{ fichier.bonAttachement.id }}_{{ fichier.id }}" class='btn-disable' 
 												href="{{ asset(prefix_image ~ '/web/uploads/bonsAttachement/fichiersDesBons/' ~ fichier.bonAttachement.id ~ '_' ~  fichier.url) }}" download={{ fichier.alt }}>
-											{{ fichier.alt }}
+											{{ fichier.alt }} {% if fichier.informations is not null %}<br /><span class='informations_archivage'>{{ fichier.informations }}</span>{% endif %}
 										</a></td>
 										<td class='zone_texte_petit selectionnable' onClick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
 											<img src="{{ asset('bundles/lciboilerbox/images/parc/boutons/btnPicto_visualiser.png') }}">
@@ -542,11 +540,11 @@
            	success: function($msg) {
 				if ($archive == false) {
 					$('#fichier_' +  $idFichier).addClass('archive');
-					$('#image_' + $idFichier).attr('src', "{{ asset('bundles/lciboilerbox/images/parc/boutons/btnPicto_visualiser.png') }}");
+					$('#image_' + $idFichier).attr('src', "{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}");
 					$('#image_' + $idFichier).attr('onClick',"archiveUnFichierDuBon('" + $idFichier + "', '1')");
 				} else {
 					$('#fichier_' +  $idFichier).removeClass('archive');
-					$('#image_' + $idFichier).attr('src', "{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}");
+					$('#image_' + $idFichier).attr('src', "{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-ajout.png') }}");
 					$('#image_' + $idFichier).attr('onClick',"archiveUnFichierDuBon('" + $idFichier + "', '0')");
 				}
            	},

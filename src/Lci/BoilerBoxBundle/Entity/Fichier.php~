@@ -44,6 +44,12 @@ class Fichier {
     */
 	protected $archive;
 
+	/**
+	 * @ORM\Column(name="informations", type="text")
+    */
+	protected $informations;
+
+
     /**
      * @Assert\NotBlank(message="Veuillez uploader le(s) fichier(s) pdf.")
      * @Assert\File(maxSize="20M", uploadErrorMessage="Erreur d'importation du fichier", maxSizeMessage="Fichier trop volumineux (max:20Mo)")
@@ -249,5 +255,28 @@ class Fichier {
     public function getBonAttachement()
     {
         return $this->bonAttachement;
+    }
+
+    /**
+     * Set archive
+     *
+     * @param boolean $archive
+     * @return Fichier
+     */
+    public function setArchive($archive)
+    {
+        $this->archive = $archive;
+
+        return $this;
+    }
+
+    /**
+     * Get archive
+     *
+     * @return boolean 
+     */
+    public function getArchive()
+    {
+        return $this->archive;
     }
 }
