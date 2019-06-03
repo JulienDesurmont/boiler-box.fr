@@ -23,7 +23,7 @@
 			</div>
 			<div class="icone"><div class="logoChaudiere"></div></div>
 			<div class='affaire'><span>CONNEXION</span></div>
-			<form action="{{ path('fos_user_security_check') }}" method="post" name='myForm'>
+			<form action="{{ path('fos_user_security_check') }}" method="post" name='myForm' autocomplete="off">
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 			    <input type="hidden" id="remember_me" name="_remember_me" value="on" />
 			    <input class='input_login' type="text" id="username" name="_username" placeholder="Identifiant" value="" required="required" x-moz-errormessage="Entrez un identifiant"  />
