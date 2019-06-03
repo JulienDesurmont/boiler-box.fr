@@ -49,7 +49,7 @@
 				
 	    	        <div class='liste_fichiers_du_bon'>
 						<h2>
-							Fichiers attachés 
+							{{ entity_bon.fichiersPdf | length }}  Fichier{% if entity_bon.fichiersPdf | length > 1 %}s{% endif %} attaché{% if entity_bon.fichiersPdf | length > 1 %}s{% endif %} 
                             <div id='info_bulle_archive' class='fichier cacher'>Montrer / Cacher les fichiers archivés</div>
                             <div id='label_archive'>
                                 Archives : <input type='checkbox' id='chk_archive' name='chk_archive' value='chk_archive' onClick="afficheArchives();" />
