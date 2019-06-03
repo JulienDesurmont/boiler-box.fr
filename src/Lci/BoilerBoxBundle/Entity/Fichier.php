@@ -40,12 +40,12 @@ class Fichier {
   	protected $alt;
 
 	/**
-     * @ORM\column(name="archive", type="boolean")
+     * @ORM\column(name="archive", type="boolean", nullable=true)
     */
 	protected $archive;
 
 	/**
-	 * @ORM\Column(name="informations", type="text")
+	 * @ORM\Column(name="informations", type="text", nullable=true)
     */
 	protected $informations;
 

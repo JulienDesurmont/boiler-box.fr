@@ -71,7 +71,7 @@
     	</div>
 	</div>
 </div>
-<div id="validation_formulaire_end_portrait">
+<div id="validation_formulaire_end_portrait" class='validation_formulaire_end'>
 	<div class='validation_formulaire_end notToBePrinted'>
     	<img src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_annuler.png') }}" class="btn_menu" alt="Annuler"
          onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_annuler_hover.png') }}"
@@ -79,7 +79,10 @@
          onClick="attente(); redirection('bonsVisualiser'); return false;">
 	</div>
 </div>
+
 {% endblock fos_user_content %}
+
+
 
 
 {% block javascript %}

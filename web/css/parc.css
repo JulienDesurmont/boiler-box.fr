@@ -312,7 +312,24 @@ input {
 }
 
 .validation_formulaire_end {
+  position: fixed;
+  flex-direction: column;
+  justify-content: flex-end;
+  right: 10px;
+  bottom: 20px;
+  width: 200px;
+  text-align: right;
+}
+.validation_formulaire_end div{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+/*
+
+.validation_formulaire_end {
   display: flex;
+	border:2px solid red;
   flex-direction: row;
   justify-content: flex-end;
   margin-top: 20px;
@@ -322,6 +339,7 @@ input {
 .validation_formulaire_end div{
   margin-left: 10px;
 }
+*/
 .validation_formulaire_solo {
   display: flex;
   justify-content: center;
@@ -1333,7 +1351,9 @@ a:active {
   font-size: 10px;
 }
 
+
 /* Affichage Huawei */
+/* @media screen and (max-height:1000px) { */
 @media screen and (max-height:900px) {
 	#bloc_body {
 	  position: fixed;
