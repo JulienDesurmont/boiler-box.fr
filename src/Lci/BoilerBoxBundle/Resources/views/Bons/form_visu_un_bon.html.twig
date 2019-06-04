@@ -316,9 +316,9 @@
 		</div>
 	</div>
 
-	<div id='validation_formulaire_end_portrait'>
 	<div class='validation_formulaire_end notToBePrinted'>
-		<img    id='img_validation'
+		<div>
+			<img    id='img_validation'
 				onClick="attente(); document.forms['myFormCommentaires'].submit(); return false;"
 	    		class="btn_menu mobile"
 	            alt="Valider"
@@ -327,16 +327,15 @@
 	            onmouseout=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer.png') }}"
 	    	/>
 		</div>
-
-	<div class='validation_formulaire_end notToBePrinted'>
-	    <img 	onClick="attente(); redirection('bonsVisualiser'); return false;"
+		<div>
+	    	<img 	onClick="attente(); redirection('bonsVisualiser'); return false;"
 				class="btn_menu mobile"
 				alt="Retour au menu"
 				src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour.png') }}" 
 	        	onmouseover=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour_hover.png') }}"
 	        	onmouseout=this.src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_retour.png') }}"
-	    />
-	</div>
+	    	/>
+		</div>
 	</div>
 
 	<form method='post' name='form_modification_bon' id='form_modification_bon' action="{{ path('lci_bons_modifier_unbon', { 'idBon':entity_bon.id }) }}">
