@@ -50,10 +50,13 @@
 	    	        <div class='liste_fichiers_du_bon'>
 						<h2>
 							{{ entity_bon.fichiersPdf | length }}  Fichier{% if entity_bon.fichiersPdf | length > 1 %}s{% endif %} attaché{% if entity_bon.fichiersPdf | length > 1 %}s{% endif %} 
-                            <div id='info_bulle_archive' class='fichier cacher'>Montrer / Cacher les fichiers archivés</div>
-                            <div id='label_archive'>
-                                Archives : <input type='checkbox' id='chk_archive' name='chk_archive' value='chk_archive' onClick="afficheArchives();" />
-                            </div>
+
+							{% if is_granted('ROLE_SAISIE_BA') %}
+                            	<div id='info_bulle_archive' class='fichier cacher'>Montrer / Cacher les fichiers archivés</div>
+                            	<div id='label_archive'>
+                            	    Archives : <input type='checkbox' id='chk_archive' name='chk_archive' value='chk_archive' onClick="afficheArchives();" />
+                            	</div>
+							{% endif %}
 
 							<div id='info_bulle_fichier' class='fichier cacher'></div>
 							<div id='label_fichier' class='droite_div' style='top:15px;'>
@@ -66,7 +69,9 @@
 						<table class='table_boiler tab_fichiers'>
 							<thead>
 								<tr>
-									<th class='zone_texte_mini'>Archiver</th>
+									{% if is_granted('ROLE_SAISIE_BA') %}
+										<th class='zone_texte_mini'>Archiver</th>
+									{% endif %}
 									<th class='zone_texte_geant'>Nom</th>
 									<th class='zone_texte_petit'>Visualiser</th>
 								</tr>
@@ -74,16 +79,18 @@
 							<tbody id='table_des_fichiers'>
 								{% for fichier in entity_bon.fichiersPdf %}
 									<tr id="fichier_{{ fichier.id }}" {% if fichier.archive == true %}class="cacher archive"{% endif %}>
-										<td class='zone_texte_mini'>
-											<img 	id="image_{{ fichier.id }}" 
-													{% if fichier.archive == false %}
-														src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-ajout.png') }}" 
-													{% else %}
-														src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}" 
-													{% endif %} 
-													onClick="archiveUnFichierDuBon('{{ fichier.id }}', '{{ fichier.archive }}');"
-											/>
-										</td>
+										{% if is_granted('ROLE_SAISIE_BA') %}
+											<td class='zone_texte_mini'>
+												<img 	id="image_{{ fichier.id }}" 
+														{% if fichier.archive == false %}
+															src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-ajout.png') }}" 
+														{% else %}
+															src="{{ asset('bundles/lciboilerbox/images/bons/boutonsMenu/croix-suppression.png') }}" 
+														{% endif %} 
+														onClick="archiveUnFichierDuBon('{{ fichier.id }}', '{{ fichier.archive }}');"
+												/>
+											</td>
+										{% endif %}
 										<td class='zone_texte_geant gauche selectionnable' onClick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
 											<a id="{{ fichier.bonAttachement.id }}_{{ fichier.id }}" class='btn-disable' 
 												href="{{ asset(prefix_image ~ '/web/uploads/bonsAttachement/fichiersDesBons/' ~ fichier.bonAttachement.id ~ '_' ~  fichier.url) }}" download={{ fichier.alt }}>
