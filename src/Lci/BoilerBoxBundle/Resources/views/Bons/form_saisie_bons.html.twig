@@ -74,10 +74,13 @@
 		<div class='listing3 notToBePrinted'>
 			<div class='ajout_objet'>
 				<h1>Nouveau site</h1>
+				<a href='https://goo.gl/maps/RG2zoSZrbis8vsqj6' target='google'><span style='color:green; text-decoration:underline'>Accès Google Map</span></a>
 				<div class='formulaire taille_texte_moyen'>
 					{{ form_start(form_site, {'action':path('lci_bons_saisie'), 'method':'POST', 'name':'mySiteForm'}) }}
+							{#
 							<div class='ligne_error'>{{ form_errors(form_site.intitule) }}</div>
         	                <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.intitule) }}</div><div>{{ form_widget(form_site.intitule) }}</div></div>
+							#}
 					{{ form_end(form_site) }}
     		    	<div class='validation_formulaire_centre notToBePrinted'>
         	    		<img    onClick="attente(); document.forms['mySiteForm'].submit(); return false;"
@@ -109,6 +112,34 @@
 
 
 {% block javascript %}
+{# Script d'autocompletion de l'adresse #}
+<script>
+var placeSearch, autocomplete;
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search predictions to
+  // geographical location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('lci_boilerboxbundle_site_ba_adresse'), {types: ['geocode']});
+
+  // Avoid paying for data that you don't need by restricting the set of
+  // place fields that are returned to just the address components.
+  autocomplete.setFields(['address_component']);
+
+  // When the user selects an address from the drop-down, populate the
+  // address fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+</script>
+
+{# lien vers api autocompletion de google #}
+<script src="https://maps.googleapis.com/maps/api/js?key={{ apiKey }}&libraries=places&callback=initAutocomplete"  async defer></script>
+
+
+
+
+
+
+
 <script type='text/javascript'>
 	var $indexFichier = 1;
 	var $container;

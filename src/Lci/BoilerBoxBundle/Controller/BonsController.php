@@ -20,12 +20,14 @@ use Lci\BoilerBoxBundle\Form\Type\BonsAttachementModification2Type;
 use Lci\BoilerBoxBundle\Entity\Fichier;
 use Lci\BoilerBoxBundle\Form\Type\FichierType;
 
-
 use Lci\BoilerBoxBundle\Entity\Validation;
 use Lci\BoilerBoxBundle\Form\Type\ValidationType;
 
 use Lci\BoilerBoxBundle\Entity\ObjRechercheBonsAttachement;
 use Lci\BoilerBoxBundle\Form\Type\ObjRechercheBonsAttachementType;
+
+
+use Lci\BoilerBoxBundle\Objets\Configuration;
 
 use Symfony\Component\Form\FormError;
 
@@ -59,6 +61,8 @@ public function indexAction() {
 }
 
 public function saisieAction() {
+	$obj_configuration = new Configuration();
+	$apiKey = $obj_configuration->getApiKey();	
 	$em = $this->getDoctrine()->getManager();
 	$max_upload_size = ini_get('upload_max_filesize');
 
@@ -75,8 +79,7 @@ public function saisieAction() {
     // Si le formulaire a été soumis (retour de type POST)
     if ($requete->getMethod() == 'POST') {
         if ($formulaire->handleRequest($requete)->isValid()) {
-
-            // On persist l'entité "Bon d'atachement" et par cascade l'entité" "Fichier"
+            // On persist l'entité "Bon d'attachement" et par cascade l'entité" "Fichier"
             // On enregistre le tout en base
             try {
                 $em->persist($ent_bons_attachement);
@@ -86,9 +89,10 @@ public function saisieAction() {
                 if (preg_match($pattern_error_files, $e->getMessage())) {
                     $requete->getSession()->getFlashBag()->add('info', 'Bon '.$ent_bons_attachement->getId()." non enregistré. Vous n'avez pas sélectionné de fichier.");
                     return $this->render('LciBoilerBoxBundle:Bons:form_saisie_bons.html.twig', array(
-                        'form' => $formulaire->createView(),
-                        'form_site' => $formulaire_site->createView(),
-						'max_upload_size' => $max_upload_size
+                        'form' 				=> $formulaire->createView(),
+                        'form_site' 		=> $formulaire_site->createView(),
+						'max_upload_size' 	=> $max_upload_size,
+						'apiKey'			=> $apiKey
                     ));
                 } else {
                     throw new \Exception();
@@ -103,12 +107,14 @@ public function saisieAction() {
 			$formulaire = $this->createForm(new BonsAttachementType(), $ent_bons_attachement);
 
 			return $this->render('LciBoilerBoxBundle:Bons:form_saisie_bons.html.twig', array(
-				'form' => $formulaire->createView(),
-				'form_site' => $formulaire_site->createView(),
-				'max_upload_size' => $max_upload_size
+				'form' 				=> $formulaire->createView(),
+				'form_site' 		=> $formulaire_site->createView(),
+				'max_upload_size' 	=> $max_upload_size,
+				'apiKey'            => $apiKey
 			));
         } else {
 			if ($formulaire_site->handleRequest($requete)->isValid()) {
+				$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA->getLienGoogle()));
             	$em->persist($entity_siteBA);
             	$em->flush();
                 $requete->getSession()->getFlashBag()->add('info', 'Site '.$entity_siteBA->getIntitule().' enregistré');
@@ -118,19 +124,31 @@ public function saisieAction() {
                 $formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA);
         	}
 			return $this->render('LciBoilerBoxBundle:Bons:form_saisie_bons.html.twig', array(
-            	'form' => $formulaire->createView(),
-				'form_site' => $formulaire_site->createView(),
-				'max_upload_size' => $max_upload_size
+            	'form' 				=> $formulaire->createView(),
+				'form_site' 		=> $formulaire_site->createView(),
+				'max_upload_size' 	=> $max_upload_size,
+				'apiKey'            => $apiKey
         	));
         }
     } else {
     	// Si le formulaire n'a pas encore été affiché
         return $this->render('LciBoilerBoxBundle:Bons:form_saisie_bons.html.twig', array(
-            'form' => $formulaire->createView(),
-			'form_site' => $formulaire_site->createView(),
-			'max_upload_size' => $max_upload_size
+            'form' 				=> $formulaire->createView(),
+			'form_site' 		=> $formulaire_site->createView(),
+			'max_upload_size' 	=> $max_upload_size,
+			'apiKey'            => $apiKey
         ));
     }
+}
+
+// Fonction qui récupère l'url retournée par google map et extrait la partie recherche
+private function transformeUrl($lienGoogle) {
+	$obj_configuration = new Configuration();
+	$pattern = '$^https://www.google.com/maps/place/(.+?)/$';
+	if (preg_match($pattern, $lienGoogle, $matches)) {
+		return 'https://www.google.com/maps/embed/v1/place?key='.$obj_configuration->getApiKey().'&q='.$matches[1];
+	}
+	return null;
 }
 
 
@@ -441,5 +459,16 @@ public function creerSiteAction() {
 	));
 }
 */
+
+// Fonction qui permet de visualiser les informations d'un site
+public function visualiserSitesAction($idSiteActif) {
+	$ents_sitesBA = $this->getDoctrine()->getManager()->getRepository('LciBoilerBoxBundle:SiteBA')->findAll();
+	$ent_siteBA_actif = $this->getDoctrine()->getManager()->getRepository('LciBoilerBoxBundle:SiteBA')->find($idSiteActif);
+	return $this->render('LciBoilerBoxBundle:Bons:visualiser_sitesBA.html.twig', array(
+		'ents_sitesBA' 		=> $ents_sitesBA,
+		'ent_siteBA_actif'	=> $ent_siteBA_actif
+	));
+}
+
 
 }

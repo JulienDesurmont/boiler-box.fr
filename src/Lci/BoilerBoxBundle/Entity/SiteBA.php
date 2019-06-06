@@ -5,6 +5,7 @@ namespace Lci\BoilerBoxBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * SiteBA
@@ -26,7 +27,8 @@ class SiteBA
     /**
      * @var string
      *
-     * @ORM\Column(type="string",length=255)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Nom du site manquant")
     */
     protected $intitule;
 
@@ -37,6 +39,57 @@ class SiteBA
 	 * @ORM\OneToMany(targetEntity="BonsAttachement", mappedBy="site")
 	*/
 	protected $bonsAttachement;
+
+	
+	/**
+	 * @var string
+	 * @Assert\Url(message = "L'Url {{ value }} est invalide")
+	 *
+	 * @ORM\Column(type="string", nullable=true)
+	*/
+	protected $lienGoogle;
+
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	*/
+	protected $adresse;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+    */
+    protected $contact;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+    */
+    protected $emailContact;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
+    */
+    protected $telContact;
+
+
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="text", nullable=true)
+	*/
+	protected $informationsClient;
+
 
     /**
      * Constructor
@@ -110,5 +163,143 @@ class SiteBA
     public function getBonsAttachement()
     {
         return $this->bonsAttachement;
+    }
+
+    /**
+     * Set lienGoogle
+     *
+     * @param string $lienGoogle
+     * @return SiteBA
+     */
+    public function setLienGoogle($lienGoogle)
+    {
+        $this->lienGoogle = $lienGoogle;
+
+        return $this;
+    }
+
+    /**
+     * Get lienGoogle
+     *
+     * @return string
+     */
+    public function getLienGoogle()
+    {
+        return $this->lienGoogle;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     * @return SiteBA
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string 
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Set informationsClient
+     *
+     * @param string $informationsClient
+     * @return SiteBA
+     */
+    public function setInformationsClient($informationsClient)
+    {
+        $this->informationsClient = $informationsClient;
+
+        return $this;
+    }
+
+    /**
+     * Get informationsClient
+     *
+     * @return string 
+     */
+    public function getInformationsClient()
+    {
+        return $this->informationsClient;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param string $contact
+     * @return SiteBA
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return string 
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+
+    /**
+     * Set emailContact
+     *
+     * @param string $emailContact
+     * @return SiteBA
+     */
+    public function setEmailContact($emailContact)
+    {
+        $this->emailContact = $emailContact;
+
+        return $this;
+    }
+
+    /**
+     * Get emailContact
+     *
+     * @return string 
+     */
+    public function getEmailContact()
+    {
+        return $this->emailContact;
+    }
+
+    /**
+     * Set telContact
+     *
+     * @param string $telContact
+     * @return SiteBA
+     */
+    public function setTelContact($telContact)
+    {
+        $this->telContact = $telContact;
+
+        return $this;
+    }
+
+    /**
+     * Get telContact
+     *
+     * @return string 
+     */
+    public function getTelContact()
+    {
+        return $this->telContact;
     }
 }

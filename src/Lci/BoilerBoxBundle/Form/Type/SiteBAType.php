@@ -15,16 +15,93 @@ class SiteBAType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options) {
 	    $builder
 				->add('intitule', 'text', array(
-                    'max_length'    => 20,
-                    'label'         => 'Intitulé',
-					'label_attr'    => array ('class' => 'label_smalltext'),
+                    'label'         => 'Nom du site',
+					'label_attr'    => array (
+						'class' 		=> 'label_smalltext',
+					),
 					'attr'          => array(
                 		'class'         => 'biginput centrer',
-                		'placeholder'   => 'Intitulé du nouveau site'
+                		'placeholder'   => 'Inscrire ici le nom du site',
+						'style'         => 'width:100%'
             		),
                     'required'      => true,
                     'trim'          => true
-				));
+				))
+				->add('adresse', 'text', array(
+                    'label'         => 'Adresse',
+                    'label_attr'    => array(
+                        'class'         => 'label_smalltext'
+                    ),
+                    'attr'          => array(
+                        'class'         => 'biginput centrer',
+                        'placeholder'   => "Inscrire ici l'adresse",
+						'style'         => 'width:100%'
+                    ),
+					'required'      => false
+                ))
+                ->add('lienGoogle', 'url', array(
+                    'label'         => 'Url de Google map',
+                    'label_attr'    => array(
+                        'class'         => 'label_smalltext',
+                    ),
+                    'attr'          => array(
+                        'class'         => 'biginput centrer',
+                        'placeholder'   => "Copier ici l'url retournée par Google Map",
+                        'style'         => 'width:100%'
+                    ),
+                    'required'      => false
+                ))
+
+                ->add('contact', 'text', array(
+                    'label'         => 'Contact client',
+                    'label_attr'    => array(
+                        'class'         => 'label_smalltext'
+                    ),
+                    'attr'          => array(
+                        'class'         => 'biginput centrer',
+                        'placeholder'   => "Nom et prénom du contact client",
+                        'style'         => 'width:100%'
+                    ),
+                    'required'      => false
+                ))
+                ->add('emailContact', 'email', array(
+                    'label'         => 'Email du contact',
+                    'label_attr'    => array(
+                        'class'         => 'label_smalltext'
+                    ),
+                    'attr'          => array(
+                        'class'         => 'biginput centrer',
+                        'placeholder'   => "Inscrire ici l'email du contact",
+                        'style'         => 'width:100%'
+                    ),
+                    'required'      => false
+                ))
+                ->add('telContact', 'text', array(
+                    'label'         => 'Tél contact',
+                    'label_attr'    => array(
+                        'class'         => 'label_smalltext'
+                    ),
+                    'attr'          => array(
+                        'class'         => 'biginput centrer',
+                        'placeholder'   => "Inscrire ici le téléphone du contact",
+                        'style'         => 'width:100%'
+                    ),
+                    'required'      => false
+                ))
+
+				->add('informationsClient', 'textarea', array(
+                    'label'         => 'Informations',
+                    'label_attr'    => array(
+                        'class'         => 'label_smalltext'
+                    ),
+                    'attr'          => array(
+						'rows'			=> 7,
+                        'class'         => 'biginput centrer',
+                        'placeholder'   => "Inscrire ici les informations complémentaires",
+						'style'         => 'width:100%; resize:none'
+                    ),
+					'required'      => false
+                ));
     }
 
     /*
