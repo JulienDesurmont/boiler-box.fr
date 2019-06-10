@@ -477,6 +477,7 @@ public function creerSiteAction() {
 public function visualiserSitesAction($idSiteActif) {
 	$ents_sitesBA = $this->getDoctrine()->getManager()->getRepository('LciBoilerBoxBundle:SiteBA')->findAll();
 	$ent_siteBA_actif = $this->getDoctrine()->getManager()->getRepository('LciBoilerBoxBundle:SiteBA')->find($idSiteActif);
+
 	return $this->render('LciBoilerBoxBundle:Bons:visualiser_sitesBA.html.twig', array(
 		'ents_sitesBA' 		=> $ents_sitesBA,
 		'ent_siteBA_actif'	=> $ent_siteBA_actif

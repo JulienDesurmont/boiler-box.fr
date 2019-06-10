@@ -21,9 +21,9 @@
 
 	    <div id='encart_de_selection_du_site'>
 			<h1>Sélection du site</h1>
-	        <select name='liste_sitesBA'>
+	        <select name='liste_sitesBA' id='liste_sitesBA' onChange='afficher_site()'>
 	            {% for site in ents_sitesBA %}
-	                <option id="{{ site.id }}" onClick="afficher_site({{ site.id }});">{{ site.intitule }}</option>
+	                <option id="{{ site.id }}">{{ site.intitule }}</option>
 	            {% endfor %}
 	        </select>
 	    </div>
@@ -84,6 +84,7 @@
 
 	<script type='text/javascript'>
 		function afficher_site($site_id) {
+			$site_id = $('#liste_sitesBA option:selected').attr('id');
 			var $url = $('#liens').attr('data-sitesBAVisualiser') + '/' +  $site_id;
 			document.location.href = $url;
 		}	
