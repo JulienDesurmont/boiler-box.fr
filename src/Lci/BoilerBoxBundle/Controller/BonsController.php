@@ -66,6 +66,8 @@ public function saisieAction() {
 	$em = $this->getDoctrine()->getManager();
 	$max_upload_size = ini_get('upload_max_filesize');
 
+	$entities_sitesBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->findAll();
+
 	// Création d'un formulaire de bon d'attachement +  Récupération de l'utilisateur courant pour définir l'initiateur d'un nouveau bon
     $ent_bons_attachement = new BonsAttachement();
 	$ent_user_courant = $this->get('security.context')->getToken()->getUser();
@@ -92,6 +94,7 @@ public function saisieAction() {
                         'form' 				=> $formulaire->createView(),
                         'form_site' 		=> $formulaire_site->createView(),
 						'max_upload_size' 	=> $max_upload_size,
+						'ents_sitesBA'		=> $entities_sitesBA,
 						'apiKey'			=> $apiKey
                     ));
                 } else {
@@ -110,9 +113,17 @@ public function saisieAction() {
 				'form' 				=> $formulaire->createView(),
 				'form_site' 		=> $formulaire_site->createView(),
 				'max_upload_size' 	=> $max_upload_size,
+				'ents_sitesBA'      => $entities_sitesBA,
 				'apiKey'            => $apiKey
 			));
         } else {
+			// Si un identifiant de site est passé => Mise à jour de l'entité
+			if (isset($_POST['id_site_ba'])) {
+				if ($_POST['id_site_ba'] != "") {
+					$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
+					$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA);
+				}
+			}
 			if ($formulaire_site->handleRequest($requete)->isValid()) {
 				$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA->getLienGoogle()));
             	$em->persist($entity_siteBA);
@@ -127,6 +138,7 @@ public function saisieAction() {
             	'form' 				=> $formulaire->createView(),
 				'form_site' 		=> $formulaire_site->createView(),
 				'max_upload_size' 	=> $max_upload_size,
+				'ents_sitesBA'      => $entities_sitesBA,
 				'apiKey'            => $apiKey
         	));
         }
@@ -136,6 +148,7 @@ public function saisieAction() {
             'form' 				=> $formulaire->createView(),
 			'form_site' 		=> $formulaire_site->createView(),
 			'max_upload_size' 	=> $max_upload_size,
+			'ents_sitesBA'      => $entities_sitesBA,
 			'apiKey'            => $apiKey
         ));
     }

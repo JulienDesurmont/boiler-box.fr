@@ -204,6 +204,9 @@ lci_bons_externe_enquete:
 lci_bons_sitesBA_visualiser:
     pattern: /lci/bons/sitesBA/visualiser/{idSiteActif}
     defaults: { _controller: LciBoilerBoxBundle:Bons:visualiserSites, idSiteActif:1 }
+lci_ajax_bons_get_siteBA:
+    pattern: /lci/bons/sitesBA/get
+    defaults: { _controller: LciBoilerBoxBundle:AjaxBons:getSiteBAEntity }
 
 
 

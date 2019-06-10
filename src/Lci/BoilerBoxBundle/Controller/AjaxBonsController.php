@@ -6,6 +6,9 @@ use Lci\BoilerBoxBundle\Entity\Validation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+
 class AjaxBonsController extends Controller {
 
 // Fonction qui modifie le paramètre EnqueteNecessaire d'un bon
@@ -103,6 +106,28 @@ public function archiveUnFichierDeBonAction() {
 	}
 	$em->flush();
 	return new Response();
+}
+
+
+public function getSiteBAEntityAction() {
+	if (isset($_POST['id_site_ba'])){
+		$id_site_ba = $_POST['id_site_ba'];
+	} else {
+		$id_site_ba = 1;
+	}
+	$em = $this->getDoctrine()->getManager();
+	$entity_siteba = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($id_site_ba);
+
+	$tab_siteba[] = $entity_siteba->getId();
+    $tab_siteba[] = $entity_siteba->getIntitule();
+	$tab_siteba[] = $entity_siteba->getAdresse();
+	$tab_siteba[] = $entity_siteba->getLienGoogle();
+	$tab_siteba[] = $entity_siteba->getContact();
+	$tab_siteba[] = $entity_siteba->getEmailContact();
+	$tab_siteba[] = $entity_siteba->getTelContact();
+	$tab_siteba[] = $entity_siteba->getInformationsClient();
+	echo json_encode($tab_siteba);
+	return new Response;
 }
 
 

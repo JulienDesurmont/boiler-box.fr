@@ -45,9 +45,6 @@ h1#titre_affichage_siteBA {
 	position: relative;
 	width: 45%;
 	box-sizing: border-box;
-
-	background-color: #A4A4A4;
-	color: black;
 	border-style: ridge;
 
 	display: flex;
@@ -79,7 +76,7 @@ h1#titre_affichage_siteBA {
 	margin-top: 20px;
 	margin-bottom: 5px;
 	font-size: 18px;
-	border-bottom:2px solid black;
+	border-bottom: 2px solid white;
 	width: 100%;
 }
 #informations_site div.informations {

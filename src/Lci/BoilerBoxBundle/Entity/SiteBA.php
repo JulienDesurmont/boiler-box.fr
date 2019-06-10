@@ -10,9 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * SiteBA
  * @ORM\Entity
- * @UniqueEntity("intitule")
  * @ORM\Table(name="siteBA")
  * @ORM\Entity(repositoryClass="Lci\BoilerBoxBundle\Entity\SiteBARepository")
+ * @UniqueEntity("intitule")
  * @ORM\HasLifecycleCallbacks
 */
 class SiteBA
@@ -27,7 +27,7 @@ class SiteBA
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotNull(message="Nom du site manquant")
     */
     protected $intitule;
@@ -108,6 +108,20 @@ class SiteBA
     {
         return $this->id;
     }
+
+    /**
+     * Set id
+     *
+     * @param string $id
+     * @return SiteBA
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
 
     /**
      * Set intitule
