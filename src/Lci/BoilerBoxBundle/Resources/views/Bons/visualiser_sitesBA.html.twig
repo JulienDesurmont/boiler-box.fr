@@ -23,7 +23,7 @@
 			<h1>Sélection du site</h1>
 	        <select name='liste_sitesBA'>
 	            {% for site in ents_sitesBA %}
-	                <option id="{{ site.id }}" onClick="afficher_site({{ site.id }});">Intitule {{ site.intitule }}</option>
+	                <option id="{{ site.id }}" onClick="afficher_site({{ site.id }});">{{ site.intitule }}</option>
 	            {% endfor %}
 	        </select>
 	    </div>
