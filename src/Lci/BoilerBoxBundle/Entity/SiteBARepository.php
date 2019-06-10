@@ -12,4 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class SiteBARepository extends EntityRepository
 {
+	public function findAll() {
+		return $this->findBy(array(), array('intitule' => 'ASC'));	
+	}
 }
