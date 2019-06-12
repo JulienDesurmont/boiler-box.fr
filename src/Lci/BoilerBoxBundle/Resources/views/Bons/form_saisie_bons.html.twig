@@ -21,10 +21,9 @@
 	<div class='listing_raw'>
 		<div class='listing2' style='border:none;'>
 			<div class='ajout_objet'>
-				<h1>Nouvelle saisie</h1>
+				<h1>Nouveau Bon</h1>
 				<div class='formulaire taille_texte_moyen' >
-					{{ ents_sitesBA[10].intitule }} - {{ ents_sitesBA[10].id }}
-    		    	{{ form_start(form, {'action':path('lci_bons_saisie'), 'method':'POST', 'name':'myForm'}) }}
+    		    	{{ form_start(form, {'action':path('lci_bons_saisie'), 'method':'POST', 'name':'myForm', 'id':'myForm'}) }}
         			{{ form_errors(form) }}
         		        <div class='ligne_error'>{{ form_errors(form.userInitiateur) }}</div>
             		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.userInitiateur) }}</div><div>{{ form_widget(form.userInitiateur) }}</div></div>
@@ -52,9 +51,13 @@
 
             		    <div class='ligne_error'>{{ form_errors(form.dateSignature) }}</div>
             		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateSignature) }}</div><div>{{ form_widget(form.dateSignature) }}</div></div>
-						<div id="ajout_fichier_mobile_portrait">
+						<div id="ajout_fichier_mobile_portrait"  class='ajout_fichier_joint'>
 							<div class='ligne_error'>{{ form_errors(form.fichiersPdf) }}</div>
-							<div class='nouveau_probleme_ligne'><div>{{ form_label(form.fichiersPdf) }} <span style='font-size:12px'>({{ max_upload_size }} max)</span><br /><span id='lien_ajout_fichier'></span></div></div>
+							<div class='nouveau_probleme_ligne'>
+								<div>{{ form_label(form.fichiersPdf) }} <span style='font-size:12px'>( {{ max_upload_size }} max ) : </span><br />
+									<span id='lien_ajout_fichier'></span>
+								</div>
+							</div>
 							<div class='nouveau_probleme_ligne'><div id='champ_ajout_fichiers_bon'>{{ form_widget(form.fichiersPdf) }}</div></div>
 						</div>
 					{{ form_rest(form) }}
@@ -74,18 +77,49 @@
 
 		<div class='listing3 notToBePrinted'>
 			<div class='ajout_objet'>
-				<h1>Nouveau site</h1>
+				<h1 id='titre_nouveau_siteBA'>Nouveau site</h1>
 				<a href='https://goo.gl/maps/RG2zoSZrbis8vsqj6' target='google'><span style='color:green; text-decoration:underline'>Accès Google Map</span></a>
 				<div class='formulaire taille_texte_moyen'>
-					{{ form_start(form_site, {'action':path('lci_bons_saisie'), 'method':'POST', 'name':'mySiteForm'}) }}
-							<input type='hidden' name='id_site_ba' id='id_site_ba' />
-							{#
-							<div class='ligne_error'>{{ form_errors(form_site.intitule) }}</div>
-        	                <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.intitule) }}</div><div>{{ form_widget(form_site.intitule) }}</div></div>
-							#}
+					{{ form_start(form_site, {attr: {'id': 'lci_boilerboxbundle_site_ba'}}) }}
+					{{ form_errors(form_site) }}
+						<input type='hidden' name='id_site_ba' id='id_site_ba' />
+
+                        <div class='ligne_error'>{{ form_errors(form_site.intitule) }}{{ form_errors(form_site.adresse) }}{{ form_errors(form_site.lienGoogle) }}{{ form_errors(form_site.contact) }}{{ form_errors(form_site.emailContact) }}{{ form_errors(form_site.telContact) }}{{ form_errors(form_site.informationsClient) }}</div>
+                        <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.intitule) }}</div></div>
+						<div class='nouveau_probleme_ligne'><div class='right'>{{ form_widget(form_site.intitule) }}</div></div>
+
+                        <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.adresse) }}</div></div>
+                        <div class='nouveau_probleme_ligne'><div class='right'>{{ form_widget(form_site.adresse) }}</div></div>
+
+                        <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.lienGoogle) }}</div></div>
+                        <div class='nouveau_probleme_ligne'><div class='right'>{{ form_widget(form_site.lienGoogle) }}</div></div>
+
+                        <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.contact) }}</div></div>
+                        <div class='nouveau_probleme_ligne'><div class='right'>{{ form_widget(form_site.contact) }}</div></div>
+
+                        <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.emailContact) }}</div></div>
+                        <div class='nouveau_probleme_ligne'><div class='right'>{{ form_widget(form_site.emailContact) }}</div></div>
+
+                        <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.telContact) }}</div></div>
+                        <div class='nouveau_probleme_ligne'><div class='right'>{{ form_widget(form_site.telContact) }}</div></div>
+
+                        <div class='nouveau_probleme_ligne'><div>{{ form_label(form_site.informationsClient) }}</div></div>
+                        <div class='nouveau_probleme_ligne'><div class='right'>{{ form_widget(form_site.informationsClient) }}</div></div>
+
+						<div id="ajout_fichier_siteBA_mobile_portrait" class='ajout_fichier_joint'>
+                            <div class='ligne_error'>{{ form_errors(form_site.fichiersJoint) }}</div>
+                            <div class='nouveau_probleme_ligne'>
+                                <div>{{ form_label(form_site.fichiersJoint) }}<span style='font-size:12px'> ( {{ max_upload_size }} max ) : </span>
+									<div id='fichiers_deja_joints' style='font-size:12px; font-style:italic; line-height:1.6;'></div>
+                                    <span id='lien_ajout_fichier_siteBA'></span>
+                                </div>
+                            </div>
+                            <div class='nouveau_probleme_ligne'><div id='champ_ajout_fichiers_siteBA'>{{ form_widget(form_site.fichiersJoint) }}</div></div>
+                        </div>
+                    {{ form_rest(form_site) }}
 					{{ form_end(form_site) }}
     		    	<div class='validation_formulaire_centre notToBePrinted'>
-        	    		<img    onClick="attente(); document.forms['mySiteForm'].submit(); return false;"
+        	    		<img    onClick="attente(); document.forms['lci_boilerboxbundle_site_ba'].submit(); return false;"
         	    		        class="btn_menu"
         	    		        alt="Valider"
         	    		        src="{{ asset('bundles/lciboilerbox/images/commun/boutons/btn_enregistrer.png') }}"
@@ -141,9 +175,12 @@ function initAutocomplete() {
 
 <script type='text/javascript'>
 	var $indexFichier = 1;
+	var $indexFichierSiteBA = 1;
 	var $container;
+	var $container_site;
 
-	$(document).ready(function(){
+	$(document).ready(function() {
+
 		/* Mise en place de l'objet datepicker avec 2 mois affichés */
         $.datepicker.setDefaults({
             numberOfMonths: 2
@@ -151,14 +188,24 @@ function initAutocomplete() {
 		$("#lci_boilerboxbundle_bonsAttachement_dateInitialisation" ).datepicker();
 		$("#lci_boilerboxbundle_bonsAttachement_dateSignature" ).datepicker();
 
+
 		/* Récupération du container contenant l'attribut data-prototype */
 		$container = $('#lci_boilerboxbundle_bonsAttachement_fichiersPdf');
+		/* Récupération du container des fichiers des SitesBA */
+		$container_site = $('#lci_boilerboxbundle_site_ba_fichiersJoint');
 	
-		/* Lien permettant l'ajout d'un nouveau fichier */
+
+		/* Lien permettant l'ajout d'un nouveau fichier au bon */
 		var $addLink = $('<a href="#" id="add_fichier" class="small_link">Ajouter un fichier</a>');
+		/* Lien permettant l'ajout d'un nouveau fichier au site */
+		var $addLinkFichierSiteBA = $('<a href="#" id="add_fichier_site" class="small_link">Ajouter un fichier</a>');
+
 
 		/* Ajout du lien dans la div du container */
 		$('#lien_ajout_fichier').html($addLink);
+		/* Ajout du lien dans la div du container de fichiers des sites */
+		$('#lien_ajout_fichier_siteBA').html($addLinkFichierSiteBA);
+
 
 		/* Ajout d'un listener pour créer un nouveau champs lors du clic sur le lien */
 		$addLink.click(function(e){
@@ -167,9 +214,20 @@ function initAutocomplete() {
 			$('#lci_boilerboxbundle_bonsAttachement_fichiersPdf_' + ( $indexFichier - 1 ) + '_file').trigger("click");
 			return false;
 		});
+		/* Ajout d'un listener pour création d'un champs lors du clic sur le lien des fichiers des sitesBA */
+		$addLinkFichierSiteBA.click(function(e){
+            ajoutChampFichierSiteBA();
+            e.preventDefault();
+            $('#lci_boilerboxbundle_site_ba_fichiersJoint_' + ( $indexFichierSiteBA - 1 ) + '_file').trigger("click");
+            return false;
+        });
 
 
+
+		/* Affichage des informations du site selectionné dans l'encart SiteBA */
         $('#lci_boilerboxbundle_bonsAttachement_site option').click(function(){
+			$('#titre_nouveau_siteBA').text('Modification du site');
+			$('#fichiers_deja_joints').html('');
             var $id_site_ba = this.value;
             var $url = "{{ path('lci_ajax_bons_get_siteBA') }}";
             $.ajax({
@@ -180,20 +238,32 @@ function initAutocomplete() {
 					var $tab_siteBA = $.parseJSON(msg);
 					$('#id_site_ba').val($tab_siteBA[0]);
 					$('#lci_boilerboxbundle_site_ba_intitule').val($tab_siteBA[1]);
+					$('#lci_boilerboxbundle_site_ba_intitule').attr('readonly', true);
 					$('#lci_boilerboxbundle_site_ba_adresse').val($tab_siteBA[2]);
 					$('#lci_boilerboxbundle_site_ba_lienGoogle').val($tab_siteBA[3]);			
 					$('#lci_boilerboxbundle_site_ba_contact').val($tab_siteBA[4]);
 					$('#lci_boilerboxbundle_site_ba_emailContact').val($tab_siteBA[5]);
 					$('#lci_boilerboxbundle_site_ba_telContact').val($tab_siteBA[6]);	
 					$('#lci_boilerboxbundle_site_ba_informationsClient').val($tab_siteBA[7]);
+					$.each($tab_siteBA[8], function(index, value) {
+						$('#fichiers_deja_joints').append(value + '<br />');
+					});
                     return true;
                 }
             });
         });
 
+		/* Lors du clic sur reset on réautorise l'écriture du nom du site et on supprime la valeur de l'identifiant du site  pour éviter une mise à jour */
+		$('#lci_boilerboxbundle_site_ba_reset').click(function(){
+			$('#lci_boilerboxbundle_site_ba_intitule').attr('readonly', false);
+			$('#id_site_ba').val('');
+			$('#fichiers_deja_joints').html('');
+			$('#titre_nouveau_siteBA').text('Nouveau site');
+		});
+
 	});
 
-	// Fonction qui ajout un champs 'Nouveau fichier' en remplacant le label et le nom par l'index du fichier
+	// Fonction qui ajoute un champs 'Nouveau fichier' en remplacant le label et le nom par l'index du fichier
 	function ajoutChampFichier() {
 		var $nouveauPrototype = $($('#lci_boilerboxbundle_bonsAttachement_fichiersPdf').data('prototype').replace(/__name__label__/g, '').replace(/__name__/g, $indexFichier));
 
@@ -201,7 +271,6 @@ function initAutocomplete() {
         $deleteLink = $('<a href="#" class="mini_link">Supprimer</a>');
         $nouveauPrototype.append($deleteLink);
 
-		// Ajout du listener permettant la suppression du champ fichier lors du clic sur le lien
 		$deleteLink.click(function(e){
 			$nouveauPrototype.remove();
 			e.preventDefault();
@@ -209,14 +278,38 @@ function initAutocomplete() {
 		});
 
 		// Ajout du prototype a la fin du container
-		console.log($nouveauPrototype.html());
+		//console.log($nouveauPrototype.html());
 		$container.prepend($nouveauPrototype);
-
-		console.log($container.html());
-
+		//console.log($container.html());
 		// Incrémentation de l'index des fichiers
 		$indexFichier ++;
 	}
+
+
+
+    // Fonction qui ajoute un champs 'Nouveau fichier de site BA' en remplacant le label et le nom par l'index du fichier
+    function ajoutChampFichierSiteBA() {
+        var $nouveauPrototype = $($('#lci_boilerboxbundle_site_ba_fichiersJoint').data('prototype').replace(/__name__label__/g, '').replace(/__name__/g, $indexFichierSiteBA));
+
+        // Création et ajout d'un lien de suppression en fin de container
+        $deleteLink = $('<a href="#" class="mini_link">Supprimer</a>');
+        $nouveauPrototype.append($deleteLink);
+
+        // Ajout du listener permettant la suppression du champ fichier lors du clic sur le lien
+        $deleteLink.click(function(e){
+            $nouveauPrototype.remove();
+            e.preventDefault();
+            return false;
+        });
+
+		console.log($nouveauPrototype);
+        // Ajout du prototype a la fin du container
+        $container_site.prepend($nouveauPrototype);
+		//console.log($container_site.html());
+        // Incrémentation de l'index des fichiers
+        $indexFichierSiteBA ++;
+    }
+
 
 </script>
 {% endblock javascript %}

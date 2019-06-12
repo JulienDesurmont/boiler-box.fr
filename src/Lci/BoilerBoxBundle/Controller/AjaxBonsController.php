@@ -110,6 +110,7 @@ public function archiveUnFichierDeBonAction() {
 
 
 public function getSiteBAEntityAction() {
+	$tab_fichier = null;
 	if (isset($_POST['id_site_ba'])){
 		$id_site_ba = $_POST['id_site_ba'];
 	} else {
@@ -126,6 +127,13 @@ public function getSiteBAEntityAction() {
 	$tab_siteba[] = $entity_siteba->getEmailContact();
 	$tab_siteba[] = $entity_siteba->getTelContact();
 	$tab_siteba[] = $entity_siteba->getInformationsClient();
+	foreach ($entity_siteba->getFichiersJoint() as $ent_fichier) {
+		$tab_fichier[] = $ent_fichier->getAlt();
+	}
+	if ($tab_fichier != null) {
+		$tab_siteba[] = $tab_fichier;
+	}
+	
 	echo json_encode($tab_siteba);
 	return new Response;
 }

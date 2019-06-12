@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="siteBA")
  * @ORM\Entity(repositoryClass="Lci\BoilerBoxBundle\Entity\SiteBARepository")
  * @UniqueEntity("intitule")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
 */
 class SiteBA
 {
@@ -91,12 +91,24 @@ class SiteBA
 	protected $informationsClient;
 
 
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Lci\BoilerBoxBundle\Entity\FichierSiteBA", mappedBy="siteBA", cascade={"persist", "remove"})
+     *
+    */
+    protected $fichiersJoint;
+
+
+
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->bonsAttachement = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->fichiersJoint = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -316,4 +328,70 @@ class SiteBA
     {
         return $this->telContact;
     }
+
+
+
+
+
+
+
+    /**
+     * Add fichiersJoint
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\FichierSiteBA $fichiersJoint
+     * @return BonsAttachement
+     */
+    public function addFichiersJoint(\Lci\BoilerBoxBundle\Entity\FichierSiteBA $fichiersJoint)
+    {
+        $this->fichiersJoint[] = $fichiersJoint;
+
+        // On lie le fichier
+        $fichiersJoint->setSiteBA($this);
+
+        return $this;
+    }
+
+    /*
+     * Remove fichiersJoint
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\FichierSiteBA $fichiersJoint
+    public function removeFichiersJoint(\Lci\BoilerBoxBundle\Entity\FichierSiteBA $fichiersJoint)
+    {
+        $this->fichiersJoint->removeElement($fichiersJKoint);
+        //$fichiersJoint->setSiteBA(null);
+    }
+    */
+
+
+    /**
+     * Get fichiersJoint
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFichiersJoint()
+    {
+        return $this->fichiersJoint;
+    }
+
+
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+    */
+    public function setBonToFichiers(){
+        foreach ($this->fichiersJoint as $fichier) {
+            $fichier->setSiteBA($this);
+        }
+    }
+
+
+
+	public function setFichiersJointToEmpty() {
+		$this->fichiersJoint = array();
+	}
+
+
+
 }

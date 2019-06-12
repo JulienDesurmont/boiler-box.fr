@@ -75,7 +75,11 @@ public function saisieAction() {
     $formulaire = $this->createForm(new BonsAttachementType(), $ent_bons_attachement);
 
 	$entity_siteBA = new SiteBA();
-	$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA);
+	$entity_siteBA_update = null;
+	$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA, array(
+		'action' => $this->generateUrl('lci_bons_saisie'),
+        'method' => 'POST'
+	));
 
     $requete = $this->get('request');
     // Si le formulaire a été soumis (retour de type POST)
@@ -118,22 +122,40 @@ public function saisieAction() {
 			));
         } else {
 			// Si un identifiant de site est passé => Mise à jour de l'entité
+			// Pour cela on enregistre les information du formulaire dans une nouvelle entité et on met a jour l'entité à modifier
 			if (isset($_POST['id_site_ba'])) {
 				if ($_POST['id_site_ba'] != "") {
 					$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
-					$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA);
+					$entity_siteBA_update = new SiteBA();
+					$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA_update, array(
+        				'action' => $this->generateUrl('lci_bons_saisie'),
+        				'method' => 'POST'
+    				));
 				}
 			}
-			if ($formulaire_site->handleRequest($requete)->isValid()) {
+			$formulaire_site->handleRequest($requete);
+			// Si une mise à jour est demandée
+			if ($entity_siteBA_update != null) {
+				$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
+				// Seule la modification du nom du site n'est pas permise	
+				$entity_siteBA->setAdresse($entity_siteBA_update->getAdresse());
+				$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA_update->getLienGoogle()));
+				foreach($entity_siteBA_update->getFichiersJoint() as $ent_fichier) {
+					$entity_siteBA->addFichiersJoint($ent_fichier);
+               	}
+				$em->detach($entity_siteBA_update);
+			} else {
 				$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA->getLienGoogle()));
-            	$em->persist($entity_siteBA);
-            	$em->flush();
-                $requete->getSession()->getFlashBag()->add('info', 'Site '.$entity_siteBA->getIntitule().' enregistré');
-
-				/* Création d'un nouveau formulaire de création de site */
-                $entity_siteBA = new SiteBA();
-                $formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA);
-        	}
+			}
+            $em->persist($entity_siteBA);
+            $em->flush();
+            $requete->getSession()->getFlashBag()->add('info', 'Site '.$entity_siteBA->getIntitule().' enregistré');
+			/* Création d'un nouveau formulaire de création de site */
+            $entity_siteBA = new SiteBA();
+            $formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA, array(
+        		'action' => $this->generateUrl('lci_bons_saisie'),
+        		'method' => 'POST'
+    		));
 			return $this->render('LciBoilerBoxBundle:Bons:form_saisie_bons.html.twig', array(
             	'form' 				=> $formulaire->createView(),
 				'form_site' 		=> $formulaire_site->createView(),
@@ -331,6 +353,7 @@ public function afficherUnBonAction() {
 						}
             	    }
             	}
+				return new Response();
 				$em->flush();
 			}else{
 				$form->addError(new FormError($form_message_erreur));

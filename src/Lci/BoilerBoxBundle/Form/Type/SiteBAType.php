@@ -35,7 +35,7 @@ class SiteBAType extends AbstractType
                     'attr'          => array(
                         'class'         => 'biginput centrer',
                         'placeholder'   => "Inscrire ici l'adresse",
-						'style'         => 'width:100%'
+						'style'         => 'width:100%;'
                     ),
 					'required'      => false
                 ))
@@ -101,7 +101,18 @@ class SiteBAType extends AbstractType
 						'style'         => 'width:100%; resize:none'
                     ),
 					'required'      => false
-                ));
+                ))
+        		->add('fichiersJoint', 'collection', array(
+            		'type'          => new FichierSiteBAType(),
+            		'label'         => 'Fichier(s) joints au site',
+            		'label_attr'    => array ('class' => 'label_smalltext'),
+            		'allow_add'     => true,
+            		'allow_delete'  => true,
+            		/* Option à ajouter pour résoudre l'erreur -> Warning: spl_object_hash() expects parameter 1 to be object, array given */
+            		'options'       => array('data_class' => 'Lci\BoilerBoxBundle\Entity\FichierSiteBA'),
+            		'required'      => true
+        		))
+				->add('reset', 'reset');
     }
 
     /*

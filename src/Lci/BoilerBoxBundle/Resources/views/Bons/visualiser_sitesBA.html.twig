@@ -18,7 +18,6 @@
 {% block fos_user_content %}
 	<h1 id='titre_affichage_siteBA'>Sites d'interventions</h1>
 	<div id='div_principal'>
-
 	    <div id='encart_de_selection_du_site'>
 			<h1>Sélection du site</h1>
 	        <select name='liste_sitesBA' id='liste_sitesBA' onChange='afficher_site()'>
@@ -27,8 +26,6 @@
 	            {% endfor %}
 	        </select>
 	    </div>
-
-
 
 	    <div id='encart_du_site_actif'>
 			<div id='informations_site'>
@@ -65,8 +62,28 @@
 				{% endif %}
 			</div>
         </div>
-
-
+	</div>
+	
+	<h1>Liste des fichiers</h1>
+	<div id='encart_fichiers_joint'>
+		{% if ent_siteBA_actif.fichiersJoint is not null %}
+			{% for fichier in ent_siteBA_actif.fichiersJoint %}
+				<div>
+					<a 
+					id="{{ fichier.siteBA.id }}_{{ fichier.id }}" 
+                    href="{{ asset('uploads/bonsAttachement/fichiersDesSitesBA/' ~ fichier.siteBA.id ~ '_' ~  fichier.url) }}#"
+					download="{{ fichier.alt }}" 
+					>
+					{{ fichier.alt }}<br />
+					{% if fichier.extension in ['txt', 'pdf', 'jpeg', 'png', 'jpg']  %}
+						<iframe src="{{ asset('uploads/bonsAttachement/fichiersDesSitesBA/' ~ fichier.siteBA.id ~ '_' ~  fichier.url) }}" ></iframe>
+					{% else %}
+						<div width="250px" height="150px" ></div>
+					{% endif %}
+                    </a>
+				</div>
+			{% endfor %}
+		{% endif %}
 	</div>
 
     <div id="validation_formulaire_end_portrait">
