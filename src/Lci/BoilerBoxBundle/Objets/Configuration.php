@@ -19,6 +19,7 @@ class Configuration {
 
 	public function __construct() {
 		$this->apiKey = 'AIzaSyA4ceVB6W6udd67ihnRTeR_Oiip9tY_87s';
+		//$this->apiKey = 'AIzaSyDWDE06KALl3FUgCr8FczcO2vzc2baEBKg';
 	}
 
 

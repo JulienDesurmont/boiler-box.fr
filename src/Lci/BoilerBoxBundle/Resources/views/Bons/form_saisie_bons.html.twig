@@ -130,6 +130,8 @@
 				</div>
 			</div>
 		</div>
+	<div id='map' style='height:500px;width:500px;></div>
+
 	</div>
 	<div id="validation_formulaire_end_portrait">
 		<div class='validation_formulaire_end notToBePrinted'>
@@ -149,6 +151,7 @@
 
 {% block javascript %}
 {# Script d'autocompletion de l'adresse #}
+{#
 <script>
 var placeSearch, autocomplete;
 function initAutocomplete() {
@@ -161,8 +164,79 @@ function initAutocomplete() {
   // place fields that are returned to just the address components.
   autocomplete.setFields(['address_component']);
 }
-
 </script>
+#}
+
+
+
+    <script>
+    function initAutocomplete(){
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 50.475258, lng: 2.970084},
+            zoom: 13,
+            mapTypeId: 'roadmap'
+        });
+
+        /* Mise en place du textbox dans la carte */
+        var input = document.getElementById('lci_boilerboxbundle_site_ba_adresse');
+        var searchBox = new google.maps.places.SearchBox(input);
+
+/*
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+            searchBox.setBounds(map.getBounds());
+        });
+*/
+
+        var markers = [];
+
+        searchBox.addListener('places_changed', function() {
+            var places = searchBox.getPlaces();
+            if (places.length == 0) {
+                return;
+            }
+
+            markers.forEach(function(marker) {
+                marker.setMap(null);
+            });
+            markers = [];
+
+            // For each place, get the icon, name and location.
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+			$('#lci_boilerboxbundle_site_ba_lienGoogle').val('place' + place.place_id);
+          });
+          map.fitBounds(bounds);
+        });
+    }
+    </script>
+
 
 {# lien vers api autocompletion de google #}
 <script src="https://maps.googleapis.com/maps/api/js?key={{ apiKey }}&libraries=places&callback=initAutocomplete"  async defer></script>

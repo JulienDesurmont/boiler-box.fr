@@ -139,7 +139,11 @@ public function saisieAction() {
 				$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
 				// Seule la modification du nom du site n'est pas permise	
 				$entity_siteBA->setAdresse($entity_siteBA_update->getAdresse());
+				////echo $entity_siteBA_update->getLienGoogle();
+				////echo "<br />";
 				$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA_update->getLienGoogle()));
+				////echo $entity_siteBA->getLienGoogle();
+				////return new Response();
 				foreach($entity_siteBA_update->getFichiersJoint() as $ent_fichier) {
 					$entity_siteBA->addFichiersJoint($ent_fichier);
                	}
@@ -180,8 +184,13 @@ public function saisieAction() {
 private function transformeUrl($lienGoogle) {
 	$obj_configuration = new Configuration();
 	$pattern = '$^https://www.google.com/maps/place/(.+?)/$';
+	$pattern2 = '$^http://place(.+)$';
 	if (preg_match($pattern, $lienGoogle, $matches)) {
 		return 'https://www.google.com/maps/embed/v1/place?key='.$obj_configuration->getApiKey().'&q='.$matches[1];
+	} else {
+		if (preg_match($pattern2, $lienGoogle, $matches)) {
+        	return 'https://www.google.com/maps/embed/v1/place?key='.$obj_configuration->getApiKey().'&q=place_id:'.$matches[1];
+		}
 	}
 	return null;
 }
@@ -335,7 +344,6 @@ public function afficherUnBonAction() {
 	$f_ba_commentaires = $this->createForm(new BonsAttachementCommentairesType(), $entity_bon);
 	$form = $this->createForm(new BonsAttachementModificationType(), $entity_bon);
 		
-
 	// Gestion de l'ajout de fichiers à un bon 
 	$requete = $this->get('request');
 	if ($requete->getMethod() == 'POST') {
@@ -353,7 +361,6 @@ public function afficherUnBonAction() {
 						}
             	    }
             	}
-				return new Response();
 				$em->flush();
 			}else{
 				$form->addError(new FormError($form_message_erreur));
