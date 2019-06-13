@@ -65,4 +65,3 @@ security:
         - { path: ^/lci/gestionnaire_parc/, roles: ROLE_TECHNICIEN }
         - { path: ^/lci/gestionnaire_parc/admin/, roles: ROLE_RESPONSABLE_PARC }
         - { path: ^/lci/admin/, roles: ROLE_ADMIN }
-

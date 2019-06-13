@@ -27,7 +27,7 @@ use Lci\BoilerBoxBundle\Entity\ObjRechercheBonsAttachement;
 use Lci\BoilerBoxBundle\Form\Type\ObjRechercheBonsAttachementType;
 
 
-use Lci\BoilerBoxBundle\Objets\Configuration;
+use Lci\BoilerBoxBundle\Entity\Configuration;
 
 use Symfony\Component\Form\FormError;
 
@@ -61,11 +61,11 @@ public function indexAction() {
 }
 
 public function saisieAction() {
-	$obj_configuration = new Configuration();
-	$apiKey = $obj_configuration->getApiKey();	
 	$em = $this->getDoctrine()->getManager();
 	$max_upload_size = ini_get('upload_max_filesize');
 
+	$apiKey = $this->get('lci_boilerbox.configuration')->getEntiteDeConfiguration('cle_api_google')->getValeur();
+	
 	$entities_sitesBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->findAll();
 
 	// Création d'un formulaire de bon d'attachement +  Récupération de l'utilisateur courant pour définir l'initiateur d'un nouveau bon
@@ -182,14 +182,14 @@ public function saisieAction() {
 
 // Fonction qui récupère l'url retournée par google map et extrait la partie recherche
 private function transformeUrl($lienGoogle) {
-	$obj_configuration = new Configuration();
+	$apiKey = $this->get('lci_boilerbox.configuration')->getEntiteDeConfiguration('cle_api_google')->getValeur();
 	$pattern = '$^https://www.google.com/maps/place/(.+?)/$';
 	$pattern2 = '$^http://place(.+)$';
 	if (preg_match($pattern, $lienGoogle, $matches)) {
-		return 'https://www.google.com/maps/embed/v1/place?key='.$obj_configuration->getApiKey().'&q='.$matches[1];
+		return 'https://www.google.com/maps/embed/v1/place?key='.$apiKey.'&q='.$matches[1];
 	} else {
 		if (preg_match($pattern2, $lienGoogle, $matches)) {
-        	return 'https://www.google.com/maps/embed/v1/place?key='.$obj_configuration->getApiKey().'&q=place_id:'.$matches[1];
+        	return 'https://www.google.com/maps/embed/v1/place?key='.$apiKey.'&q=place_id:'.$matches[1];
 		}
 	}
 	return null;

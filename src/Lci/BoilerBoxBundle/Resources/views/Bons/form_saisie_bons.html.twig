@@ -130,8 +130,11 @@
 				</div>
 			</div>
 		</div>
-	<div id='map' style='height:500px;width:500px;></div>
-
+		<div id='map' style='height:500px;width:500px;></div>
+    	<div>
+    	    <div class='validation_formulaire_end notToBePrinted'>
+    	    </div>
+    	</div>
 	</div>
 	<div id="validation_formulaire_end_portrait">
 		<div class='validation_formulaire_end notToBePrinted'>
@@ -231,6 +234,7 @@ function initAutocomplete() {
               bounds.extend(place.geometry.location);
             }
 			$('#lci_boilerboxbundle_site_ba_lienGoogle').val('place' + place.place_id);
+			$('#lci_boilerboxbundle_site_ba_lienGoogle').attr('readonly', true)
           });
           map.fitBounds(bounds);
         });
@@ -330,6 +334,7 @@ function initAutocomplete() {
 		/* Lors du clic sur reset on réautorise l'écriture du nom du site et on supprime la valeur de l'identifiant du site  pour éviter une mise à jour */
 		$('#lci_boilerboxbundle_site_ba_reset').click(function(){
 			$('#lci_boilerboxbundle_site_ba_intitule').attr('readonly', false);
+			$('#lci_boilerboxbundle_site_ba_lienGoogle').attr('readonly', false);
 			$('#id_site_ba').val('');
 			$('#fichiers_deja_joints').html('');
 			$('#titre_nouveau_siteBA').text('Nouveau site');
