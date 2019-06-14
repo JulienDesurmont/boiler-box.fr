@@ -185,12 +185,13 @@ private function transformeUrl($lienGoogle) {
 	$apiKey = $this->get('lci_boilerbox.configuration')->getEntiteDeConfiguration('cle_api_google')->getValeur();
 	$pattern = '$^https://www.google.com/maps/place/(.+?)/$';
 	$pattern2 = '$^http://place(.+)$';
+	$patternLatLng = '$^http://latLng\((.+),(.+)\)$';
 	if (preg_match($pattern, $lienGoogle, $matches)) {
-		return 'https://www.google.com/maps/embed/v1/place?key='.$apiKey.'&q='.$matches[1];
-	} else {
-		if (preg_match($pattern2, $lienGoogle, $matches)) {
-        	return 'https://www.google.com/maps/embed/v1/place?key='.$apiKey.'&q=place_id:'.$matches[1];
-		}
+		return 'https://www.google.com/maps/embed/v1/place?key='.$apiKey.'&q='.$matches[1].'&zoom=19&maptype=satellite';
+	} else if (preg_match($pattern2, $lienGoogle, $matches)) {
+        	return 'https://www.google.com/maps/embed/v1/place?key='.$apiKey.'&q=place_id:'.$matches[1].'&zoom=19&maptype=satellite';
+	} else if (preg_match($patternLatLng, $lienGoogle, $matches)) {
+        return 'https://www.google.com/maps/embed/v1/view?key='.$apiKey.'&center='.trim($matches[1]).','.trim($matches[2]).'&zoom=19&maptype=satellite';
 	}
 	return null;
 }

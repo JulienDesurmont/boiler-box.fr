@@ -7,6 +7,13 @@
 {% endblock meta_viewport %}
 
 
+{% block liens_css %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bons_attachement.css') }}" media='screen' />
+{% endblock liens_css %}
+
+
+
 {% block title %}{{ parent() }} Saisie de bon{% endblock title %}
 
 {% block class_menu_boiler %} elargir {% endblock class_menu_boiler %}
@@ -130,7 +137,9 @@
 				</div>
 			</div>
 		</div>
-		<div id='map' style='height:500px;width:500px;></div>
+		<div>
+			<div id='map' style='height:500px;width:500px;></div>
+		</div>
     	<div>
     	    <div class='validation_formulaire_end notToBePrinted'>
     	    </div>
@@ -154,104 +163,89 @@
 
 {% block javascript %}
 {# Script d'autocompletion de l'adresse #}
-{#
-<script>
-var placeSearch, autocomplete;
-function initAutocomplete() {
-  // Create the autocomplete object, restricting the search predictions to
-  // geographical location types.
-  autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById('lci_boilerboxbundle_site_ba_adresse'), {types: ['geocode']});
 
-  // Avoid paying for data that you don't need by restricting the set of
-  // place fields that are returned to just the address components.
-  autocomplete.setFields(['address_component']);
-}
-</script>
-#}
-
-
-
-    <script>
+    <script type='text/javascript'>
     function initAutocomplete(){
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 50.475258, lng: 2.970084},
-            zoom: 13,
+		var monMarqueur;
+
+        var maCarte = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 50.474, lng: 2.97118},
+            zoom: 4,
             mapTypeId: 'roadmap'
         });
 
         /* Mise en place du textbox dans la carte */
         var input = document.getElementById('lci_boilerboxbundle_site_ba_adresse');
-        var searchBox = new google.maps.places.SearchBox(input);
 
-/*
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-            searchBox.setBounds(map.getBounds());
+        var autocomplete = new google.maps.places.Autocomplete(input);
+		autocomplete.setFields(['place_id', 'geometry']);
+
+        maCarte.addListener('click', function(e){
+			if (monMarqueur != null) {
+				monMarqueur.setMap(null);
+			}
+
+			monMarqueur = new google.maps.Marker({
+				position: e.latLng,
+				map: maCarte,
+				title: 'Cliquez pour zoomer'
+			});
+			maCarte.setZoom(19);
+			maCarte.setCenter(monMarqueur.getPosition());
+			maCarte.setMapTypeId('satellite');
+
+			
+			/* Service de geocoding pour récupérer l'adresse du lieu selectionné par la souris */
+			geocoder = new google.maps.Geocoder();
+			geocoder.geocode({'location':monMarqueur.getPosition()}, function(results, status) {
+				if (status == 'OK') {
+					$('#lci_boilerboxbundle_site_ba_lienGoogle').val('latLng' + monMarqueur.getPosition());
+					$('#lci_boilerboxbundle_site_ba_adresse').val(results[0].formatted_address);
+					$('#lci_boilerboxbundle_site_ba_lienGoogle').attr('readonly', true);
+				} else {
+					alert('Aucune adresse trouvée pour le lieu selectionné');
+				}
+			});
         });
-*/
 
-        var markers = [];
 
-        searchBox.addListener('places_changed', function() {
-            var places = searchBox.getPlaces();
-            if (places.length == 0) {
-                return;
-            }
-
-            markers.forEach(function(marker) {
-                marker.setMap(null);
-            });
-            markers = [];
-
-            // For each place, get the icon, name and location.
-            var bounds = new google.maps.LatLngBounds();
-            places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-              map: map,
-              icon: icon,
-              title: place.name,
-              position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-			$('#lci_boilerboxbundle_site_ba_lienGoogle').val('place' + place.place_id);
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+			if (place.geometry) {
+				maCarte.panTo(place.geometry.location);
+				maCarte.setZoom(19);
+				maCarte.setMapTypeId('satellite');
+            	monMarqueur = new google.maps.Marker({
+                    position: place.geometry.location,
+                    map: maCarte
+            	});
+			}
+			$('#lci_boilerboxbundle_site_ba_lienGoogle').val('latLng' + place.geometry.location);
 			$('#lci_boilerboxbundle_site_ba_lienGoogle').attr('readonly', true)
-          });
-          map.fitBounds(bounds);
-        });
+		});
+
+		$('#lci_boilerboxbundle_site_ba_lienGoogle').on('change', function() {
+			var $objPos = {};
+
+			var $position = $('#lci_boilerboxbundle_site_ba_lienGoogle').val();
+			var $coordonnees = $position.match(/latLng\((.+?),(.+?)\)/);
+			if ($coordonnees == null) {
+				$objPos.lat = 50.474;
+				$objPos.lng = 2.97118;
+				maCarte.setCenter($objPos);
+				maCarte.setZoom(4);
+				maCarte.setMapTypeId('roadmap');
+			} else {
+				$objPos.lat = parseFloat($coordonnees[1]);
+				$objPos.lng = parseFloat($coordonnees[2]);
+        		maCarte.setCenter($objPos);
+				maCarte.setZoom(19);
+				maCarte.setMapTypeId('satellite');
+			}
+		});
     }
-    </script>
 
 
-{# lien vers api autocompletion de google #}
-<script src="https://maps.googleapis.com/maps/api/js?key={{ apiKey }}&libraries=places&callback=initAutocomplete"  async defer></script>
-
-
-
-
-
-
-
-<script type='text/javascript'>
 	var $indexFichier = 1;
 	var $indexFichierSiteBA = 1;
 	var $container;
@@ -319,13 +313,21 @@ function initAutocomplete() {
 					$('#lci_boilerboxbundle_site_ba_intitule').attr('readonly', true);
 					$('#lci_boilerboxbundle_site_ba_adresse').val($tab_siteBA[2]);
 					$('#lci_boilerboxbundle_site_ba_lienGoogle').val($tab_siteBA[3]);			
+					/*
+					if ($tab_siteBA[3] != null) {
+						$('#mapIFrame').attr('src', $tab_siteBA[3]);
+					}
+					*/
 					$('#lci_boilerboxbundle_site_ba_contact').val($tab_siteBA[4]);
 					$('#lci_boilerboxbundle_site_ba_emailContact').val($tab_siteBA[5]);
 					$('#lci_boilerboxbundle_site_ba_telContact').val($tab_siteBA[6]);	
 					$('#lci_boilerboxbundle_site_ba_informationsClient').val($tab_siteBA[7]);
-					$.each($tab_siteBA[8], function(index, value) {
-						$('#fichiers_deja_joints').append(value + '<br />');
-					});
+					if ($tab_siteBA[8]) {
+						$.each($tab_siteBA[8], function(index, value) {
+							$('#fichiers_deja_joints').append(value + '<br />');
+						});
+					}
+					$('#lci_boilerboxbundle_site_ba_lienGoogle').trigger('change');
                     return true;
                 }
             });
@@ -391,4 +393,12 @@ function initAutocomplete() {
 
 
 </script>
+
+
+
+{# lien vers api autocompletion de google #}
+<script src="https://maps.googleapis.com/maps/api/js?key={{ apiKey }}&libraries=places&callback=initAutocomplete"  async defer></script>
+
+
+
 {% endblock javascript %}

@@ -122,7 +122,7 @@ public function getSiteBAEntityAction() {
 	$tab_siteba[] = $entity_siteba->getId();
     $tab_siteba[] = $entity_siteba->getIntitule();
 	$tab_siteba[] = $entity_siteba->getAdresse();
-	$tab_siteba[] = $entity_siteba->getLienGoogle();
+	$tab_siteba[] = $this->transformeUrlReverse($entity_siteba->getLienGoogle());
 	$tab_siteba[] = $entity_siteba->getContact();
 	$tab_siteba[] = $entity_siteba->getEmailContact();
 	$tab_siteba[] = $entity_siteba->getTelContact();
@@ -132,7 +132,10 @@ public function getSiteBAEntityAction() {
 	}
 	if ($tab_fichier != null) {
 		$tab_siteba[] = $tab_fichier;
+	} else {
+		$tab_siteba[] = null;
 	}
+
 	
 	echo json_encode($tab_siteba);
 	return new Response;
@@ -140,6 +143,20 @@ public function getSiteBAEntityAction() {
 
 
 
+// Fonction qui récupère l'url retournée par l'entité et extrait la latitude et la longitude
+private function transformeUrlReverse($url) {
+    $apiKey = $this->get('lci_boilerbox.configuration')->getEntiteDeConfiguration('cle_api_google')->getValeur();
+	// https://www.google.com/maps/embed/v1/view?key=AIzaSyA4ceVB6W6udd67ihnRTeR_Oiip9tY_87s&center=49.26347329999999,-123.14046880000001&zoom=20&maptype=satellite
+	$patternLatLng = '$^https?://www.google.com/maps/embed/v1/view\?key=.+?&center=(.+?),(.+?)&zoom.*$';
+	$patternPlace = '$^https://www.google.com/maps/embed/v1/place\?key=.+&q=(.+?)&zoom=.*$';
+    if (preg_match($patternLatLng, $url, $matches)) {
+        return 'latLng('.$matches[1].','.$matches[2].')';
+    } else if  (preg_match($patternPlace, $url, $matches)) {
+		return 'https://www.google.com/maps/place/'.$matches[1].'/';
+	} else {
+		return $url;
+	}
+}
 
 
 }

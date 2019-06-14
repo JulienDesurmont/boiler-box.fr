@@ -1,4 +1,9 @@
 
+
+div#entete_de_page {
+  margin-top: 0px;
+}
+
 #bloc_body {
   	position: fixed;
   	top: 50px;
