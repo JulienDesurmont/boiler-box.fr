@@ -101,14 +101,14 @@
 
 
 	<script type='text/javascript'>
-		function afficher_site($site_id) {
+		function afficher_site() {
 			$site_id = $('#liste_sitesBA option:selected').attr('id');
 			var $url = $('#liens').attr('data-sitesBAVisualiser') + '/' +  $site_id;
 			document.location.href = $url;
 		}	
 
 		function initAutocomplete() {
-			if (({{ latitude }} != null) && ({{ longitude }} != null))  {
+			if (("{{ latitude }}" != "") && ("{{ longitude }}" != ""))  {
 				$('#mapIFrame').addClass('cacher');
 				$('#map').removeClass('cacher');
 				var $objPos = {};
