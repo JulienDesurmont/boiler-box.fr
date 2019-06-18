@@ -121,45 +121,56 @@ public function saisieAction() {
 				'apiKey'            => $apiKey
 			));
         } else {
-			// Si un identifiant de site est passé => Mise à jour de l'entité
-			// Pour cela on enregistre les information du formulaire dans une nouvelle entité et on met a jour l'entité à modifier
-			if (isset($_POST['id_site_ba'])) {
-				if ($_POST['id_site_ba'] != "") {
-					$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
-					$entity_siteBA_update = new SiteBA();
-					$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA_update, array(
-        				'action' => $this->generateUrl('lci_bons_saisie'),
-        				'method' => 'POST'
-    				));
-				}
-			}
-			$formulaire_site->handleRequest($requete);
-			// Si une mise à jour est demandée
-			if ($entity_siteBA_update != null) {
-				$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
-				// Seule la modification du nom du site n'est pas permise	
-				$entity_siteBA->setAdresse($entity_siteBA_update->getAdresse());
-				////echo $entity_siteBA_update->getLienGoogle();
-				////echo "<br />";
-				$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA_update->getLienGoogle()));
-				////echo $entity_siteBA->getLienGoogle();
-				////return new Response();
-				foreach($entity_siteBA_update->getFichiersJoint() as $ent_fichier) {
-					$entity_siteBA->addFichiersJoint($ent_fichier);
-               	}
-				$em->detach($entity_siteBA_update);
+			// Soit le formulaire de création d'un bon n'est pas valide soit c'est un formulaire de site qui est envoyé
+			if ($formulaire->isSubmitted()){
+				// Le formulaire de nouveau bon n'est pas valide
 			} else {
-				$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA->getLienGoogle()));
+				// Le formulaire de nouveau ou de modification de site est passé
+				// Si un identifiant de site est passé => Mise à jour de l'entité
+				// Pour cela on enregistre les information du formulaire dans une nouvelle entité et on met a jour l'entité à modifier
+				if (isset($_POST['id_site_ba'])) {
+					if ($_POST['id_site_ba'] != "") {
+						$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
+						$entity_siteBA_update = new SiteBA();
+						$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA_update, array(
+        					'action' => $this->generateUrl('lci_bons_saisie'),
+        					'method' => 'POST'
+    					));
+					}
+				}
+				$formulaire_site->handleRequest($requete);
+				// Si une mise à jour est demandée
+				// !! On ne test pas que le formulaire est correct avec un form->isValid donc il nous faut intercepter l'exception DBAL en cas d'erreur
+				if ($entity_siteBA_update != null) {
+					$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
+					// Seule la modification du nom du site n'est pas permise	
+					$entity_siteBA->setAdresse($entity_siteBA_update->getAdresse());
+					////echo $entity_siteBA_update->getLienGoogle();
+					////echo "<br />";
+					$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA_update->getLienGoogle()));
+					////echo $entity_siteBA->getLienGoogle();
+					////return new Response();
+					foreach($entity_siteBA_update->getFichiersJoint() as $ent_fichier) {
+						$entity_siteBA->addFichiersJoint($ent_fichier);
+            	   	}
+					$em->detach($entity_siteBA_update);
+				} else {
+					$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA->getLienGoogle()));
+				}
+            	$em->persist($entity_siteBA);
+				try{
+            		$em->flush();
+					$requete->getSession()->getFlashBag()->add('info', 'Site '.$entity_siteBA->getIntitule().' enregistré');
+				} catch (\Doctrine\DBAL\DBALException $e) {
+					$requete->getSession()->getFlashBag()->add('info', "Erreur d'importation");
+				}
+				/* Création d'un nouveau formulaire de création de site */
+            	$entity_siteBA = new SiteBA();
+            	$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA, array(
+        			'action' => $this->generateUrl('lci_bons_saisie'),
+        			'method' => 'POST'
+    			));
 			}
-            $em->persist($entity_siteBA);
-            $em->flush();
-            $requete->getSession()->getFlashBag()->add('info', 'Site '.$entity_siteBA->getIntitule().' enregistré');
-			/* Création d'un nouveau formulaire de création de site */
-            $entity_siteBA = new SiteBA();
-            $formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA, array(
-        		'action' => $this->generateUrl('lci_bons_saisie'),
-        		'method' => 'POST'
-    		));
 			return $this->render('LciBoilerBoxBundle:Bons:form_saisie_bons.html.twig', array(
             	'form' 				=> $formulaire->createView(),
 				'form_site' 		=> $formulaire_site->createView(),
@@ -187,11 +198,11 @@ private function transformeUrl($lienGoogle) {
 	$pattern2 = '$^http://place(.+)$';
 	$patternLatLng = '$^http://latLng\((.+),(.+)\)$';
 	if (preg_match($pattern, $lienGoogle, $matches)) {
-		return 'https://www.google.com/maps/embed/v1/place?key='.$apiKey.'&q='.$matches[1].'&zoom=19&maptype=satellite';
+		return 'https://www.google.com/maps/embed/v1/place?key=APIKEY&q='.$matches[1].'&zoom=19&maptype=satellite';
 	} else if (preg_match($pattern2, $lienGoogle, $matches)) {
-        	return 'https://www.google.com/maps/embed/v1/place?key='.$apiKey.'&q=place_id:'.$matches[1].'&zoom=19&maptype=satellite';
+        	return 'https://www.google.com/maps/embed/v1/place?key=APIKEY&q=place_id:'.$matches[1].'&zoom=19&maptype=satellite';
 	} else if (preg_match($patternLatLng, $lienGoogle, $matches)) {
-        return 'https://www.google.com/maps/embed/v1/view?key='.$apiKey.'&center='.trim($matches[1]).','.trim($matches[2]).'&zoom=19&maptype=satellite';
+        return 'https://www.google.com/maps/embed/v1/view?key=APIKEY&center='.trim($matches[1]).','.trim($matches[2]).'&zoom=19&maptype=satellite';
 	}
 	return null;
 }
@@ -508,12 +519,21 @@ public function creerSiteAction() {
 public function visualiserSitesAction($idSiteActif) {
 	$ents_sitesBA = $this->getDoctrine()->getManager()->getRepository('LciBoilerBoxBundle:SiteBA')->findAll();
 	$ent_siteBA_actif = $this->getDoctrine()->getManager()->getRepository('LciBoilerBoxBundle:SiteBA')->find($idSiteActif);
+	$ent_siteBA_actif->setLienGoogle($this->putApiKey($ent_siteBA_actif->getLienGoogle()));
 
 	return $this->render('LciBoilerBoxBundle:Bons:visualiser_sitesBA.html.twig', array(
 		'ents_sitesBA' 		=> $ents_sitesBA,
 		'ent_siteBA_actif'	=> $ent_siteBA_actif
 	));
 }
+
+
+private function putApiKey($url) {
+    $apiKey = $this->get('lci_boilerbox.configuration')->getEntiteDeConfiguration('cle_api_google')->getValeur();
+    $pattern = '/APIKEY/';
+    return (preg_replace($pattern, $apiKey, $url));
+}
+
 
 
 }

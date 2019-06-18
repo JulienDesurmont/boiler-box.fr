@@ -165,10 +165,12 @@
 {# Script d'autocompletion de l'adresse #}
 
     <script type='text/javascript'>
+	var maCarte;
+
     function initAutocomplete(){
 		var monMarqueur;
 
-        var maCarte = new google.maps.Map(document.getElementById('map'), {
+        maCarte = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 50.474, lng: 2.97118},
             zoom: 4,
             mapTypeId: 'roadmap'
@@ -313,11 +315,6 @@
 					$('#lci_boilerboxbundle_site_ba_intitule').attr('readonly', true);
 					$('#lci_boilerboxbundle_site_ba_adresse').val($tab_siteBA[2]);
 					$('#lci_boilerboxbundle_site_ba_lienGoogle').val($tab_siteBA[3]);			
-					/*
-					if ($tab_siteBA[3] != null) {
-						$('#mapIFrame').attr('src', $tab_siteBA[3]);
-					}
-					*/
 					$('#lci_boilerboxbundle_site_ba_contact').val($tab_siteBA[4]);
 					$('#lci_boilerboxbundle_site_ba_emailContact').val($tab_siteBA[5]);
 					$('#lci_boilerboxbundle_site_ba_telContact').val($tab_siteBA[6]);	
@@ -328,6 +325,8 @@
 						});
 					}
 					$('#lci_boilerboxbundle_site_ba_lienGoogle').trigger('change');
+					 /* Placement du marqueur sur la page */
+					ajoutMarqueur($('#lci_boilerboxbundle_site_ba_lienGoogle').val());
                     return true;
                 }
             });
@@ -390,6 +389,27 @@
         // Incrémentation de l'index des fichiers
         $indexFichierSiteBA ++;
     }
+
+
+	function ajoutMarqueur($infosCoordonnees) {
+		var $objPos = {};
+		var $coordonnees = $infosCoordonnees.match(/latLng\((.+?),(.+?)\)/);
+		$objPos.lat = parseFloat($coordonnees[1]);
+        $objPos.lng = parseFloat($coordonnees[2]);
+		
+		/* Création du marqueur */
+        monMarqueur = new google.maps.Marker({
+            position: $objPos,
+            map: maCarte,
+            title: 'Cliquez pour zoomer'
+        });
+
+		/* Placement du marqueur sur la carte */
+        maCarte.setZoom(19);
+        maCarte.setCenter(monMarqueur.getPosition());
+        maCarte.setMapTypeId('satellite');
+	}
+
 
 
 </script>
