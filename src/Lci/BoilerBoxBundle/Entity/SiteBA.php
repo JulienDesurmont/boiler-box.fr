@@ -43,7 +43,6 @@ class SiteBA
 	
 	/**
 	 * @var string
-	 * @Assert\Url(message = "L'Url {{ value }} est invalide")
 	 *
 	 * @ORM\Column(type="string", nullable=true)
 	*/

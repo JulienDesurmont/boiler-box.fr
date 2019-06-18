@@ -194,15 +194,16 @@ public function saisieAction() {
 // Fonction qui récupère l'url retournée par google map et extrait la partie recherche
 private function transformeUrl($lienGoogle) {
 	$apiKey = $this->get('lci_boilerbox.configuration')->getEntiteDeConfiguration('cle_api_google')->getValeur();
-	$pattern = '$^https://www.google.com/maps/place/(.+?)/$';
-	$pattern2 = '$^http://place(.+)$';
-	$patternLatLng = '$^http://latLng\((.+),(.+)\)$';
+	$pattern = '$^https?://www.google.com/maps/place/(.+?)/$';
+	$pattern2 = '$^https?://place(.+)$';
+	$patternLatLng = '$^latLng\((.+),(.+)\)$';
 	if (preg_match($pattern, $lienGoogle, $matches)) {
 		return 'https://www.google.com/maps/embed/v1/place?key=APIKEY&q='.$matches[1].'&zoom=19&maptype=satellite';
 	} else if (preg_match($pattern2, $lienGoogle, $matches)) {
         	return 'https://www.google.com/maps/embed/v1/place?key=APIKEY&q=place_id:'.$matches[1].'&zoom=19&maptype=satellite';
 	} else if (preg_match($patternLatLng, $lienGoogle, $matches)) {
-        return 'https://www.google.com/maps/embed/v1/view?key=APIKEY&center='.trim($matches[1]).','.trim($matches[2]).'&zoom=19&maptype=satellite';
+        //return 'https://www.google.com/maps/embed/v1/view?key=APIKEY&center='.trim($matches[1]).','.trim($matches[2]).'&zoom=19&maptype=satellite';
+		return $lienGoogle;
 	}
 	return null;
 }
@@ -519,11 +520,19 @@ public function creerSiteAction() {
 public function visualiserSitesAction($idSiteActif) {
 	$ents_sitesBA = $this->getDoctrine()->getManager()->getRepository('LciBoilerBoxBundle:SiteBA')->findAll();
 	$ent_siteBA_actif = $this->getDoctrine()->getManager()->getRepository('LciBoilerBoxBundle:SiteBA')->find($idSiteActif);
+
 	$ent_siteBA_actif->setLienGoogle($this->putApiKey($ent_siteBA_actif->getLienGoogle()));
+	//'https://www.google.com/maps/embed/v1/view?key=APIKEY&center='.trim($matches[1]).','.trim($matches[2]).'&zoom=19&maptype=satellite';
+
+	$latitude = $this->getLatLng('latitude', $ent_siteBA_actif->getLienGoogle());
+	$longitude = $this->getLatLng('longitude', $ent_siteBA_actif->getLienGoogle());
 
 	return $this->render('LciBoilerBoxBundle:Bons:visualiser_sitesBA.html.twig', array(
 		'ents_sitesBA' 		=> $ents_sitesBA,
-		'ent_siteBA_actif'	=> $ent_siteBA_actif
+		'ent_siteBA_actif'	=> $ent_siteBA_actif,
+		'latitude'			=> $latitude,
+		'longitude'			=> $longitude,
+		'apiKey' 			=> $this->get('lci_boilerbox.configuration')->getEntiteDeConfiguration('cle_api_google')->getValeur()
 	));
 }
 
@@ -532,6 +541,21 @@ private function putApiKey($url) {
     $apiKey = $this->get('lci_boilerbox.configuration')->getEntiteDeConfiguration('cle_api_google')->getValeur();
     $pattern = '/APIKEY/';
     return (preg_replace($pattern, $apiKey, $url));
+}
+
+private function getLatLng($type, $url) {
+	$pattern = '/^latLng\((.+?),(.+?)\)$/';
+	if (preg_match($pattern, $url, $matches)) {
+		switch($type) {
+			case 'latitude':
+				return $matches[1];
+				break;
+			case 'longitude':
+				return $matches[2];
+				break;
+		}
+	}
+	return null;
 }
 
 

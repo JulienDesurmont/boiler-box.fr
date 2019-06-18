@@ -39,7 +39,7 @@ class SiteBAType extends AbstractType
                     ),
 					'required'      => false
                 ))
-                ->add('lienGoogle', 'url', array(
+                ->add('lienGoogle', 'text', array(
                     'label'         => 'Url de Google map',
                     'label_attr'    => array(
                         'class'         => 'label_smalltext',

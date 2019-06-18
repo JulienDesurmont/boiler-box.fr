@@ -56,7 +56,8 @@
 		<div id='encart_map_site'>
             <div>
 				{% if ent_siteBA_actif.lienGoogle is not null %}
-					<iFrame src="{{ ent_siteBA_actif.lienGoogle  }}" width="535" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+					<div id='map' style='height:450px; width:535px' class='cacher'></div>
+					<iFrame id'mapIFrame' src="{{ ent_siteBA_actif.lienGoogle  }}" width="535" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 				{% else %}
 					<p>Aucune carte enregistrée</p>
 				{% endif %}
@@ -105,7 +106,29 @@
 			var $url = $('#liens').attr('data-sitesBAVisualiser') + '/' +  $site_id;
 			document.location.href = $url;
 		}	
+
+		function initAutocomplete() {
+			if (({{ latitude }} != null) && ({{ longitude }} != null))  {
+				$('#mapIFrame').addClass('cacher');
+				$('#map').removeClass('cacher');
+				var $objPos = {};
+				$objPos.lat = parseFloat("{{ latitude }}");
+        		$objPos.lng = parseFloat("{{ longitude }}");
+				var maCarte = new google.maps.Map(document.getElementById('map'), {
+					center: $objPos,
+					zoom: 19,
+					mapTypeId: 'satellite'
+				});
+				var monMarqueur = new google.maps.Marker({
+					position: $objPos,
+					map: maCarte
+				});
+			}
+		}
 	</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ apiKey }}&libraries=places&callback=initAutocomplete"  async defer></script>
+
 {% endblock fos_user_content %}
 
 

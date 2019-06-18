@@ -182,15 +182,16 @@
         var autocomplete = new google.maps.places.Autocomplete(input);
 		autocomplete.setFields(['place_id', 'geometry']);
 
+
+		/* Placement du marqueur sur l'emplacement selectionné */
         maCarte.addListener('click', function(e){
 			if (monMarqueur != null) {
 				monMarqueur.setMap(null);
 			}
-
 			monMarqueur = new google.maps.Marker({
 				position: e.latLng,
 				map: maCarte,
-				title: 'Cliquez pour zoomer'
+				icon: 'http://maps.google.com/mapfiles/kml/paddle/blu-circle.png'
 			});
 			maCarte.setZoom(19);
 			maCarte.setCenter(monMarqueur.getPosition());
@@ -198,11 +199,12 @@
 
 			
 			/* Service de geocoding pour récupérer l'adresse du lieu selectionné par la souris */
+			/* On ne modifie que l'url en fonction du marqueur */
 			geocoder = new google.maps.Geocoder();
 			geocoder.geocode({'location':monMarqueur.getPosition()}, function(results, status) {
 				if (status == 'OK') {
 					$('#lci_boilerboxbundle_site_ba_lienGoogle').val('latLng' + monMarqueur.getPosition());
-					$('#lci_boilerboxbundle_site_ba_adresse').val(results[0].formatted_address);
+					/*$('#lci_boilerboxbundle_site_ba_adresse').val(results[0].formatted_address);*/
 					$('#lci_boilerboxbundle_site_ba_lienGoogle').attr('readonly', true);
 				} else {
 					alert('Aucune adresse trouvée pour le lieu selectionné');
@@ -230,13 +232,29 @@
 			var $objPos = {};
 
 			var $position = $('#lci_boilerboxbundle_site_ba_lienGoogle').val();
+			// Si la coordonnée est retournée par l'outil de google map On zoom sur le lieu de l'adresse selectionnée
+			// Sinon si l'adresse provient du site web google map, on extrait les coordonnées
 			var $coordonnees = $position.match(/latLng\((.+?),(.+?)\)/);
 			if ($coordonnees == null) {
-				$objPos.lat = 50.474;
-				$objPos.lng = 2.97118;
-				maCarte.setCenter($objPos);
-				maCarte.setZoom(4);
-				maCarte.setMapTypeId('roadmap');
+				geocoder = new google.maps.Geocoder();
+				var $adresse = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $('#lci_boilerboxbundle_site_ba_lienGoogle').val() + '&key=' + "{{ apiKey }}";
+				$.ajax({
+					url: $adresse,
+					method: "get",
+					success: function(msg) {
+						$objPos.lat = msg['results'][0]['geometry']['location']['lat'];
+						$objPos.lng = msg['results'][0]['geometry']['location']['lng'];
+						maCarte.setCenter($objPos);
+						maCarte.setZoom(19);
+						maCarte.setMapTypeId('satellite');
+						monMarqueur = new google.maps.Marker({
+            				position: $objPos,
+            				map: maCarte
+        				});
+						$latLng = 'latLng(' + $objPos.lat + ',' + $objPos.lng + ')';
+                        $('#lci_boilerboxbundle_site_ba_lienGoogle').val($latLng);
+					}
+				});
 			} else {
 				$objPos.lat = parseFloat($coordonnees[1]);
 				$objPos.lng = parseFloat($coordonnees[2]);
@@ -400,8 +418,7 @@
 		/* Création du marqueur */
         monMarqueur = new google.maps.Marker({
             position: $objPos,
-            map: maCarte,
-            title: 'Cliquez pour zoomer'
+            map: maCarte
         });
 
 		/* Placement du marqueur sur la carte */
