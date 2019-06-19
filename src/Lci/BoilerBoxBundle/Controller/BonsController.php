@@ -90,6 +90,29 @@ public function saisieAction() {
             try {
                 $em->persist($ent_bons_attachement);
                 $em->flush();
+				// Envoi d'un mail à l'intervenant
+				$service_mailling = $this->get('lci_boilerbox.mailing');
+				$emetteur = $ent_bons_attachement->getUserInitiateur()->getEmail();
+				$destinataire = $ent_bons_attachement->getUser()->getEmail();
+				$sujet = "Affectation d'un nouveau bon d'attachement";
+				$tab_message = array();
+				$tab_message['titre'] = "Un bon d'attachement vous a été affecté";
+				$tab_message['site'] = "Intervention sur le site : ".$ent_bons_attachement->getSite()->getIntitule()." ( ".$ent_bons_attachement->getNumeroAffaire()." ) ";
+				if (($ent_bons_attachement->getNomDuContact() != null) || ($ent_bons_attachement->getEmailContactClient() != null)) {
+					$tab_message['contact'] = "Votre contact sur site est : ".$ent_bons_attachement->getNomDuContact()." ( ".$ent_bons_attachement->getEmailContactClient()." ) ";
+				} else {
+					$tab_message['contact'] = "Aucun contact sur site n'a été renseigné";
+				}
+				$liste_fichiers = "";
+				foreach($ent_bons_attachement->getFichiersPdf() as $fichier) {
+					$liste_fichiers .= $fichier->getAlt().' ';
+				}
+				if ($liste_fichiers != "") {
+					$tab_message['fichiers'] = "Vous pouvez retrouver les fichiers suivants dans le bon d'attachement sur le site boilerbox.fr : $liste_fichiers";
+				} else {
+					$tab_message['fichiers'] = "Aucun fichier n'a été importé pour ce bon";
+				}
+				$service_mailling->sendMail($emetteur, $destinataire, $sujet, $tab_message);
             } catch (\Exception $e) {
                 $pattern_error_files = "#Column 'url' cannot be null#";
                 if (preg_match($pattern_error_files, $e->getMessage())) {

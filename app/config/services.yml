@@ -26,7 +26,7 @@ services:
          class: Lci\BoilerBoxBundle\Form\Type\SiteType
      lci_boilerbox.mailing:
          class: "%mailing.class%"
-         arguments: ["@mailer", "@templating", "%mailer_delivery%", "@lci_boilerbox.log"]
+         arguments: ["@mailer", "@templating", "%mailer_delivery%", "@lci_boilerbox.log", "@lci_boilerbox.configuration"]
      lci_boilerbox.rapport:
          class: "%rapport.class%"
          arguments: ["@doctrine", "@lci_boilerbox.configuration", "@lci_boilerbox.mailing"]
