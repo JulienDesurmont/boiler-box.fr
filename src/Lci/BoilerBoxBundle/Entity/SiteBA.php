@@ -44,7 +44,8 @@ class SiteBA
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", nullable=true)
+	 * @ORM\Column(type="string", nullable=false)
+     * @Assert\NotNull(message="Un lien google map est nécessaire")
 	*/
 	protected $lienGoogle;
 
@@ -52,7 +53,8 @@ class SiteBA
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=255, nullable=true)
+	 * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotNull(message="Veuillez entrer une adresse valide svp")
 	*/
 	protected $adresse;
 

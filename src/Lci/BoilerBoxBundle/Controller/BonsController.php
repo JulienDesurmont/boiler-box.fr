@@ -128,6 +128,7 @@ public function saisieAction() {
 				// Le formulaire de nouveau ou de modification de site est passé
 				// Si un identifiant de site est passé => Mise à jour de l'entité
 				// Pour cela on enregistre les information du formulaire dans une nouvelle entité et on met a jour l'entité à modifier
+				// Si une mise à jour est demandée
 				if (isset($_POST['id_site_ba'])) {
 					if ($_POST['id_site_ba'] != "") {
 						$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
@@ -139,17 +140,12 @@ public function saisieAction() {
 					}
 				}
 				$formulaire_site->handleRequest($requete);
-				// Si une mise à jour est demandée
-				// !! On ne test pas que le formulaire est correct avec un form->isValid donc il nous faut intercepter l'exception DBAL en cas d'erreur
+				// !! On ne test pas que le formulaire soit correct avec un form->isValid donc il nous faut intercepter l'exception DBAL en cas d'erreur
 				if ($entity_siteBA_update != null) {
 					$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
 					// Seule la modification du nom du site n'est pas permise	
 					$entity_siteBA->setAdresse($entity_siteBA_update->getAdresse());
-					////echo $entity_siteBA_update->getLienGoogle();
-					////echo "<br />";
 					$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA_update->getLienGoogle()));
-					////echo $entity_siteBA->getLienGoogle();
-					////return new Response();
 					foreach($entity_siteBA_update->getFichiersJoint() as $ent_fichier) {
 						$entity_siteBA->addFichiersJoint($ent_fichier);
             	   	}
@@ -157,19 +153,25 @@ public function saisieAction() {
 				} else {
 					$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA->getLienGoogle()));
 				}
-            	$em->persist($entity_siteBA);
-				try{
-            		$em->flush();
-					$requete->getSession()->getFlashBag()->add('info', 'Site '.$entity_siteBA->getIntitule().' enregistré');
-				} catch (\Doctrine\DBAL\DBALException $e) {
-					$requete->getSession()->getFlashBag()->add('info', "Erreur d'importation");
+				$retourTest = $this->testEntite($entity_siteBA);
+				if ($retourTest === 0) {
+            		$em->persist($entity_siteBA);
+					try{
+            			$em->flush();
+						$requete->getSession()->getFlashBag()->add('info', 'Site '.$entity_siteBA->getIntitule().' enregistré');
+					} catch (\Doctrine\DBAL\DBALException $e) {
+						$requete->getSession()->getFlashBag()->add('info', "Erreur d'importation");
+						$requete->getSession()->getFlashBag()->add('info', $e->getMessage());
+					}
+					/* Création d'un nouveau formulaire de création de site */
+            		$entity_siteBA = new SiteBA();
+            		$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA, array(
+        				'action' => $this->generateUrl('lci_bons_saisie'),
+        				'method' => 'POST'
+    				));
+				} else {
+					$requete->getSession()->getFlashBag()->add('info', $retourTest);
 				}
-				/* Création d'un nouveau formulaire de création de site */
-            	$entity_siteBA = new SiteBA();
-            	$formulaire_site = $this->createForm(new SiteBAType(), $entity_siteBA, array(
-        			'action' => $this->generateUrl('lci_bons_saisie'),
-        			'method' => 'POST'
-    			));
 			}
 			return $this->render('LciBoilerBoxBundle:Bons:form_saisie_bons.html.twig', array(
             	'form' 				=> $formulaire->createView(),
@@ -566,6 +568,22 @@ private function getLatLng($type, $url) {
 	return null;
 }
 
+
+private function testEntite($ent_siteBA) {
+	$intitule = $ent_siteBA->getIntitule();
+	if (($intitule == null) || ($intitule == "")) {
+		return "Veuillez indiquer un nom de site";
+	} 
+	$adresse = $ent_siteBA->getAdresse();
+	if (($adresse == null) || ($adresse == "")) {
+		return "Veuillez indiquer une adresse pour le site";
+	}
+	$lien = $ent_siteBA->getLienGoogle();
+	if (($lien == null) || ($lien == "")) {
+		return "Veuillez indiquer un lien google map";
+	}
+	return 0;
+}
 
 
 }
