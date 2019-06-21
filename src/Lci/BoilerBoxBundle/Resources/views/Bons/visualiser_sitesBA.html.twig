@@ -75,13 +75,18 @@
                     href="{{ asset('uploads/bonsAttachement/fichiersDesSitesBA/' ~ fichier.siteBA.id ~ '_' ~  fichier.url) }}#"
 					download="{{ fichier.alt }}" 
 					>
-					{{ fichier.alt }}<br />
-					{% if fichier.extension in ['txt', 'pdf', 'jpeg', 'png', 'jpg']  %}
-						<iframe src="{{ asset('uploads/bonsAttachement/fichiersDesSitesBA/' ~ fichier.siteBA.id ~ '_' ~  fichier.url) }}" ></iframe>
+					{{ fichier.alt }}
+					</a>
+					<br />
+					{% if fichier.extension in ['jpeg', 'png', 'jpg']  %}
+						<a href="{{ asset('uploads/bonsAttachement/fichiersDesSitesBA/' ~ fichier.siteBA.id ~ '_' ~  fichier.url) }}" data-lightbox="image">
+							<img src="{{ asset('uploads/bonsAttachement/fichiersDesSitesBA/' ~ fichier.siteBA.id ~ '_' ~  fichier.url) }}" height='150px'>
+						</a>
+					{% elseif fichier.extension in ['txt', 'pdf'] %}
+						 <iframe src="{{ asset('uploads/bonsAttachement/fichiersDesSitesBA/' ~ fichier.siteBA.id ~ '_' ~  fichier.url) }}" ></iframe>
 					{% else %}
 						<div width="250px" height="150px" ></div>
 					{% endif %}
-                    </a>
 				</div>
 			{% endfor %}
 		{% endif %}

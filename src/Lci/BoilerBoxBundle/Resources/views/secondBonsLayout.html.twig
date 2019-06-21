@@ -1,9 +1,13 @@
 {# src/Lci/BoilerBoxBundle/Resources/views/secondBonsLayout.html.twig #}
 {% extends "::firstLayout.html.twig" %}
 
+{% block liens_css %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/lightbox.css') }}" media='screen' />
+{% endblock liens_css %}
+
 {% block liens_url %}
 {{ parent() }}
-
 <input type='hidden' name='liens' id='liens' 
     data-bonsSaisie = "{{ path('lci_bons_saisie') }}"
     data-bonsVisualiser = "{{ path('lci_bons_visualiser') }}"
@@ -29,3 +33,8 @@
 	    $('#sousmenu_boiler_deroulant1').addClass('nopadding');
 	</script>
 {% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('js/lightbox.min.js') }}"></script>
+{% endblock javascript %}
