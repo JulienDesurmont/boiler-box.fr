@@ -171,7 +171,7 @@ public function saisieAction() {
 					$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA_update->getLienGoogle()));
 					$entity_siteBA->setContact($entity_siteBA_update->getContact());
 					$entity_siteBA->setEmailContact($entity_siteBA_update->getEmailContact());
-					$entity_siteBA->setInformationsClient($entity_siteBA_update->getInformationClient());
+					$entity_siteBA->setInformationsClient($entity_siteBA_update->getInformationsClient());
 					foreach($entity_siteBA_update->getFichiersJoint() as $ent_fichier) {
 						$entity_siteBA->addFichiersJoint($ent_fichier);
             	   	}
