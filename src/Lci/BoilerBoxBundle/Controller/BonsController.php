@@ -172,6 +172,7 @@ public function saisieAction() {
 					$entity_siteBA->setContact($entity_siteBA_update->getContact());
 					$entity_siteBA->setEmailContact($entity_siteBA_update->getEmailContact());
 					$entity_siteBA->setInformationsClient($entity_siteBA_update->getInformationsClient());
+					$entity_siteBA->setTelContact($entity_siteBA_update->getTelContact());
 					foreach($entity_siteBA_update->getFichiersJoint() as $ent_fichier) {
 						$entity_siteBA->addFichiersJoint($ent_fichier);
             	   	}
