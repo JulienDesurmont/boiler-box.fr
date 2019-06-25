@@ -169,6 +169,9 @@ public function saisieAction() {
 					// Seule la modification du nom du site n'est pas permise	
 					$entity_siteBA->setAdresse($entity_siteBA_update->getAdresse());
 					$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA_update->getLienGoogle()));
+					$entity_siteBA->setContact($entity_siteBA_update->getContact());
+					$entity_siteBA->setEmailContact($entity_siteBA_update->getEmailContact());
+					$entity_siteBA->setInformationsClient($entity_siteBA_update->getInformationClient());
 					foreach($entity_siteBA_update->getFichiersJoint() as $ent_fichier) {
 						$entity_siteBA->addFichiersJoint($ent_fichier);
             	   	}
