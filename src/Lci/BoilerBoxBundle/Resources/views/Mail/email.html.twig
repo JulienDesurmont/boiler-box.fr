@@ -2,44 +2,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/mail.css') }}" media='screen' />
 </head>
 
 <body>
-<div id='contenu_email'>
-	<h1>{{ tab_message['titre'] }}</h1>
-	<h2>{{ tab_message['site'] }}</h2>
-	<h3>{{ tab_message['contact'] }}</h3>
+<div id='contenu_email' style='margin-bottom:200px;min-height:800px;'>
+	<h1 style='margin-bottom:100px;'>
+		{{ tab_message['titre'] }}<br />
+		{{ tab_message['site'] }}
+	</h1>
+	<h2>{{ tab_message['contact'] }}</h2>
 	<h4>{{ tab_message['fichiers'] }}</h4>
-	
-	<div id='map' style='height:450px; width:535px'></div>
 </div>
 <img src="{{ image_link }}" alt='IPC' align='left' />
-
-
-
-    <script type='text/javascript'>
-        function initAutocomplete() {
-            if (("{{ latitude }}" != "") && ("{{ longitude }}" != ""))  {
-                var $objPos = {};
-                $objPos.lat = parseFloat("{{ latitude }}");
-                $objPos.lng = parseFloat("{{ longitude }}");
-                var maCarte = new google.maps.Map(document.getElementById('map'), {
-                    center: $objPos,
-                    zoom: parseInt("{{ zoomApi }}"),
-                    mapTypeId: 'satellite'
-                });
-                var monMarqueur = new google.maps.Marker({
-                    position: $objPos,
-                    map: maCarte
-                });
-            }
-        }
-    </script>
-
-
-	<script src="https://maps.googleapis.com/maps/api/js?key={{ apiKey }}&libraries=places&callback=initAutocomplete"  async defer></script>
-
 
 </body>
 </html>

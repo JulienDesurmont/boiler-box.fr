@@ -96,8 +96,8 @@ public function saisieAction() {
 				$destinataire = $ent_bons_attachement->getUser()->getEmail();
 				$sujet = "Affectation d'un nouveau bon d'attachement";
 				$tab_message = array();
-				$tab_message['titre'] = "Un bon d'attachement vous a été affecté";
-				$tab_message['site'] = "Intervention sur le site : ".$ent_bons_attachement->getSite()->getIntitule()." ( ".$ent_bons_attachement->getNumeroAffaire()." ) ";
+				$tab_message['titre'] = "Une nouvelle intervention vous est affectée";
+				$tab_message['site'] = "Sur le site : ".$ent_bons_attachement->getSite()->getIntitule()." ( ".$ent_bons_attachement->getNumeroAffaire()." ) ";
 				if (($ent_bons_attachement->getNomDuContact() != null) || ($ent_bons_attachement->getEmailContactClient() != null)) {
 					$tab_message['contact'] = "Votre contact sur site est : ".$ent_bons_attachement->getNomDuContact()." ( ".$ent_bons_attachement->getEmailContactClient()." ) ";
 				} else {
