@@ -220,10 +220,29 @@ class BonsAttachementRepository extends EntityRepository
             $queryBuilder   ->andWhere($queryBuilder->expr()->between('b.dateInitialisation', ':dateMinInitialisation', ':dateMaxInitialisation'))
                             ->setParameter('dateMinInitialisation', $this->convertirDate($entity_objRechercheBon->getDateMinInitialisation()))
                             ->setParameter('dateMaxInitialisation', $this->convertirDate($entity_objRechercheBon->getDateMaxInitialisation()));
-        } else if ($entity_objRechercheBon->getDateMin()) {
+        } else if ($entity_objRechercheBon->getDateMinInitialisation()) {
             $queryBuilder   ->andWhere($queryBuilder->expr()->eq('b.dateInitialisation', ':dateMinInitialisation'))
                             ->setParameter('dateMinInitialisation', $this->convertirDate($entity_objRechercheBon->getDateMinInitialisation()));
         }
+
+        if ($entity_objRechercheBon->getDateMaxIntervention()) {
+           	$queryBuilder   ->andWhere(
+                              	$queryBuilder->expr()->OrX(
+                                    $queryBuilder->expr()->between('b.dateDebutIntervention', ':dateMinIntervention', ':dateMaxIntervention'),
+                                    $queryBuilder->expr()->between('b.dateFinIntervention', ':dateMinIntervention', ':dateMaxIntervention'),
+									$queryBuilder->expr()->AndX(
+										$queryBuilder->expr()->lte('b.dateDebutIntervention', ':dateMinIntervention'),
+										$queryBuilder->expr()->gte('b.dateFinIntervention', ':dateMinIntervention')
+									)
+                                )
+                            )
+                            ->setParameter('dateMinIntervention', $this->convertirDate($entity_objRechercheBon->getDateMinIntervention()))
+                            ->setParameter('dateMaxIntervention', $this->convertirDate($entity_objRechercheBon->getDateMaxIntervention()));
+        } else if ($entity_objRechercheBon->getDateMinIntervention()) {
+            $queryBuilder   ->andWhere($queryBuilder->expr()->gte('b.dateDebutIntervention', ':dateMinIntervention'))
+                            ->setParameter('dateMinIntervention', $this->convertirDate($entity_objRechercheBon->getDateMinIntervention()));
+        }
+
 
 
 		/*	*********************************************  Si la recherche porte sur un bon saisie, on vérifie qu'un numéro de bon est entré *********************************************/

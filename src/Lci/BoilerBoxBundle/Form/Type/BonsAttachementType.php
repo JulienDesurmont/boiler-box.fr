@@ -97,6 +97,32 @@ class BonsAttachementType extends AbstractType {
 				'maxlength' 	=> 10
 			)
 		))
+        ->add('dateDebutIntervention', 'date', array(
+            'label'         => 'Date de début d\'intervention',
+            'label_attr'    => array ('class' => 'label_smalltext'),
+            'widget'        => 'single_text',
+            'html5'         => false,
+            'format'        => 'dd-MM-yyyy',
+            'invalid_message' => 'Format de la date incorrect.',
+            'attr'          => array(
+                'class'         => 'smallinput',
+                'placeholder'   => 'dd/mm/YYYY',
+                'maxlength'     => 10
+            )
+        ))
+        ->add('dateFinIntervention', 'date', array(
+            'label'         => 'Date de fin d\'intervention',
+            'label_attr'    => array ('class' => 'label_smalltext'),
+            'widget'        => 'single_text',
+            'html5'         => false,
+            'format'        => 'dd-MM-yyyy',
+            'invalid_message' => 'Format de la date incorrect.',
+            'attr'          => array(
+                'class'         => 'smallinput',
+                'placeholder'   => 'dd/mm/YYYY',
+                'maxlength'     => 10
+            )
+        ))
 		->add('nomDuContact', 'text', array(
 			'label'			=> 'Nom du contact client',
 			'label_attr'    => array ('class' => 'label_smalltext'),

@@ -94,6 +94,24 @@ class ObjRechercheBonsAttachement {
     protected $dateMaxInitialisation;
 
 
+    // Plage de date utilisée pour affiner la recherche de bons
+    /**
+     * @var date
+     *
+     * @Assert\Date(message="Format attendu jj/mm/AAAA")
+     *
+    */
+    protected $dateMinIntervention;
+
+
+    /**
+     * @var date
+     *
+     * @Assert\Date(message="format attendu : jj/mm/AAAA");
+    */
+    protected $dateMaxIntervention;
+
+
 
 	/**
 	 * @var boolean
@@ -389,6 +407,53 @@ class ObjRechercheBonsAttachement {
         return $this->dateMaxInitialisation;
     }
 
+
+    /**
+     * Set dateMinIntervention
+     *
+     * @param \DateTime $dateMin
+     * @return ObjRechercheBonsAttachement
+     */
+    public function setDateMinIntervention($dateMinIntervention)
+    {
+        $this->dateMinIntervention = $dateMinIntervention;
+
+        return $this;
+    }
+
+    /**
+     * Get dateMinIntervention
+     *
+     * @return \DateTime
+     */
+    public function getDateMinIntervention()
+    {
+        return $this->dateMinIntervention;
+    }
+
+
+    /**
+     * Set dateMaxIntervention
+     *
+     * @param \DateTime $dateMaxIntervention
+     * @return ObjRechercheBonsAttachement
+     */
+    public function setDateMaxIntervention($dateMaxIntervention)
+    {
+        $this->dateMaxIntervention = $dateMaxIntervention;
+
+        return $this;
+    }
+
+    /**
+     * Get dateMaxIntervention
+     *
+     * @return \DateTime
+     */
+    public function getDateMaxIntervention()
+    {
+        return $this->dateMaxIntervention;
+    }
 
 
 	// Return -1 si la date min est > à la date max

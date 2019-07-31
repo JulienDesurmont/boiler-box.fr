@@ -135,6 +135,32 @@ class ObjRechercheBonsAttachementType extends AbstractType {
                 'maxlength'   => 10
             )
         ))
+        ->add('dateMinIntervention', 'date', array(
+            'label'      => 'Intervention (entre) le ',
+            'label_attr' => array('class' => 'label_smalltext'),
+            'widget'     => 'single_text',
+            'input'      => 'string',
+            'format'     => 'dd-MM-yyyy',
+            'invalid_message' => 'Format de la date incorrect.',
+            'attr'       => array(
+                'class'       => 'smalldate',
+                'placeholder' => 'dd/mm/YYYY',
+                'maxlength'   => 10
+            )
+        ))
+        ->add('dateMaxIntervention', 'date', array(
+            'label'      => 'et',
+            'label_attr' => array('class' => 'label_smalltext'),
+            'widget'     => 'single_text',
+            'input'      => 'string',
+            'format'     => 'dd-MM-yyyy',
+            'invalid_message' => 'Format de la date incorrect.',
+            'attr'       => array(
+                'class'       => 'smalldate',
+                'placeholder' => 'dd/mm/YYYY',
+                'maxlength'   => 10
+            )
+        ))
         ->add('valideur', 'entity', array(
             'class'           => 'LciBoilerBoxBundle:User',
             'label'           => 'Validé par',

@@ -83,6 +83,26 @@ class BonsAttachement {
 	*/
 	protected $dateSignature;
 
+    /**
+     * @var date
+     *
+     * @Assert\Date(message="Format incorrect. Format jj/mm/AAAA attendu.")
+     *
+     * @ORM\Column(type="date", name="date_debut_intervention", nullable=true)
+    */
+    protected $dateDebutIntervention;
+
+
+    /**
+     * @var date
+     *
+     * @Assert\Date(message="Format incorrect. Format jj/mm/AAAA attendu.")
+     *
+     * @ORM\Column(type="date", name="date_fin_intervention", nullable=true)
+    */
+    protected $dateFinIntervention;
+
+
 
 	/**
  	 * @var string
@@ -621,4 +641,60 @@ class BonsAttachement {
     }
 
 
+
+    /**
+     * Set dateDebutIntervention
+     *
+     * @param \DateTime $dateDebutIntervention
+     * @return BonsAttachement
+     */
+    public function setDateDebutIntervention($dateDebutIntervention)
+    {
+        $this->dateDebutIntervention = $dateDebutIntervention;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebutIntervention
+     *
+     * @return \DateTime 
+     */
+    public function getDateDebutIntervention()
+    {
+        return $this->dateDebutIntervention;
+    }
+
+    /**
+     * Set dateFinIntervention
+     *
+     * @param \DateTime $dateFinIntervention
+     * @return BonsAttachement
+     */
+    public function setDateFinIntervention($dateFinIntervention)
+    {
+        $this->dateFinIntervention = $dateFinIntervention;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFinIntervention
+     *
+     * @return \DateTime 
+     */
+    public function getDateFinIntervention()
+    {
+        return $this->dateFinIntervention;
+    }
+
+    /**
+     * Remove fichiersPdf
+     *
+     * @param \Lci\BoilerBoxBundle\Entity\Fichier $fichiersPdf
+     */
+    public function removeFichiersPdf(\Lci\BoilerBoxBundle\Entity\Fichier $fichiersPdf)
+    {
+        $this->fichiersPdf->removeElement($fichiersPdf);
+    }
 }

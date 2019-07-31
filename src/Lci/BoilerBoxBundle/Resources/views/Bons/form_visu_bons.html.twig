@@ -43,6 +43,8 @@
 						<th scope='col' class='zone_texte_mini selectionnable' onclick="compare('dateInitialisation')">le</th>
 						<th scope='col' class='zone_texte_mini selectionnable' onclick="compare('site');">Affaire</th> 
 						<th scope='col' class='zone_texte_moyen selectionnable' onclick="compare('nomDuSite');">Nom du site</th>
+						<th scope='col' class='zone_texte_mini'>Du</th>
+						<th scope='col' class='zone_texte_mini'>Au</th>
 						<th scope='col' class='zone_texte_moyen selectionnable' onclick="compare('label');">Intervenant</th>
 						<th scope='col' class='zone_texte_moyen selectionnable' onclick="compare('nomDuContact');">Nom du contact</th>
 						<th scope='col' class='zone_texte_grand'>
@@ -104,6 +106,12 @@
 						<td class='zone_texte_moyen' data-intitule='nomDuSite'>
 							{{ ent_bons.site.intitule }}
 						</td>
+                        <td class='zone_texte_mini' data-intitule='dateDebutIntervention'>
+                            {{ ent_bons.dateDebutIntervention | date('d/m/Y') }}
+                        </td>
+                        <td class='zone_texte_mini' data-intitule='dateFinIntervention'>
+                            {{ ent_bons.dateFinIntervention | date('d/m/Y') }}
+                        </td>
 						<td class='zone_texte_moyen' data-intitule='label'>
 							{{ ent_bons.user.label }}
 						</td>
@@ -309,6 +317,12 @@
 					case 'dateInitialisation':
 						ligne.dateInitialisation = $(this).text().trim();
                         break;
+                    case 'dateDebutIntervention':
+                        ligne.dateDebutIntervention = $(this).text().trim();
+                        break;
+                    case 'dateFinIntervention':
+                        ligne.dateFinIntervention = $(this).text().trim();
+                        break;
 					case 'validation':
 						/* Faire une recherche pour chaque enfant */
 						$(this).children().children().children().each(function() {
@@ -440,6 +454,14 @@
 			nouveauTableau += "<td class='zone_texte_moyen' data-intitule='nomDuSite'>";
 			nouveauTableau += tableau[index]['nomDuSite'];
 			nouveauTableau += "</td>";
+
+            nouveauTableau += "<td class='zone_texte_mini' data-intitule='dateDebutIntervention'>";
+            nouveauTableau += tableau[index]['dateDebutIntervention'];
+            nouveauTableau += "</td>";
+
+            nouveauTableau += "<td class='zone_texte_mini' data-intitule='dateFinIntervention'>";
+            nouveauTableau += tableau[index]['dateFinIntervention'];
+            nouveauTableau += "</td>";
 
 			if (tableau[index]['label']) {
             	nouveauTableau += "<td class='zone_texte_moyen' data-intitule='label'>";

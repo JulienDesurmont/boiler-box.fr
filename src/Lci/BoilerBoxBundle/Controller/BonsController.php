@@ -451,8 +451,10 @@ public function rechercherAction() {
     	$entity_bon_recherche = $session->get('objRechercheBon');
 	} else {
 		$entity_bon_recherche =  new ObjRechercheBonsAttachement();
+		//Valeurs par défaut du formulaire
 		// Lors d'une nouvelle recherche, par défaut, on indique l'utilisateur courant comme Intervenant des bons à rechercher
         $entity_bon_recherche->setUser($this->get('security.context')->getToken()->getUser());
+		//$entity_bon_recherche->setDateMaxIntervention(date('Y-m-d'));
 	}
     /*
         Utilisé pour résoudre l'erreur :
@@ -503,6 +505,7 @@ public function rechercherAction() {
                		$entity_bon_recherche->setValidationFacturation(true);
 				}
 			}
+			
             // Sauvegarde de l'objet recherche de bon d'attachement pour réaffichage des données lors de la prochaine requête
             $session->set('objRechercheBon', $entity_bon_recherche);
 

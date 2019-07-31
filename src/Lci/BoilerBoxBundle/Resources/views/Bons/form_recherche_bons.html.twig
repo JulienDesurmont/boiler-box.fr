@@ -34,6 +34,9 @@
                 <div class='ligne_error'>{{ form_errors(form.site) }}</div>
                 <div class='nouveau_probleme_ligne'><div>{{ form_label(form.site) }}</div><div>{{ form_widget(form.site) }}</div></div>
 
+				 <div class='ligne_error'>{{ form_errors(form.dateMinIntervention) }}{{ form_errors(form.dateMaxIntervention) }}</div>
+                <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateMinIntervention) }}</div><div>{{ form_widget(form.dateMinIntervention) }} ({{ form_label(form.dateMaxIntervention) }}{{ form_widget(form.dateMaxIntervention) }})</div></div>
+
 				<div class='ligne_error'>{{ form_errors(form.numeroAffaire) }}</div>
                 <div class='nouveau_probleme_ligne'><div>{{ form_label(form.numeroAffaire) }}</div><div>{{ form_widget(form.numeroAffaire) }}</div></div>
 
@@ -93,6 +96,10 @@
 		$("#lci_boilerboxbundle_rechercheBonsAttachement_dateMax" ).datepicker();
         $("#lci_boilerboxbundle_rechercheBonsAttachement_dateMinInitialisation" ).datepicker();
         $("#lci_boilerboxbundle_rechercheBonsAttachement_dateMaxInitialisation" ).datepicker();
+
+        $("#lci_boilerboxbundle_rechercheBonsAttachement_dateMinIntervention" ).datepicker();
+        $("#lci_boilerboxbundle_rechercheBonsAttachement_dateMaxIntervention" ).datepicker();
+
 
 
 		$('#lci_boilerboxbundle_rechercheBonsAttachement_sensValidation_0').click(function() {

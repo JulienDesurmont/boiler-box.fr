@@ -50,6 +50,12 @@
 						<div class='ligne_error'>{{ form_errors(form.numeroAffaire) }}</div>
             		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.numeroAffaire) }}</div><div>{{ form_widget(form.numeroAffaire) }}</div></div>
 
+                        <div class='ligne_error'>{{ form_errors(form.dateDebutIntervention) }}</div>
+                        <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateDebutIntervention) }}</div><div>{{ form_widget(form.dateDebutIntervention) }}</div></div>
+
+                        <div class='ligne_error'>{{ form_errors(form.dateFinIntervention) }}</div>
+                        <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateFinIntervention) }}</div><div>{{ form_widget(form.dateFinIntervention) }}</div></div>
+
             		    <div class='ligne_error'>{{ form_errors(form.nomDuContact) }}</div>
             		    <div class='nouveau_probleme_ligne'><div>{{ form_label(form.nomDuContact) }}</div><div>{{ form_widget(form.nomDuContact) }}</div></div>
 
@@ -279,6 +285,8 @@
         });
 		$("#lci_boilerboxbundle_bonsAttachement_dateInitialisation" ).datepicker();
 		$("#lci_boilerboxbundle_bonsAttachement_dateSignature" ).datepicker();
+       	$("#lci_boilerboxbundle_bonsAttachement_dateDebutIntervention" ).datepicker();
+        $("#lci_boilerboxbundle_bonsAttachement_dateFinIntervention" ).datepicker();
 
 
 		/* Récupération du container contenant l'attribut data-prototype */
