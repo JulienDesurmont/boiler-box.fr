@@ -23,6 +23,8 @@ class BonsAttachementCommentairesType extends BaseType {
         		->remove('userInitiateur')
         		->remove('user')
         		->remove('dateInitialisation')
+                ->remove('dateDebutIntervention')
+                ->remove('dateFinIntervention')
         		->remove('numeroAffaire')
         		->remove('site')
         		->remove('fichiersPdf')

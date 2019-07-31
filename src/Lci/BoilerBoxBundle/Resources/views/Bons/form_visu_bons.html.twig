@@ -43,8 +43,8 @@
 						<th scope='col' class='zone_texte_mini selectionnable' onclick="compare('dateInitialisation')">le</th>
 						<th scope='col' class='zone_texte_mini selectionnable' onclick="compare('site');">Affaire</th> 
 						<th scope='col' class='zone_texte_moyen selectionnable' onclick="compare('nomDuSite');">Nom du site</th>
-						<th scope='col' class='zone_texte_mini'>Du</th>
-						<th scope='col' class='zone_texte_mini'>Au</th>
+						<th scope='col' class='zone_texte_mini selectionnable' onclick="compare('dateDebutIntervention')">Du</th>
+						<th scope='col' class='zone_texte_mini selectionnable' onclick="compare('dateFinIntervention')">Au</th>
 						<th scope='col' class='zone_texte_moyen selectionnable' onclick="compare('label');">Intervenant</th>
 						<th scope='col' class='zone_texte_moyen selectionnable' onclick="compare('nomDuContact');">Nom du contact</th>
 						<th scope='col' class='zone_texte_grand'>
@@ -98,7 +98,9 @@
                             {{ ent_bons.userInitiateur.label }}
                         </td>
                         <td class='zone_texte_mini' data-intitule='dateInitialisation'>
-                            {{ ent_bons.dateInitialisation | date('d/m/Y') }}
+							{% if ent_bons.dateInitialisation is not null  %}
+                            	{{ ent_bons.dateInitialisation | date('d/m/Y') }}
+							{% endif %}
                         </td>
 						<td class='zone_texte_mini centrer' data-intitule='site'>
 							{{ ent_bons.numeroAffaire | upper }}
@@ -107,10 +109,14 @@
 							{{ ent_bons.site.intitule }}
 						</td>
                         <td class='zone_texte_mini' data-intitule='dateDebutIntervention'>
-                            {{ ent_bons.dateDebutIntervention | date('d/m/Y') }}
+							{% if ent_bons.dateDebutIntervention is not null  %}
+                            	{{ ent_bons.dateDebutIntervention | date('d/m/Y') }}
+							{% endif %}
                         </td>
                         <td class='zone_texte_mini' data-intitule='dateFinIntervention'>
-                            {{ ent_bons.dateFinIntervention | date('d/m/Y') }}
+							{% if ent_bons.dateFinIntervention is not null  %}
+                            	{{ ent_bons.dateFinIntervention | date('d/m/Y') }}
+							{% endif %}
                         </td>
 						<td class='zone_texte_moyen' data-intitule='label'>
 							{{ ent_bons.user.label }}
@@ -235,7 +241,13 @@
 		}
     };
 
+/*
     function compareDateInitialisation(a, b) {
+		alert(typeof(a.dateInitialisation));
+		date1 = new Date(a.dateInitialisation);
+		date2 = new Date(b.dateInitialisation);
+		alert(typeof(date1));
+		
         if (a.dateInitialisation == b.dateInitialisation) {
 			return 0;
 		}
@@ -245,6 +257,48 @@
             return (a.dateInitialisation < b.dateInitialisation )?1:-1;
         }
     };
+*/
+    function compareDateInitialisation(a, b) {
+        date1 = new Date(a.dateInitialisation);
+        date2 = new Date(b.dateInitialisation);
+        if (date1 == date2) {
+            return 0;
+        }
+        if (directionTri == 'asc') {
+            return (date1 < date2)?-1:1;
+        } else {
+            return (date1 < date2)?1:-1;
+        }
+    };
+
+    function compareDateDebutIntervention(a, b) {
+        date1 = new Date(a.dateDebutIntervention);
+        date2 = new Date(b.dateDebutIntervention);
+        if (date1 == date2) {
+            return 0;
+        }
+        if (directionTri == 'asc') {
+            return (date1 < date2)?-1:1;
+        } else {
+            return (date1 < date2)?1:-1;
+        }
+    };
+
+
+    function compareDateFinIntervention(a, b) {
+        date1 = new Date(a.dateFinIntervention);
+        date2 = new Date(b.dateFinIntervention);
+        if (date1 == date2) {
+            return 0;
+        }
+        if (directionTri == 'asc') {
+            return (date1 < date2)?-1:1;
+        } else {
+            return (date1 < date2)?1:-1;
+        }
+    };
+
+
 
 
     function compareNumeroBA(a, b) {
@@ -409,6 +463,12 @@
                 break;
 			case 'dateInitialisation':
 				tableau.sort(compareDateInitialisation);
+                break;
+            case 'dateDebutIntervention':
+                tableau.sort(compareDateDebutIntervention);
+                break;
+            case 'dateFinIntervention':
+                tableau.sort(compareDateFinIntervention);
                 break;
         }
 

@@ -47,6 +47,12 @@
                 <div class='ligne_error'>{{ form_errors(form.dateSignature) }}</div>
                 <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateSignature) }}</div><div>{{ form_widget(form.dateSignature) }}</div></div>
 
+                <div class='ligne_error'>{{ form_errors(form.dateDebutIntervention) }}</div>
+                <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateDebutIntervention) }}</div><div>{{ form_widget(form.dateDebutIntervention) }}</div></div>
+
+                <div class='ligne_error'>{{ form_errors(form.dateFinIntervention) }}</div>
+                <div class='nouveau_probleme_ligne'><div>{{ form_label(form.dateFinIntervention) }}</div><div>{{ form_widget(form.dateFinIntervention) }}</div></div>
+
 			{{ form_rest(form) }}
 			{{ form_end(form) }}
 		</div>
@@ -84,6 +90,8 @@
         });
 		$("#lci_boilerboxbundle_modifierBonsAttachement_dateSignature" ).datepicker();
 		$("#lci_boilerboxbundle_modifierBonsAttachement_dateInitialisation" ).datepicker();
+        $("#lci_boilerboxbundle_modifierBonsAttachement_dateDebutIntervention" ).datepicker();
+        $("#lci_boilerboxbundle_modifierBonsAttachement_dateFinIntervention" ).datepicker();
 	});
 </script>
 {% endblock javascript %}
