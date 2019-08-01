@@ -338,7 +338,7 @@
 					var $tab_siteBA = $.parseJSON(msg);
 					$('#id_site_ba').val($tab_siteBA[0]);
 					$('#lci_boilerboxbundle_site_ba_intitule').val($tab_siteBA[1]);
-					$('#lci_boilerboxbundle_site_ba_intitule').attr('readonly', true);
+					{#$('#lci_boilerboxbundle_site_ba_intitule').attr('readonly', true); // On autorise le changement du nom du site #}
 					$('#lci_boilerboxbundle_site_ba_adresse').val($tab_siteBA[2]);
 					$('#lci_boilerboxbundle_site_ba_lienGoogle').val($tab_siteBA[3]);			
 					$('#lci_boilerboxbundle_site_ba_contact').val($tab_siteBA[4]);
