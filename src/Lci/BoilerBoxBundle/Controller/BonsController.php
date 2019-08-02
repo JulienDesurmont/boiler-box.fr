@@ -167,6 +167,7 @@ public function saisieAction() {
 				if ($entity_siteBA_update != null) {
 					$entity_siteBA = $em->getRepository('LciBoilerBoxBundle:SiteBA')->find($_POST['id_site_ba']);
 					// Seule la modification du nom du site n'est pas permise	
+					$entity_siteBA->setIntitule($entity_siteBA_update->getIntitule());
 					$entity_siteBA->setAdresse($entity_siteBA_update->getAdresse());
 					$entity_siteBA->setLienGoogle($this->transformeUrl($entity_siteBA_update->getLienGoogle()));
 					$entity_siteBA->setContact($entity_siteBA_update->getContact());
