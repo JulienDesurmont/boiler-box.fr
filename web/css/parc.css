@@ -2379,3 +2379,7 @@ span.informations_archivage {
   padding: 5px 5px 20px 5px;
 }
 }
+
+tbody#table_des_fichiers {
+	height: 130px;
+}
