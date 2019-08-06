@@ -38,7 +38,7 @@ class BonsAttachementType extends AbstractType {
 				return $er->createQueryBuilder('u')
 					->where('u.roles LIKE :role')
 					->andWhere('u.enabled = :enabled')
-        			->setParameter('role', '%ROLE_TECHNICIEN%')
+        			->setParameter('role', '%ROLE_INTERVENANT_BA%')
 					->setParameter('enabled', true)
 					->orderBy('u.label', 'ASC');
 			},
