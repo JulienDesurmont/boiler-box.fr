@@ -207,8 +207,28 @@
 <script type='text/javascript'>
 var exec_fonction = 1;
 var date_refresh;
+var $login_distant = null;
+var $password_distant = null;
+
 
 $(document).ready(function() {
+    var xhr = getXHR();
+	xhr.onreadystatechange = function(event) {
+		if (this.readyState === XMLHttpRequest.DONE) {
+			if (this.status === 200) {
+				var tabReponse = xhr.responseText.split(';');
+				$login_distant = tabReponse[0];
+				$password_distant = tabReponse[1];
+			} else {
+				console.log("Pas de réponse à la requete Jquery pour l'obtention du login mot de passe d'acces aux sites distant");
+			}
+		}
+	};
+    xhr.open("POST", "{{ path('lci_boilerbox_getUserLog') }}", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send();
+
+
     $('#chk_live').attr('checked', false);
 	$('input[name="radLive"][value="affaire"]').prop('checked', 'checked');
     document.getElementById('select_sites').focus();
@@ -415,13 +435,18 @@ function actionForm() {
 	}
 
     $('#myForm').attr('action', urlForm);
-    var xhr = getXHR();
-    xhr.open("POST", "{{ path('lci_boilerbox_getUserLog') }}", false);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send();
-    var tabReponse = xhr.responseText.split(';');
-    $('#_username').val(tabReponse[0]);
-    $('#_password').val(tabReponse[1]);
+	if (($login_distant == null) || ($password_distant == null)) {
+    	var xhr = getXHR();
+    	xhr.open("POST", "{{ path('lci_boilerbox_getUserLog') }}", false);
+    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    	xhr.send();
+    	var tabReponse = xhr.responseText.split(';');
+    	$('#_username').val(tabReponse[0]);
+    	$('#_password').val(tabReponse[1]);
+	} else {
+		$('#_username').val($login_distant);
+		$('#_password').val($password_distant);
+	}
     document.forms['myForm'].submit();
 }
 </script>
