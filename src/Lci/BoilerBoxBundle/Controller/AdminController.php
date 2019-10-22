@@ -141,7 +141,7 @@ public function accueilUserRegistrationAction() {
 		    }
 		break;
 		case 'createUser':
-		    return $this->redirect($this->generateUrl('lci_register_user')); 
+		    return $this->redirect($this->generateUrl('fos_user_registration_register')); 
 		break;
 	    }
 	}
@@ -211,27 +211,6 @@ public function registerRoleAction() {
 	));
 }
 
-
-public function userRegistrationAction() {
-	$em = $this->getDoctrine()->getManager();
-    $requete = $this->get('request');
-    $user = new User();
-    $form_user = $this->createForm('lci_user_registration', $user, array('em' => $em));
-
-    if ($requete->getMethod() == 'POST') {
-        $form_user->handleRequest($requete);
-        if ($form_user->isValid()) {
-			$user->setEnabled(true);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-            return $this->redirect($this->generateUrl('lci_accueil_register_user'));
-        }
-    }
-    return $this->render('LciBoilerBoxBundle:Registration:newUserRegistration.html.twig',array(
-        'form' => $form_user->createView()
-    ));
-}
 
 // Affectation d'une nouvelle liste de sites autorisés à un utilisateur
 public function LinkUserSitesAction() {

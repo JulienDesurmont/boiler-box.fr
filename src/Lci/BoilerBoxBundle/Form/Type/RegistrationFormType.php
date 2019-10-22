@@ -6,16 +6,23 @@ namespace Lci\BoilerBoxBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityManager;
 
 class RegistrationFormType extends BaseType
 {
+	protected $em;
+
+	public function __construct(EntityManager $em) {
+		$this->em = $em;
+	}
+
     public function buildForm(FormBuilderInterface $builder, array $options) {
         parent::buildForm($builder, $options);
 
         $builder
 			->add('roles', 'choice', array(
 					'label'     => 'Rôles',
-					'choices' => $this->fillRoles($options['em']),
+					'choices' => $this->fillRoles(),
 					'expanded'  => false,
             		'multiple' => true,
 					'attr' => array(
@@ -89,7 +96,6 @@ class RegistrationFormType extends BaseType
 
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setRequired('em');
 	}
 
 
@@ -99,9 +105,9 @@ class RegistrationFormType extends BaseType
 
 
 	// Fonction qui retourne les rôles définis en base de donnée
-	private function fillRoles($em) {
+	private function fillRoles() {
 		$tableau_des_roles = array();
-		$tab_roles = $em->getRepository('LciBoilerBoxBundle:Role')->recuperationDesRoles();
+		$tab_roles = $this->em->getRepository('LciBoilerBoxBundle:Role')->recuperationDesRoles();
 		foreach($tab_roles as $key => $sous_tab_roles) {
 			foreach ($sous_tab_roles as $key2 => $role) {
 				$tableau_des_roles[$role] = strtolower(substr($role, 5));

@@ -8,7 +8,7 @@
 <div class='ajout_objet'>
     <h1>Nouvel utilisateur</h1>
     <div id='formulaire'>
-        {{ form_start(form, {'action':path('lci_register_user'), 'method':'POST', 'name':'myForm'}) }}
+        {{ form_start(form, {'action':path('fos_user_registration_register'), 'method':'POST', 'name':'myForm'}) }}
 			{{ form_widget(form._token) }}
             {{ form_errors(form) }}
 			<div>{{ form_errors(form.enabled) }}{{ form_widget(form.enabled) }}</div>

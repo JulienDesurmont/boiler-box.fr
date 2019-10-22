@@ -14,7 +14,7 @@ services:
          arguments: ["@doctrine", "@lci_boilerbox.configuration"]
      lci_user.registration.form.type:
          class: Lci\BoilerBoxBundle\Form\Type\RegistrationFormType
-         arguments: [%fos_user.model.user.class%]
+         arguments: ["@doctrine.orm.entity_manager", "%fos_user.model.user.class%"]
          tags:
              - { name: form.type, alias: lci_user_registration }
      lci_user.change.password.form.type:

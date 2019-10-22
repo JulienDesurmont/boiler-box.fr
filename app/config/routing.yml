@@ -125,9 +125,6 @@ lci_accueil_register_site:
 lci_change_password:
     pattern: /lci/changePassword
     defaults: { _controller: LciBoilerBoxBundle:User:changePassword }
-lci_register_user:
-    pattern: /lci/admin/register/user
-    defaults: { _controller: LciBoilerBoxBundle:Admin:userRegistration }
 lci_update_user:
     pattern: /lci/admin/register/update/user/{idUtilisateur}
     defaults: { _controller: LciBoilerBoxBundle:Admin:userUpdate }

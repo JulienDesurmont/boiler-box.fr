@@ -42,7 +42,7 @@ security:
             pattern: /register/confirm
             anonymous: true
         reset_password:
-            pattern: /resetting/request
+            pattern: /resetting
             anonymous: true
         main_login:
             pattern: ^/(login|ajaxLogin)$
