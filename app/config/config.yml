@@ -84,6 +84,22 @@ fos_user:
     registration:
         form:
             type: lci_user_registration
+        confirmation:
+            enabled: true
+            from_email: 
+                # Expediteur
+                address: 'admin_ipc@cargo-france.fr'
+                # Nom de l'expediteur
+                sender_name: 'Administrateur BoilerBox'
+            template: '@FOSUserBundle/Registration/email.txt.twig'
+    resetting:
+        email: 
+            from_email:
+                # Expediteur
+                address: 'admin_ipc@cargo-france.fr'
+                # Nom de l'expediteur
+                sender_name: 'Administrateur BoilerBox'
+            template: '@FOSUserBundle/Resetting/email.txt.twig'
     change_password:
         form:
             type: lci_user_change_password

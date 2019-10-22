@@ -42,7 +42,7 @@ class User extends BaseUser
 
     /**
      * One User can have many problems to solve
-     * @ORM\OneToMany(targetEntity="ProblemeTechnique", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="ProblemeTechnique", mappedBy="user", cascade={"remove"})
     */
     protected $problemeTechnique;
 
@@ -50,14 +50,14 @@ class User extends BaseUser
     /**
      * Un utilisateur peut être la cible de plusieurs bons d'attachements
      *
-     * @ORM\OneToMany(targetEntity="BonsAttachement", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="BonsAttachement", mappedBy="user", cascade={"remove"})
     */
     protected $bonsAttachement;
 
     /**
      * Un utilisateur peut être la cible de plusieurs bons d'attachements
      *
-     * @ORM\OneToMany(targetEntity="BonsAttachement", mappedBy="userInitiateur")
+     * @ORM\OneToMany(targetEntity="BonsAttachement", mappedBy="userInitiateur", cascade={"remove"})
     */
     protected $bonsAttachementInitiateur;
 

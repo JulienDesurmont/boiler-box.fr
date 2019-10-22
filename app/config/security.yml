@@ -38,6 +38,12 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        confirm_register:
+            pattern: /register/confirm
+            anonymous: true
+        reset_password:
+            pattern: /resetting/request
+            anonymous: true
         main_login:
             pattern: ^/(login|ajaxLogin)$
             anonymous: true
