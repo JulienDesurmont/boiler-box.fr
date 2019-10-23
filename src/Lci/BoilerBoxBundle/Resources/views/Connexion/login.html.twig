@@ -7,10 +7,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 
-
 {% block google_map %}
     <iframe id='map_google' src="https://www.google.com/maps/d/embed?mid=1y0NIi4DoQQCO4sDyfxOMwqQ052U3X2TB" frameborder="0" width="100%" height="100%"></iframe>
 {% endblock google_map %}
+
+{% block mdp %}{% if not app.user %}<span style='padding-left:30px; text-decoration:underline;'><a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a></span>{% endif %}{% endblock mdp %}
 
 {% block body %}
 <div id='pagePrincipaleBody'>
