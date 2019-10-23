@@ -60,7 +60,7 @@ registration:
 
 # Password resetting
 resetting:
-    password_already_requested: Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.
+    password_already_requested: Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 6 heures.
     check_email: Un e-mail a été envoyé à l'adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe.
     request:
         invalid_username: Le nom d'utilisateur ou l'adresse e-mail "%username%" n'existe pas.
@@ -78,7 +78,7 @@ resetting:
             Pour réinitialiser votre mot de passe, merci de vous rendre sur %confirmationUrl%
 
             Cordialement,
-            L'équipe.
+            Assistance BoilerBox.
 
 # Global strings
 layout:
