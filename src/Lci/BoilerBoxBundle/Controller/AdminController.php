@@ -124,7 +124,7 @@ public function accueilUserRegistrationAction() {
 		    if (isset($_POST['newPassword'])) {
 				//  Si le mot de passe est à réinitialiser
 				$user = $em->getRepository('LciBoilerBoxBundle:User')->find($_POST['idUtilisateur']);
-				$form_user_update = $this->createForm(new ModificationUserType(), $user, array('em' => $em));
+				$form_user_update = $this->createForm(new ModificationUserType(), $user);
 				$password = trim($_POST['motDePasse']);
 				$salt = $user->getSalt();
 				$password = $this->get('security.encoder_factory')->getEncoder($user)->encodePassword($password, $salt); 
@@ -133,7 +133,7 @@ public function accueilUserRegistrationAction() {
 		    } else {
 				// Si une demande de modification d'utilisateur est demandée
 		        $user = $em->getRepository('LciBoilerBoxBundle:User')->find($_POST['choix_utilisateur']);
-				$form_user_update = $this->createForm(new ModificationUserType(), $user, array('em' => $em));
+				$form_user_update = $this->createForm(new ModificationUserType(), $user);
 		        return $this->render('LciBoilerBoxBundle:Registration:changeUserRegistration.html.twig',array(
 					'user' => $user,
 					'form' => $form_user_update->createView()
@@ -157,7 +157,7 @@ public function userUpdateAction($idUtilisateur) {
     $requete = $this->get('request');
     $em = $this->getDoctrine()->getManager();
 	$user = $em->getRepository('LciBoilerBoxBundle:User')->find($idUtilisateur);
-	$form_user_update = $this->createForm(new ModificationUserType(), $user, array('em' => $em));
+	$form_user_update = $this->createForm(new ModificationUserType(), $user);
 	$form_user_update->handleRequest($requete);
 	if ($form_user_update->isSubmitted() && $form_user_update->isValid()) {
 		$em->flush();	
