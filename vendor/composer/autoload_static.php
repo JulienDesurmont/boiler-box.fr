@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e
+class ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -27,6 +27,7 @@ class ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e
             'Symfony\\Bundle\\MonologBundle\\' => 29,
             'Symfony\\Bundle\\AsseticBundle\\' => 29,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
+            'Scheb\\TwoFactorBundle\\' => 22,
         ),
         'P' => 
         array (
@@ -40,8 +41,14 @@ class ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e
         array (
             'Incenteev\\ParameterHandler\\' => 27,
         ),
+        'G' => 
+        array (
+            'Google\\Authenticator\\Tests\\' => 27,
+            'Google\\Authenticator\\' => 21,
+        ),
         'D' => 
         array (
+            'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
@@ -80,6 +87,10 @@ class ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e
         array (
             0 => __DIR__ . '/..' . '/sensio/framework-extra-bundle',
         ),
+        'Scheb\\TwoFactorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/scheb/two-factor-bundle',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
@@ -91,6 +102,18 @@ class ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
+        ),
+        'Google\\Authenticator\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/tests',
+        ),
+        'Google\\Authenticator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/lib',
+        ),
+        'Doctrine\\Common\\Lexer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
         ),
         'Doctrine\\Common\\Inflector\\' => 
         array (
@@ -170,10 +193,6 @@ class ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e
             array (
                 0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
             ),
-            'Doctrine\\Common\\Lexer\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
-            ),
             'Doctrine\\Common\\Collections\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/collections/lib',
@@ -204,11 +223,11 @@ class ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e::$prefixesPsr0;
-            $loader->fallbackDirsPsr0 = ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e::$fallbackDirsPsr0;
-            $loader->classMap = ComposerStaticInitff5fb33b4b7f4cdb09acd1649c11a66e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb::$prefixesPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb::$fallbackDirsPsr0;
+            $loader->classMap = ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb::$classMap;
 
         }, null, ClassLoader::class);
     }

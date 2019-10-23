@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Lci\BoilerBoxBundle\LciBoilerBoxBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Lci\FilesBundle\LciFilesBundle(),
+            new Scheb\TwoFactorBundle\SchebTwoFactorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
