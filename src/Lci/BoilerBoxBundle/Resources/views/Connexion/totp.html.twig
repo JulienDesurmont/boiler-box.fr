@@ -1,0 +1,33 @@
+{# Lci/BoilerBoxBundle/Resources/views/firstLayout.html.twig #}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>{% block title %}Boiler-Box {% endblock title %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="L'interface de supervision des chaudières industrielles." />
+    <meta name="title" content="BoilerBox - Accueil" />
+    {% block meta_viewport %}
+        <meta name="viewport" content="width=device-width, initial-scale=0.5, shrink-to-fit=no">
+    {% endblock meta_viewport %}
+</head>
+
+<body style="background:black;color:white;">
+{% block body %}
+<h1>Authentification double facteur</h1>
+{% if qrcode is defined %}
+	<p>Veuillez scanner le QrCode ci-dessous avec l'application "<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=fr" target="_blank"><span style='color:white;text-decoration:underline;'>Google Authenticator</span></a>" et inscrire le code dans l'encart prévu à cet effet.</p>
+{% endif %}
+<form action="{{ path('lci_boilerbox_accesSite') }}" method="post" name='myForm' id='myForm'>
+	{% if qrcode is defined %}
+		<img src="{{ qrcode }}" alt="QrCode" /><br /><br />
+	{% endif %}
+	<input id="totp_key" name="totp_key"  type='text' placeholder="Placez ici le code généré" required>
+	{% for message in app.session.flashbag.get('info') %}
+		<span style='color:red;'>{{ message }}</span>
+	{% endfor %}
+	<br /><br />
+	<input type='submit'>
+</form>
+{% endblock body %}
+</body>
+</html>

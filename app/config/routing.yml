@@ -31,6 +31,10 @@ lci_boilerbox_defineUserLog:
 lci_boilerbox_getUserLog:
     pattern: /lci/ajaxGetLogin
     defaults: { _controller: LciBoilerBoxBundle:Ajax:getUserLog }
+lci_boilerbox_auth_activation:
+    pattern: /lci/activationAuth
+    defaults: { _controller:LciBoilerBoxBundle:BoilerBox:activationAuthDoubleFacteur }
+
 
 
 # *****************************  Routes du Gestionnaire de parc ************************************** #
@@ -204,6 +208,9 @@ lci_bons_sitesBA_visualiser:
 lci_ajax_bons_get_siteBA:
     pattern: /lci/bons/sitesBA/get
     defaults: { _controller: LciBoilerBoxBundle:AjaxBons:getSiteBAEntity }
+lci_ajax_desactivation_auth:
+    pattern: /lci/boilerbox/ajax/desactivation/auth
+    defaults: { _controller: LciBoilerBoxBundle:Ajax:desactivationAuth }
 
 
 
@@ -216,4 +223,3 @@ lci_bons_admin_site_creer:
 lci_bons_commentaires:
     pattern: /lci/bons/modification/unbon/commentaires/{idBon}
     defaults: { _controller: LciBoilerBoxBundle:Bons:ajoutCommentaires }
-

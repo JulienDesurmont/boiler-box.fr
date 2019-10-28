@@ -205,6 +205,15 @@ private function interpretation_netcat($entitySite, $retour_commande_netcat) {
 }
 
 
+// Pour désactiver l'authentification double facteur, on supprime le paramètre totp de l'utilisateur.
+public function desactivationAuthAction() {
+	$user = $this->get('security.context')->getToken()->getUser();
+	$user->setTotpKey('');
+	$this->getDoctrine()->getManager()->flush();
+	$this->getRequest()->getSession()->set('totp_auth', false);
+	return new Response();
+}
+
 
 
 }

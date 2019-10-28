@@ -28,6 +28,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
+use Otp\Otp;
+use Otp\GoogleAuthenticator;
+use ParagonIE\ConstantTime\Encoding;
+
 class SecurityController extends Controller
 {
     public function loginAction(Request $request)
@@ -49,6 +53,7 @@ class SecurityController extends Controller
             $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
 			$error = "Erreur d'identification";
         } else {
+			// Pas d'erreur d'authentification: On effectue l'authentification par google authenticator
             $error = null;
         }
 

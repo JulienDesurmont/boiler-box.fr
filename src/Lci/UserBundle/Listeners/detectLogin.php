@@ -3,8 +3,13 @@
 namespace Lci\UserBundle\Listeners;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 
 class detectLogin {
+
+	private $session;
+
     // Sauvegarde de la date de connexion
     public function enregistreConnexion($typeConnexion, $dateConnexion, $token) {
         $fichier_logs = 'logs/connexions.log';
@@ -25,5 +30,24 @@ class detectLogin {
         fclose($token_fichier_log);
         return;
     }
+
+	// Vérification qu'une clé de double authentification existe ou pas. : Si elle n'existe pas on propose à l'utilisateur d'en créer une
+	// Si elle existe on procede à la vérification de l'authentification
+	public function verif_totp_key($session, $user) {
+		if ($user->getTotpKey() != '') {
+			$session->set('totp_auth', true);
+		}else {
+			$session->set('totp_auth', false);
+		}
+	}
+
+   	public function is_totp_key_exist($user) {
+		if ($user->getTotpKey() != '') {
+			return false;
+		} else {
+			return true;
+		}
+    }
+
 }
 

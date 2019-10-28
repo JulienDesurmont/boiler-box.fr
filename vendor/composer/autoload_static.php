@@ -11,6 +11,7 @@ class ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
+        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '3fad0ebbff9928a94a9d8941fb314bd8' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/functions.php',
     );
 
@@ -22,16 +23,22 @@ class ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Util\\' => 22,
+            'Symfony\\Polyfill\\Php56\\' => 23,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Bundle\\SwiftmailerBundle\\' => 33,
             'Symfony\\Bundle\\MonologBundle\\' => 29,
             'Symfony\\Bundle\\AsseticBundle\\' => 29,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
-            'Scheb\\TwoFactorBundle\\' => 22,
         ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'ParagonIE\\ConstantTime\\' => 23,
+        ),
+        'O' => 
+        array (
+            'Otp\\' => 4,
         ),
         'M' => 
         array (
@@ -40,11 +47,6 @@ class ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb
         'I' => 
         array (
             'Incenteev\\ParameterHandler\\' => 27,
-        ),
-        'G' => 
-        array (
-            'Google\\Authenticator\\Tests\\' => 27,
-            'Google\\Authenticator\\' => 21,
         ),
         'D' => 
         array (
@@ -67,6 +69,14 @@ class ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
         ),
+        'Symfony\\Polyfill\\Util\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-util',
+        ),
+        'Symfony\\Polyfill\\Php56\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php56',
+        ),
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
@@ -87,13 +97,17 @@ class ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb
         array (
             0 => __DIR__ . '/..' . '/sensio/framework-extra-bundle',
         ),
-        'Scheb\\TwoFactorBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/scheb/two-factor-bundle',
-        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'ParagonIE\\ConstantTime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
+        ),
+        'Otp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/christian-riesen/otp/src',
         ),
         'Monolog\\' => 
         array (
@@ -102,14 +116,6 @@ class ComposerStaticInit16dca9e0d785519ad3dcd057c5a068eb
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
-        ),
-        'Google\\Authenticator\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/tests',
-        ),
-        'Google\\Authenticator\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/lib',
         ),
         'Doctrine\\Common\\Lexer\\' => 
         array (

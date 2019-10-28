@@ -7,6 +7,17 @@
 	<iframe id='map_google' src="https://www.google.com/maps/d/u/0/embed?mid=1HvyRmqnv2__T4xk8EDwLBcZoulMvx7C1" frameborder="0" width="100%" height="100%"></iframe>
 {% endblock google_map %}
 
+{% block enTete_gauche %}
+	{{ parent() }}
+	{% if auth_double == false %}
+		<span style='font-size:14px; text-decoration:underline;'><a href="{{ path('lci_boilerbox_auth_activation') }}">Activer l'authentification double facteur</a></span>
+	{% else %}
+		<span id='lien_desactivation_auth'>
+			<a id="desactivation_auth" href="#" onClick="desactivationAuth();" data-url={{ path('lci_ajax_desactivation_auth') }}>Désactiver l'authentification double facteur</a>
+		</span>
+	{% endif %}
+{% endblock enTete_gauche %}
+
 {% block body %}
 	<div id='pagePrincipaleBody'>
 		<section>
@@ -31,7 +42,7 @@
                     <div><span class="feuTricolor_4"></span>Non accessible à distance</div>						{# 4 -> Site non accessible : gris #}
                 </div>
 				<div class='checkLive'><input id='chk_live' type='checkbox' name='chkLive' onClick='switchLive();'>Live</div>
-				<form action="{{ path('lci_boilerbox_accesSite') }}" method="post" name='myForm' id='myForm' autocomplete="off" data-url={{ path('lci_ajax_refreshASiteStatut') }}>
+				<form action="{{ path('lci_boilerbox_accesSite') }}" method="post" name='myForm' id='myForm' autocomplete="off" data-urjax_desactivation_authl={{ path('lci_ajax_refreshASiteStatut') }}>
 					<input type="hidden" id="_database" name="_database" value="" />
 				    <input type="hidden" id="remember_me" name="_remember_me" value="on" />
 					<input type="hidden" id="_username" name="_username" value="" />
@@ -449,5 +460,16 @@ function actionForm() {
 	}
     document.forms['myForm'].submit();
 }
+
+	function desactivationAuth() {
+		var $url_desativation_auth = $('#desactivation_auth').data('url');
+		$.ajax({
+            url: $url_desativation_auth,
+            success: function(html, status) {
+				$html = "<a href=\"{{ path('lci_boilerbox_auth_activation') }}\">Activation de l'authentification double facteur</a>";
+				$('#desactivation_auth').html($html);
+            }
+        });
+	}
 </script>
 {% endblock javascript %}

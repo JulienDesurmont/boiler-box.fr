@@ -25,6 +25,14 @@ class User extends BaseUser
      */
     protected $id;
 
+	/**
+	* @var string
+	* 
+ 	* @ORM\Column(name="totpKey", type="string", length=16)
+	*
+	*/
+	protected $totpKey;
+
     /**
      * @var string
      *
@@ -90,6 +98,32 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+
+    /**
+     * Set totpKey
+     *
+     * @param string $totpKey
+     * @return User
+     */
+    public function setTotpKey($key)
+    {
+        $this->totpKey = $key;
+
+        return $this;
+    }
+
+    /**
+     * Get totpKey
+     *
+     * @return string
+     */
+    public function gettotpKey()
+    {
+        return $this->totpKey;
+    }
+
+
 
 
     /**
