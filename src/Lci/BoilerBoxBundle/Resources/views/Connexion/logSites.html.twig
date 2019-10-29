@@ -10,10 +10,10 @@
 {% block enTete_gauche %}
 	{{ parent() }}
 	{% if auth_double == false %}
-		<span style='font-size:14px; text-decoration:underline;'><a href="{{ path('lci_boilerbox_auth_activation') }}">Activer l'authentification double facteur</a></span>
+		<span style='font-size:14px; text-decoration:underline;'><a href="{{ path('lci_boilerbox_auth_activation') }}">Activer l'authentification à double facteur</a></span>
 	{% else %}
-		<span id='lien_desactivation_auth'>
-			<a id="desactivation_auth" href="#" onClick="desactivationAuth();" data-url={{ path('lci_ajax_desactivation_auth') }}>Désactiver l'authentification double facteur</a>
+		<span id='lien_desactivation_auth' style='font-size:14px; text-decoration:underline;'>
+			<a id="desactivation_auth" href="#" onClick="desactivationAuth();" data-url={{ path('lci_ajax_desactivation_auth') }}>Désactiver l'authentification à double facteur</a>
 		</span>
 	{% endif %}
 {% endblock enTete_gauche %}
@@ -466,7 +466,7 @@ function actionForm() {
 		$.ajax({
             url: $url_desativation_auth,
             success: function(html, status) {
-				$html = "<a href=\"{{ path('lci_boilerbox_auth_activation') }}\">Activation de l'authentification double facteur</a>";
+				$html = "<a href=\"{{ path('lci_boilerbox_auth_activation') }}\">Activer l'authentification à double facteur</a>";
 				$('#desactivation_auth').html($html);
             }
         });
