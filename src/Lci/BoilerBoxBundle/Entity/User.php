@@ -33,6 +33,16 @@ class User extends BaseUser
 	*/
 	protected $totpKey;
 
+	/**
+	 *
+	 * @var string 
+	 *
+	 * @ORM\Column(name="qrCode", type="string")
+	 *	
+	*/
+	protected $qrCode;
+	
+
     /**
      * @var string
      *
@@ -118,10 +128,34 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function gettotpKey()
+    public function getTotpKey()
     {
         return $this->totpKey;
     }
+
+    /**
+     * Set qrCode
+     *
+     * @param string $qrCode
+     * @return User
+     */
+    public function setQrCode($qrCode)
+    {
+        $this->qrCode = $qrCode;
+
+        return $this;
+    }
+
+    /**
+     * Get qrCode
+     *
+     * @return string
+     */
+    public function getQrCode()
+    {
+        return $this->qrCode;
+    }
+
 
 
 

@@ -109,12 +109,22 @@ public function accesSiteAction() {
 				if ($session->get('auth_code_error') < 3) {
 					if ($session->get('auth_code_error')== 2) {
 						if ($session->get('totp_auth') == false) {
-							$request->getSession()->getFlashBag()->add('info', " - Attention, suite à un nouveau code erroné la demande d'authentification sera annulée");
+							$request->getSession()->getFlashBag()->add('info', " - Attention, suite à un nouveau code erroné la demande d'authentification sera annulée.");
+						} else {
+							 $request->getSession()->getFlashBag()->add('info', " - Dernière tentative.");
 						}
 					}
-					return $this->render('LciBoilerBoxBundle:Connexion:totp.html.twig');
+					if ($session->get('totp_auth') == false) {
+						// Si l'utilisateur ne s'est jamais connecté on lui repropose le QrCode
+                        $url_qrCode = $user->getQrCode();
+                        return $this->render('LciBoilerBoxBundle:Connexion:totp.html.twig', array(
+                            'qrcode' => $url_qrCode
+                        ));
+					} else {
+						return $this->render('LciBoilerBoxBundle:Connexion:totp.html.twig');
+					}
 				} else {
-					// Gestion du cas ou 3 erreur on été efectué alors que la demande d'authentification par double facteur vient d'être faite. 
+					// Gestion du cas ou 3 erreur on été effectué alors que la demande d'authentification par double facteur vient d'être faite. 
 					// On annule la demande en double facteur
 					if ($session->get('totp_auth') == false) {
 						$user->setTotpKey('');
@@ -192,21 +202,23 @@ public function accesSiteAction() {
 
 
 public function activationAuthDoubleFacteurAction() {
+    $em = $this->container->get('doctrine')->getManager();
+    $user = $this->get('security.context')->getToken()->getUser();
+
 	// Récupération d'une clé secrette
 	$secret = GoogleAuthenticator::generateRandom();
 	// On place la clé secrete en variable de session pour l'enregistrer dans le compte utilisateur lors de la validation du code
 	$this->getRequest()->getSession()->set('totp_secret', $secret);
 
 	// Mise de la clé dans le champs totpKey de l'utilisateur
-	$em = $this->container->get('doctrine')->getManager();
-	$user = $this->get('security.context')->getToken()->getUser();
-	//$user->setTotpKey($secret);
-	//$em->flush();
 	// Création du QRCode
     $user_email = $user->getEmail();
-    $url = GoogleAuthenticator::getQrCodeUrl('totp', "BoilerBox ($user_email)", $secret);
+    $url_qrcode = GoogleAuthenticator::getQrCodeUrl('totp', "BoilerBox ($user_email)", $secret);
+	// On inscrit le qrcode dans les paramètres de l'utilisateur
+	$user->setQrCode($url_qrcode);
+	$em->flush();
 	return $this->render('LciBoilerBoxBundle:Connexion:totp.html.twig', array(
-                'qrcode' => $url
+                'qrcode' => $url_qrcode
     ));
 
 }
