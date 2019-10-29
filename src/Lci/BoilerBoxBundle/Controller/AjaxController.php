@@ -209,7 +209,7 @@ private function interpretation_netcat($entitySite, $retour_commande_netcat) {
 public function desactivationAuthAction() {
 	$user = $this->get('security.context')->getToken()->getUser();
 	$user->setTotpKey('');
-	$uset->setQrCode('');
+	$user->setQrCode('');
 	$this->getDoctrine()->getManager()->flush();
 	$this->getRequest()->getSession()->set('totp_auth', false);
 	return new Response();
