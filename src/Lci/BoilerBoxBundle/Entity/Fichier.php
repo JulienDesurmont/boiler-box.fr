@@ -52,7 +52,7 @@ class Fichier {
 
     /**
      * @Assert\NotBlank(message="Veuillez uploader le(s) fichier(s) pdf.")
-     * @Assert\File(maxSize="20M", uploadErrorMessage="Erreur d'importation du fichier", maxSizeMessage="Fichier trop volumineux (max:20Mo)")
+     * @Assert\File(maxSize="20000000", uploadErrorMessage="Erreur d'importation du fichier", maxSizeMessage="Fichier trop volumineux (max:20Mo)")
     */
 	protected $file;
 

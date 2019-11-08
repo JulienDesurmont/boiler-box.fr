@@ -98,7 +98,7 @@
 										{% endif %}
 										<td class='zone_texte_geant gauche selectionnable' onClick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
 											<a id="{{ fichier.bonAttachement.id }}_{{ fichier.id }}" class='btn-disable' 
-												href="{{ asset(prefix_image ~ '/web/uploads/bonsAttachement/fichiersDesBons/' ~ fichier.bonAttachement.id ~ '_' ~  fichier.url) }}" download='{{ fichier.alt }}'>
+												href="{{ asset(prefix_image ~ '/web/uploads/bonsAttachement/fichiersDesBons/' ~ fichier.bonAttachement.id ~ '_' ~  fichier.url) }}" download='{{ fichier.alt }}' onClick="definirNomFichier(this.id, this.download);">
 											{{ fichier.alt }} {% if fichier.informations is not null %}<br /><span class='informations_archivage'>{{ fichier.informations }}</span>{% endif %}
 										</a></td>
 										<td class='zone_texte_petit selectionnable' onClick="afficheFichier('{{ fichier.bonAttachement.id }}_{{ fichier.id }}');">
@@ -623,6 +623,13 @@
 				}
 			});
 		} 
+	}
+
+	// Fonction qui supprime les informations contenues entre les parenthèses des noms de fichiers
+	function definirNomFichier($idLien, $nomDuFichier)
+	{
+		var $regex = /\(.+?\)$/;
+		$('#' + $idLien).attr('download', $nomDuFichier.replace($regex, ''));
 	}
 </script>
 {% endblock javascript %}
