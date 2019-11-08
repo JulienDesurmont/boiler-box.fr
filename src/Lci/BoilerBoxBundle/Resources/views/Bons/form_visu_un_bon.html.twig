@@ -628,7 +628,7 @@
 	// Fonction qui supprime les informations contenues entre les parenthèses des noms de fichiers
 	function definirNomFichier($idLien, $nomDuFichier)
 	{
-		var $regex = /\(.+?\)$/;
+		var $regex = /\([a-zA-Z0-9à:\/\s]+\)$/;
 		$('#' + $idLien).attr('download', $nomDuFichier.replace($regex, ''));
 	}
 </script>
